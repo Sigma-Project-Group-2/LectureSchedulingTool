@@ -243,6 +243,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Scheduling\Faculty.cshtml" />
     <Content Include="Views\Scheduling\Department.cshtml" />
+    <Content Include="Views\Scheduling\Classroom.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

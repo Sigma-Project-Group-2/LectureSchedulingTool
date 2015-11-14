@@ -132,6 +132,18 @@ namespace LectureSchedulingTool.Models
         public int people_capacity { get; set; }
         [Required]
         public int id_department { get; set; }
+
+        public Classroom()
+        {
+
+        }
+
+        public Classroom(string number, int people_capacity, int id_department)
+        {
+            this.number = number;
+            this.people_capacity = people_capacity;
+            this.id_department = id_department;
+        }
     }
 
     //Модель учебного плана группы
