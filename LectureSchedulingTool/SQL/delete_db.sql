@@ -1,17 +1,17 @@
-﻿DROP TABLE Lesson
+﻿DROP TABLE Lessons
 
 DROP TABLE Teacher_load
 
 DROP TABLE Students_group_load
 
-DROP TABLE Classroom
+DROP TABLE Classrooms
 
-DROP TABLE Subject
+DROP TABLE Subjects
 
-DROP TABLE Teacher
+DROP TABLE Teachers
 
 DROP TABLE Students_group
 
-DROP TABLE Department
+DROP TABLE Departments
 
-DROP TABLE Faculty
+DROP TABLE Faculties
