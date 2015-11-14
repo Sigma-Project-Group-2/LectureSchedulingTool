@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace LectureSchedulingTool.Models
 {
+    //Модель факультета
     public class Faculty
     {
         [Key]
@@ -27,6 +23,7 @@ namespace LectureSchedulingTool.Models
         }
     }
 
+    //Модель кафедры
     public class Department
     {
         [Key]
@@ -53,10 +50,10 @@ namespace LectureSchedulingTool.Models
         }
     }
 
+    //Модель студенческой группы
     public class Students_group
     {
         [Key]
-        [Required]
         public int id_students_group { get; set; }
         [Required]
         public string name { get; set; }
@@ -64,12 +61,23 @@ namespace LectureSchedulingTool.Models
         public int people_amount { get; set; }
         [Required]
         public int id_department { get; set; }
+
+        public Students_group()
+        {
+
+        }
+        public Students_group(string name, int people_amount, int id_department)
+        {
+            this.name = name;
+            this.people_amount = people_amount;
+            this.id_department = id_department;
+        }
     }
 
+    //Модель преподавателя
     public class Teacher
     {
         [Key]
-        [Required]
         public int id_teacher { get; set; }
         [Required]
         public string surname { get; set; }
@@ -84,12 +92,26 @@ namespace LectureSchedulingTool.Models
         public string regalia { get; set; }
         [Required]
         public int id_department { get; set; }
+
+        public Teacher()
+        {
+
+        }
+        public Teacher(string surname, string name, string patronymic, int max_hours, string working_position, string regalia = null)
+        {
+            this.surname = surname;
+            this.name = name;
+            this.patronymic = patronymic;
+            this.max_hours = max_hours;
+            this.working_position = working_position;
+            this.regalia = regalia;
+        }
     }
 
+    //Модель предмета
     public class Subject
     {
         [Key]
-        [Required]
         public int id_subject { get; set; }
         [Required]
         public string name { get; set; }
@@ -99,10 +121,10 @@ namespace LectureSchedulingTool.Models
         public int id_deparment { get; set; }
     }
 
+    //Модель аудитории
     public class Classroom
     {
         [Key]
-        [Required]
         public int id_classroom { get; set; }
         [Required]
         public string number { get; set; }
@@ -112,10 +134,10 @@ namespace LectureSchedulingTool.Models
         public int id_department { get; set; }
     }
 
+    //Модель учебного плана группы
     public class Students_group_load
     {
         [Key]
-        [Required]
         public int id_students_group_load { get; set; }
         [Required]
         public int hours { get; set; }
@@ -125,10 +147,10 @@ namespace LectureSchedulingTool.Models
         public int id_subject { get; set; }
     }
 
+    //Модель профильности преподавателя
     public class Teacher_load
     {
         [Key]
-        [Required]
         public int id_teacher_load { get; set; }
         [Required]
         public int id_subject { get; set; }
@@ -136,10 +158,10 @@ namespace LectureSchedulingTool.Models
         public int id_teacher { get; set; }
     }
 
+    //Модель занятия
     public class Lesson
     {
         [Key]
-        [Required]
         public int id_lesson { get; set; }
         [Required]
         public int week { get; set; }

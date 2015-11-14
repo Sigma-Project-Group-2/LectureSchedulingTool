@@ -4,6 +4,7 @@
 
 <br /><br /><br />
 
+@* Создание шапки таблицы *@
 <table align="center" border="1">
     <thead>
         <tr>
@@ -16,40 +17,44 @@
     </thead>
     <tbody>
         @{
-            List<Faculty> faculties = ViewBag.faculties;
-            for (int i = 0; i < faculties.Count; i++)
-            {
-                <tr>
-                    @if (ViewBag.action == 'e' && i == Convert.ToInt32(ViewBag.row))
+            @* Получение списка факультетов и кафедр из контроллера *@
+        List<Faculty> faculties = ViewBag.faculties;
+        for (int i = 0; i < faculties.Count; i++)
+        {
+            <tr>
+                @* Если мы редактируем существующий факультет *@
+                @if (ViewBag.action == 'e' && i == Convert.ToInt32(ViewBag.row))
+                {
+                    <td>@(i + 1)</td>
+                    using (Html.BeginForm())
                     {
-                        <td>@(i + 1)</td>
-                        using (Html.BeginForm())
-                        {
-                            <input type="hidden" name="row" value="@i" />
+                        <input type="hidden" name="row" value="@i" />
                             <input type="hidden" name="id_faculty" value="@faculties[i].id_faculty" />
                             <td><input type="text" name="name" value="@faculties[i].name" /></td>
                             <td><input type="text" name="abbreviation" value="@faculties[i].abbreviation" /></td>
                             <td><button type="submit" name="action" value="u">Обновить</button></td>
                             <td><button type="submit" name="action" value="0">Отменить</button></td>
-                        }
                     }
-                    else
-                    {
-                        <td>@(i + 1)</td>
+                }
+                @* Если мы выводим существующие факультеты *@
+                else
+                {
+                    <td>@(i + 1)</td>
                         <td>@faculties[i].name</td>
                         <td>@faculties[i].abbreviation</td>
 
-                        using (Html.BeginForm())
-                        {
-                            <input type="hidden" name="row" value="@i" />
+                    using (Html.BeginForm())
+                    {
+                        <input type="hidden" name="row" value="@i" />
                             <input type="hidden" name="id_faculty" value="@faculties[i].id_faculty" />
                             <td><button type="submit" name="action" value="e"> Редактировать </button></td>
                             <td><button type="submit" name="action" value="r"> Удалить </button></td>
-                        }
                     }
-                </tr>
+                }
+            </tr>
             }
         }
+        @* Если мы добавляем новый факультет *@
         @if (ViewBag.action == 'a')
         {
             using (Html.BeginForm())
@@ -65,6 +70,7 @@
         }
     </tbody>
 </table>
+@* Показ кнопки добавить новый факультет *@
 @if (ViewBag.action != 'a')
 {
     using (Html.BeginForm())

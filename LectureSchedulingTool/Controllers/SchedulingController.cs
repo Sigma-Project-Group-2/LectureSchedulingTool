@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using LectureSchedulingTool.Models;
 
@@ -9,8 +7,10 @@ namespace LectureSchedulingTool.Controllers
 {
     public class SchedulingController : Controller
     {
+        //База данных
         private SchedulingContext DB = new SchedulingContext();
 
+        //Контроллер факультета
         public ActionResult Faculty(char action = '0', int row = -1, int id_faculty = -1)
         {
             ViewBag.row = -1;
@@ -18,11 +18,11 @@ namespace LectureSchedulingTool.Controllers
 
             switch (action)
             {
-                //add
+                //Добавление нового элемента
                 case 'a':
                     ViewBag.action = 'a';
                     break;
-                //save
+                //Сохранение нового элемента
                 case 's':
                     string name = Request.Form["name"];
                     string abbreviation = Request.Form["abbreviation"];
@@ -30,29 +30,31 @@ namespace LectureSchedulingTool.Controllers
                     DB.Faculty.Add(faculty);
                     DB.SaveChanges();
                     break;
-                //edit
+                //Редактирование существующего элемента
                 case 'e':
                     ViewBag.action = 'e';
                     ViewBag.row = row;
                     break;
-                //update
+                //Обновление существующего элемента
                 case 'u':
                     DB.Faculty.Find(id_faculty).name = Request.Form["name"];
                     DB.Faculty.Find(id_faculty).abbreviation = Request.Form["abbreviation"];
                     DB.SaveChanges();
                     break;
-                //remove                    
+                //Удаление существующего элемента
                 case 'r':
                     DB.Faculty.Remove(DB.Faculty.Find(id_faculty));
                     DB.SaveChanges();
                     break;
             }
 
+            //Передача списка факульетов в представление
             ViewBag.faculties = DB.Faculty.ToList();
 
             return View();
         }
 
+        //Контроллер кафедры
         public ActionResult Department(char action = '0', int row = -1, int id_department = -1)
         {
             ViewBag.row = -1;
@@ -60,11 +62,11 @@ namespace LectureSchedulingTool.Controllers
 
             switch (action)
             {
-                //add
+                //Добавление нового элемента
                 case 'a':
                     ViewBag.action = 'a';
                     break;
-                //save
+                //Сохранение нового элемента
                 case 's':
                     string name = Request.Form["name"];
                     string abbreviation = Request.Form["abbreviation"];
@@ -74,12 +76,12 @@ namespace LectureSchedulingTool.Controllers
                     DB.Department.Add(department);
                     DB.SaveChanges();
                     break;
-                //edit
+                //Редактирование существующего элемента
                 case 'e':
                     ViewBag.action = 'e';
                     ViewBag.row = row;
                     break;
-                //update
+                //Обновление существующего элемента
                 case 'u':
                     DB.Department.Find(id_department).name = Request.Form["name"];
                     DB.Department.Find(id_department).abbreviation = Request.Form["abbreviation"];
@@ -87,13 +89,14 @@ namespace LectureSchedulingTool.Controllers
                     DB.Department.Find(id_department).id_faculty = Convert.ToInt32(Request.Form["id_faculty"]);
                     DB.SaveChanges();
                     break;
-                //remove                    
+                //Удаление существующего элемента
                 case 'r':
                     DB.Department.Remove(DB.Department.Find(id_department));
                     DB.SaveChanges();
                     break;
             }
 
+            //Передача списков факультетов и кадерд в представление
             ViewBag.faculties = DB.Faculty.ToList();
             ViewBag.departments = DB.Department.ToList();
             

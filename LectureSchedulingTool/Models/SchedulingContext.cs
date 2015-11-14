@@ -3,6 +3,7 @@ using System.Data.Entity;
 
 namespace LectureSchedulingTool.Models
 {
+    //Модель базы данных
     public class SchedulingContext : DbContext
     {
         public DbSet<Faculty> Faculty { get; set; }
