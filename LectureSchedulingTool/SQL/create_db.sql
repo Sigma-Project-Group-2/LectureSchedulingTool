@@ -1,11 +1,11 @@
-﻿CREATE TABLE Faculty
+﻿CREATE TABLE Faculties
 ( 
 	id_faculty           int IDENTITY ( 1,1 ) ,
 	name                 nvarchar(100) COLLATE Cyrillic_General_CI_AS  NOT NULL ,
 	abbreviation         nvarchar(10) COLLATE Cyrillic_General_CI_AS  NOT NULL 
 )
 
-CREATE TABLE Department
+CREATE TABLE Departments
 ( 
 	id_department        int IDENTITY ( 1,1 ) ,
 	name                 nvarchar(100) COLLATE Cyrillic_General_CI_AS  NOT NULL ,
@@ -22,7 +22,7 @@ CREATE TABLE Students_group
 	id_department        int  NOT NULL 
 )
 
-CREATE TABLE Teacher
+CREATE TABLE Teachers
 ( 
 	id_teacher           int IDENTITY ( 1,1 ) ,
 	surname              nvarchar(20) COLLATE Cyrillic_General_CI_AS  NOT NULL ,
@@ -34,7 +34,7 @@ CREATE TABLE Teacher
 	id_department        int  NOT NULL 
 )
 
-CREATE TABLE Subject
+CREATE TABLE Subjects
 ( 
 	id_subject           int IDENTITY ( 1,1 ) ,
 	name                 nvarchar(50) COLLATE Cyrillic_General_CI_AS  NOT NULL ,
@@ -42,7 +42,7 @@ CREATE TABLE Subject
 	id_department        int  NOT NULL 
 )
 
-CREATE TABLE Classroom
+CREATE TABLE Classrooms
 ( 
 	id_classroom         int IDENTITY ( 1,1 ) ,
 	number               nvarchar(20) COLLATE Cyrillic_General_CI_AS  NOT NULL ,
@@ -65,7 +65,7 @@ CREATE TABLE Teacher_load
 	id_subject           int  NOT NULL 
 )
 
-CREATE TABLE Lesson
+CREATE TABLE Lessons
 ( 
 	id_lesson            int IDENTITY ( 1,1 ) ,
 	week                 int  NOT NULL ,
