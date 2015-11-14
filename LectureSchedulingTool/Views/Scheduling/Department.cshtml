@@ -34,26 +34,26 @@
                     {
                         <input type="hidden" name="row" value="@i" />
                         <input type="hidden" name="id_department" value="@departments[i].id_department" />
-                            <td><input type="text" name="name" value="@departments[i].name" /></td>
-                            <td><input type="text" name="abbreviation" value="@departments[i].abbreviation" /></td>
-                            <td>
-                                <select name="id_faculty">
-                                    @for (int j = 0; j < faculties.Count; j++)
-                                    {
-                                        <option value="@faculties[j].id_faculty" @(faculties[j].id_faculty == departments[i].id_faculty ? "selected" : "")>
-                                            @faculties[j].abbreviation (@faculties[j].name)
-                                        </option>
-                                    }
-                                </select>
-                            </td>
-                            <td>
-                                <select name="is_producing">
-                                    <option value="1" @(departments[i].is_producing == 1 ? "selected" : "")>Выпускающая</option>
-                                    <option value="0" @(departments[i].is_producing != 1 ? "selected" : "")>Не выпускающая</option>
-                                </select>
-                            </td>
-                            <td><button type="submit" name="action" value="u">Обновить</button></td>
-                            <td><button type="submit" name="action" value="0">Отменить</button></td>
+                        <td><input type="text" name="name" value="@departments[i].name" class="form-control" /></td>
+                        <td><input type="text" name="abbreviation" value="@departments[i].abbreviation" class="form-control" /></td>
+                        <td>
+                            <select name="id_faculty" class="form-control">
+                                @for (int j = 0; j < faculties.Count; j++)
+                                {
+                                    <option value="@faculties[j].id_faculty" @(faculties[j].id_faculty == departments[i].id_faculty ? "selected" : "")>
+                                        @faculties[j].abbreviation (@faculties[j].name)
+                                    </option>
+                                }
+                            </select>
+                        </td>
+                        <td>
+                            <select name="is_producing" class="form-control">
+                                <option value="1" @(departments[i].is_producing == 1 ? "selected" : "")>Выпускающая</option>
+                                <option value="0" @(departments[i].is_producing != 1 ? "selected" : "")>Не выпускающая</option>
+                            </select>
+                        </td>
+                        <td><button type="submit" name="action" value="u" class="btn btn-default">Обновить</button></td>
+                        <td><button type="submit" name="action" value="0" class="btn btn-default">Отменить</button></td>
                     }
                 }
                 @* Если мы выводим существующие кафедры *@
@@ -69,8 +69,8 @@
                     {
                         <input type="hidden" name="row" value="@i" />
                         <input type="hidden" name="id_department" value="@departments[i].id_department" />
-                            <td><button type="submit" name="action" value="e"> Редактировать </button></td>
-                            <td><button type="submit" name="action" value="r"> Удалить </button></td>
+                        <td><button type="submit" name="action" value="e" class="btn btn-default"> Редактировать </button></td>
+                        <td><button type="submit" name="action" value="r" class="btn btn-default"> Удалить </button></td>
                     }
                 }
             </tr>
@@ -83,10 +83,10 @@
             {
                 <tr>
                     <td>@(departments.Count + 1)</td>
-                    <td><input type="text" name="name" /></td>
-                    <td><input type="text" name="abbreviation" /></td>
+                    <td><input type="text" name="name" class="form-control" /></td>
+                    <td><input type="text" name="abbreviation" class="form-control" /></td>
                     <td>
-                        <select name="id_faculty">
+                        <select name="id_faculty" class="form-control">
                             @for (int j = 0; j < faculties.Count; j++)
                             {
                                 <option value="@faculties[j].id_faculty">
@@ -96,13 +96,13 @@
                         </select>
                     </td>
                     <td>
-                        <select name="is_producing">
+                        <select name="is_producing" class="form-control">
                             <option value="1">Выпускающая</option>
                             <option value="0">Не выпускающая</option>
                         </select>
                     </td>
-                    <td><button type="submit" name="action" value="s">Сохранить</button></td>
-                    <td><button type="submit" name="action" value="0">Отменить</button></td>
+                    <td><button type="submit" name="action" value="s" class="btn btn-default">Сохранить</button></td>
+                    <td><button type="submit" name="action" value="0" class="btn btn-default">Отменить</button></td>
                 </tr>
             }
         }
@@ -113,6 +113,6 @@
 {
     using (Html.BeginForm())
     {
-        <button type="submit" name="action" value="a">Добавить</button>
+        <button type="submit" name="action" value="a" class="btn btn-default">Добавить</button>
     }
 }
