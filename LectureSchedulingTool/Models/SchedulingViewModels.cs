@@ -124,7 +124,6 @@ namespace LectureSchedulingTool.Models
         {
 
         }
-
         public Subject(string name, string type, int id_department)
         {
             this.name = name;
@@ -149,7 +148,6 @@ namespace LectureSchedulingTool.Models
         {
 
         }
-
         public Classroom(string number, int people_capacity, int id_department)
         {
             this.number = number;
@@ -158,7 +156,7 @@ namespace LectureSchedulingTool.Models
         }
     }
 
-    //Модель учебного плана группы
+    //Модель загрузки группы
     public class Students_group_load
     {
         [Key]
@@ -174,7 +172,6 @@ namespace LectureSchedulingTool.Models
         {
 
         }
-
         public Students_group_load(int hours, int id_students_group, int id_subject)
         {
             this.hours = hours;
@@ -183,7 +180,7 @@ namespace LectureSchedulingTool.Models
         }
     }
 
-    //Модель профильности преподавателя
+    //Модель загрузки
     public class Teacher_load
     {
         [Key]
@@ -197,7 +194,6 @@ namespace LectureSchedulingTool.Models
         {
 
         }
-
         public Teacher_load(int id_subject, int id_teacher)
         {
             this.id_subject = id_subject;
@@ -211,9 +207,9 @@ namespace LectureSchedulingTool.Models
         [Key]
         public int id_lesson { get; set; }
         [Required]
-        public int week { get; set; }
+        public int week_count { get; set; }
         [Required]
-        public int lesson { get; set; }
+        public int lesson_count { get; set; }
         [Required]
         public int id_classroom { get; set; }
         [Required]
@@ -225,11 +221,10 @@ namespace LectureSchedulingTool.Models
         {
 
         }
-
-        public Lesson(int week, int lesson, int id_classroom, int id_students_group_load, int id_teacher_load)
+        public Lesson(int week_count, int lesson_count, int id_classroom, int id_students_group_load, int id_teacher_load)
         {
-            this.week = week;
-            this.lesson = lesson;
+            this.week_count = week_count;
+            this.lesson_count = lesson_count;
             this.id_classroom = id_classroom;
             this.id_students_group_load = id_students_group_load;
             this.id_teacher_load = id_teacher_load;

@@ -68,8 +68,8 @@ CREATE TABLE Teacher_load
 CREATE TABLE Lessons
 ( 
 	id_lesson            int IDENTITY ( 1,1 ) ,
-	week                 int  NOT NULL ,
-	lesson               int  NOT NULL ,
+	week_count            int  NOT NULL ,
+	lesson_count            int  NOT NULL ,
 	id_students_group_load int  NOT NULL ,
 	id_teacher_load      int  NOT NULL ,
 	id_classroom         int  NOT NULL 
