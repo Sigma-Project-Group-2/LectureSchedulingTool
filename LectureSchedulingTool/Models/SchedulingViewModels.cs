@@ -118,7 +118,19 @@ namespace LectureSchedulingTool.Models
         [Required]
         public string type { get; set; }
         [Required]
-        public int id_deparment { get; set; }
+        public int id_department { get; set; }
+
+        public Subject()
+        {
+
+        }
+
+        public Subject(string name, string type, int id_department)
+        {
+            this.name = name;
+            this.type = type;
+            this.id_department = id_department;
+        }
     }
 
     //Модель аудитории
@@ -157,6 +169,18 @@ namespace LectureSchedulingTool.Models
         public int id_students_group { get; set; }
         [Required]
         public int id_subject { get; set; }
+
+        public Students_group_load()
+        {
+
+        }
+
+        public Students_group_load(int hours, int id_students_group, int id_subject)
+        {
+            this.hours = hours;
+            this.id_students_group = id_students_group;
+            this.id_students_group_load = id_subject;
+        }
     }
 
     //Модель профильности преподавателя
@@ -168,6 +192,17 @@ namespace LectureSchedulingTool.Models
         public int id_subject { get; set; }
         [Required]
         public int id_teacher { get; set; }
+
+        public Teacher_load()
+        {
+
+        }
+
+        public Teacher_load(int id_subject, int id_teacher)
+        {
+            this.id_subject = id_subject;
+            this.id_teacher = id_teacher;
+        }
     }
 
     //Модель занятия
@@ -185,5 +220,19 @@ namespace LectureSchedulingTool.Models
         public int id_students_group_load { get; set; }
         [Required]
         public int id_teacher_load { get; set; }
+
+        public Lesson()
+        {
+
+        }
+
+        public Lesson(int week, int lesson, int id_classroom, int id_students_group_load, int id_teacher_load)
+        {
+            this.week = week;
+            this.lesson = lesson;
+            this.id_classroom = id_classroom;
+            this.id_students_group_load = id_students_group_load;
+            this.id_teacher_load = id_teacher_load;
+        }
     }
 }
