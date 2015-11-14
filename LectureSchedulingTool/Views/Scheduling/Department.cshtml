@@ -19,96 +19,96 @@
     </thead>
     <tbody>
         @{
-            @* Получение списков факультетов и кафедр из контроллера *@
-        List<Faculty> faculties = ViewBag.faculties;
-        List<Department> departments = ViewBag.departments;
-        for (int i = 0; i < departments.Count; i++)
-        {
-            <tr>
-                <td>@(i + 1)</td>
-
-                @* Если мы редактируем существующую кафедру *@
-                @if (ViewBag.action == 'e' && i == Convert.ToInt32(ViewBag.row))
-                {
-                    using (Html.BeginForm())
-                    {
-                        <input type="hidden" name="row" value="@i" />
-                        <input type="hidden" name="id_department" value="@departments[i].id_department" />
-                        <td><input type="text" name="name" value="@departments[i].name" class="form-control" /></td>
-                        <td><input type="text" name="abbreviation" value="@departments[i].abbreviation" class="form-control" /></td>
-                        <td>
-                            <select name="id_faculty" class="form-control">
-                                @for (int j = 0; j < faculties.Count; j++)
-                                {
-                                    <option value="@faculties[j].id_faculty" @(faculties[j].id_faculty == departments[i].id_faculty ? "selected" : "")>
-                                        @faculties[j].abbreviation (@faculties[j].name)
-                                    </option>
-                                }
-                            </select>
-                        </td>
-                        <td>
-                            <select name="is_producing" class="form-control">
-                                <option value="1" @(departments[i].is_producing == 1 ? "selected" : "")>Выпускающая</option>
-                                <option value="0" @(departments[i].is_producing != 1 ? "selected" : "")>Не выпускающая</option>
-                            </select>
-                        </td>
-                        <td><button type="submit" name="action" value="u" class="btn btn-default">Обновить</button></td>
-                        <td><button type="submit" name="action" value="0" class="btn btn-default">Отменить</button></td>
-                    }
-                }
-                @* Если мы выводим существующие кафедры *@
-                else
-                {
-                    <td>@departments[i].name</td>
-                    <td>@departments[i].abbreviation</td>
-                    Faculty faculty = faculties.Find(f => f.id_faculty == departments[i].id_faculty);
-                    <td>@faculty.abbreviation (@faculty.name)</td>
-                    <td>@(departments[i].is_producing == 1 ? "Выпускающая" : "Не выпускающая")</td>
-
-                    using (Html.BeginForm())
-                    {
-                        <input type="hidden" name="row" value="@i" />
-                        <input type="hidden" name="id_department" value="@departments[i].id_department" />
-                        <td><button type="submit" name="action" value="e" class="btn btn-default"> Редактировать </button></td>
-                        <td><button type="submit" name="action" value="r" class="btn btn-default"> Удалить </button></td>
-                    }
-                }
-            </tr>
-            }
-        }
-        @* Если мы добавляем новую кафедру *@
-        @if (ViewBag.action == 'a')
-        {
-            using (Html.BeginForm())
+            List<Faculty> faculties = ViewBag.faculties;
+            List<Department> departments = ViewBag.departments;
+            for (int i = 0; i < departments.Count; i++)
             {
-                <tr>
-                    <td>@(departments.Count + 1)</td>
-                    <td><input type="text" name="name" class="form-control" /></td>
-                    <td><input type="text" name="abbreviation" class="form-control" /></td>
-                    <td>
-                        <select name="id_faculty" class="form-control">
-                            @for (int j = 0; j < faculties.Count; j++)
-                            {
-                                <option value="@faculties[j].id_faculty">
-                                    @faculties[j].abbreviation (@faculties[j].name)
-                                </option>
-                            }
-                        </select>
-                    </td>
-                    <td>
-                        <select name="is_producing" class="form-control">
-                            <option value="1">Выпускающая</option>
-                            <option value="0">Не выпускающая</option>
-                        </select>
-                    </td>
-                    <td><button type="submit" name="action" value="s" class="btn btn-default">Сохранить</button></td>
-                    <td><button type="submit" name="action" value="0" class="btn btn-default">Отменить</button></td>
-                </tr>
-            }
+                if (ViewBag.action == 'e' && i == Convert.ToInt32(ViewBag.row))
+                {
+                    using (Html.BeginForm())
+                    {
+                        <tr>
+                            <input type="hidden" name="row" value="@i" />
+                            <input type="hidden" name="id_department" value="@departments[i].id_department" />
+                            <td>@(i + 1)</td>
+                            <td><input type="text" name="name" value="@departments[i].name" class="form-control" /></td>
+                            <td><input type="text" name="abbreviation" value="@departments[i].abbreviation" class="form-control" /></td>
+                            <td>
+                                <select name="id_faculty" class="form-control">
+                                    @{
+                                        for (int j = 0; j < faculties.Count; j++)
+                                        {
+                                            <option value="@faculties[j].id_faculty" @(faculties[j].id_faculty == departments[i].id_faculty ? "selected" : "")>
+                                                @faculties[j].abbreviation (@faculties[j].name)
+                                            </option>
+                                        }
+                                    }
+                                </select>
+                            </td>
+                            <td>
+                                <select name="is_producing" class="form-control">
+                                    <option value="1" @(departments[i].is_producing == 1 ? "selected" : "")>Выпускающая</option>
+                                    <option value="0" @(departments[i].is_producing != 1 ? "selected" : "")>Не выпускающая</option>
+                                </select>
+                            </td>
+                            <td><button type="submit" name="action" value="u" class="btn btn-default">Обновить</button></td>
+                            <td><button type="submit" name="action" value="0" class="btn btn-default">Отменить</button></td>
+                        </tr>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            using (Html.BeginForm())
+                                            {
+                                                Faculty faculty = faculties.Find(f => f.id_faculty == departments[i].id_faculty);
+                                                <tr>
+                                                    <input type="hidden" name="row" value="@i" />
+                                                    <input type="hidden" name="id_department" value="@departments[i].id_department" />
+                                                    <td>@(i + 1)</td>
+                                                    <td>@departments[i].name</td>
+                                                    <td>@departments[i].abbreviation</td>
+                                                    <td>@faculty.abbreviation (@faculty.name)</td>
+                                                    <td>@(departments[i].is_producing == 1 ? "Выпускающая" : "Не выпускающая")</td>
+                                                    <td><button type="submit" name="action" value="e" class="btn btn-default"> Редактировать </button></td>
+                                                    <td><button type="submit" name="action" value="r" class="btn btn-default"> Удалить </button></td>
+                                                </tr>
+                                                }
+                                            }
+                                        }
+                                        if (ViewBag.action == 'a')
+                                        {
+                                            using (Html.BeginForm())
+                                            {
+                                                <tr>
+                                                    <td>@(departments.Count + 1)</td>
+                                                    <td><input type="text" name="name" class="form-control" /></td>
+                                                    <td><input type="text" name="abbreviation" class="form-control" /></td>
+                                                    <td>
+                                                        <select name="id_faculty" class="form-control">
+                                                            @{
+                                                                for (int j = 0; j < faculties.Count; j++)
+                                                                {
+                                                                    <option value="@faculties[j].id_faculty">
+                                                                        @faculties[j].abbreviation (@faculties[j].name)
+                                                                    </option>
+                                                                }
+                                                            }
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <select name="is_producing" class="form-control">
+                                                            <option value="1">Выпускающая</option>
+                                                            <option value="0">Не выпускающая</option>
+                                                        </select>
+                                                    </td>
+                                                    <td><button type="submit" name="action" value="s" class="btn btn-default">Сохранить</button></td>
+                                                    <td><button type="submit" name="action" value="0" class="btn btn-default">Отменить</button></td>
+                                                </tr>
+                                                                    }
+                                                                }
         }
     </tbody>
 </table>
-@* Показ кнопки добавить новую кафедру *@
 @if (ViewBag.action != 'a')
 {
     using (Html.BeginForm())
