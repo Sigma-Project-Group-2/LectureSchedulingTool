@@ -80,9 +80,12 @@ namespace LectureSchedulingTool.Controllers
                     string abbreviation = Request.Form["abbreviation"];
                     int is_producing = Convert.ToInt32(Request.Form["is_producing"]);
                     int id_faculty = Convert.ToInt32(Request.Form["id_faculty"]);
-                    Department department = new Department(name, abbreviation, is_producing, id_faculty);
-                    DB.Department.Add(department);
-                    DB.SaveChanges();
+                    if (name.Length != 0 && abbreviation.Length != 0)
+                    {
+                        Department department = new Department(name, abbreviation, is_producing, id_faculty);
+                        DB.Department.Add(department);
+                        DB.SaveChanges();
+                    }
                     break;
                 //Редактирование существующего элемента
                 case 'e':
@@ -91,11 +94,18 @@ namespace LectureSchedulingTool.Controllers
                     break;
                 //Обновление существующего элемента
                 case 'u':
-                    DB.Department.Find(id_department).name = Request.Form["name"];
-                    DB.Department.Find(id_department).abbreviation = Request.Form["abbreviation"];
-                    DB.Department.Find(id_department).is_producing = Convert.ToInt32(Request.Form["is_producing"]);
-                    DB.Department.Find(id_department).id_faculty = Convert.ToInt32(Request.Form["id_faculty"]);
-                    DB.SaveChanges();
+                    name = Request.Form["name"];
+                    abbreviation = Request.Form["abbreviation"];
+                    is_producing = Convert.ToInt32(Request.Form["is_producing"]);
+                    id_faculty = Convert.ToInt32(Request.Form["id_faculty"]);
+                    if (name.Length != 0 && abbreviation.Length != 0)
+                    {
+                        DB.Department.Find(id_department).name = Request.Form["name"];
+                        DB.Department.Find(id_department).abbreviation = Request.Form["abbreviation"];
+                        DB.Department.Find(id_department).is_producing = Convert.ToInt32(Request.Form["is_producing"]);
+                        DB.Department.Find(id_department).id_faculty = Convert.ToInt32(Request.Form["id_faculty"]);
+                        DB.SaveChanges();
+                    }
                     break;
                 //Удаление существующего элемента
                 case 'r':
@@ -128,9 +138,12 @@ namespace LectureSchedulingTool.Controllers
                     string number = Request.Form["number"];
                     int people_capacity = Convert.ToInt32(Request.Form["peolple_capacity"]);
                     int id_department = Convert.ToInt32(Request.Form["id_department"]);
-                    Classroom classroom = new Classroom(number, people_capacity, id_department);
-                    DB.Classroom.Add(classroom);
-                    DB.SaveChanges();
+                    if (number.Length != 0)
+                    {
+                        Classroom classroom = new Classroom(number, people_capacity, id_department);
+                        DB.Classroom.Add(classroom);
+                        DB.SaveChanges();
+                    }
                     break;
                 //Редактирование существующего элемента
                 case 'e':
@@ -139,10 +152,16 @@ namespace LectureSchedulingTool.Controllers
                     break;
                 //Обновление существующего элемента
                 case 'u':
-                    DB.Classroom.Find(id_classroom).number = Request.Form["number"];
-                    DB.Classroom.Find(id_classroom).people_capacity = Convert.ToInt32(Request.Form["peolple_capacity"]);
-                    DB.Classroom.Find(id_classroom).id_department = Convert.ToInt32(Request.Form["id_department"]);
-                    DB.SaveChanges();
+                    number = Request.Form["number"];
+                    people_capacity = Convert.ToInt32(Request.Form["peolple_capacity"]);
+                    id_department = Convert.ToInt32(Request.Form["id_department"]);
+                    if (number.Length != 0)
+                    {
+                        DB.Classroom.Find(id_classroom).number = Request.Form["number"];
+                        DB.Classroom.Find(id_classroom).people_capacity = Convert.ToInt32(Request.Form["peolple_capacity"]);
+                        DB.Classroom.Find(id_classroom).id_department = Convert.ToInt32(Request.Form["id_department"]);
+                        DB.SaveChanges();
+                    }
                     break;
                 //Удаление существующего элемента
                 case 'r':
