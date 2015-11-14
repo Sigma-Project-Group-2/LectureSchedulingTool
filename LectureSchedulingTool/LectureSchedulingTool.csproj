@@ -179,6 +179,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\SchedulingContext.cs" />
     <Compile Include="Models\SchedulingViewModels.cs" />
+    <Compile Include="Models\SecretCodeAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
