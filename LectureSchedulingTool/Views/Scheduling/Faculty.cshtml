@@ -1,0 +1,74 @@
+﻿@using LectureSchedulingTool.Models;
+
+<h2>Факультеты</h2>
+
+<br /><br /><br />
+
+<table align="center" border="1">
+    <thead>
+        <tr>
+            <td>№</td>
+            <td>Название</td>
+            <td>Аббревиатура</td>
+            <td></td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            List<Faculty> faculties = ViewBag.faculties;
+            for (int i = 0; i < faculties.Count; i++)
+            {
+                <tr>
+                    @if (ViewBag.action == 'e' && i == Convert.ToInt32(ViewBag.row))
+                    {
+                        <td>@(i + 1)</td>
+                        using (Html.BeginForm())
+                        {
+                            <input type="hidden" name="row" value="@i" />
+                            <input type="hidden" name="id_faculty" value="@faculties[i].id_faculty" />
+                            <td><input type="text" name="name" value="@faculties[i].name" /></td>
+                            <td><input type="text" name="abbreviation" value="@faculties[i].abbreviation" /></td>
+                            <td><button type="submit" name="action" value="u">Обновить</button></td>
+                            <td><button type="submit" name="action" value="0">Отменить</button></td>
+                        }
+                    }
+                    else
+                    {
+                        <td>@(i + 1)</td>
+                        <td>@faculties[i].name</td>
+                        <td>@faculties[i].abbreviation</td>
+
+                        using (Html.BeginForm())
+                        {
+                            <input type="hidden" name="row" value="@i" />
+                            <input type="hidden" name="id_faculty" value="@faculties[i].id_faculty" />
+                            <td><button type="submit" name="action" value="e"> Редактировать </button></td>
+                            <td><button type="submit" name="action" value="r"> Удалить </button></td>
+                        }
+                    }
+                </tr>
+            }
+        }
+        @if (ViewBag.action == 'a')
+        {
+            using (Html.BeginForm())
+            {
+                <tr>
+                    <td>@(faculties.Count + 1)</td>
+                    <td><input type="text" name="name" /></td>
+                    <td><input type="text" name="abbreviation" /></td>
+                    <td><button type="submit" name="action" value="s">Сохранить</button></td>
+                    <td><button type="submit" name="action" value="0">Отменить</button></td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+@if (ViewBag.action != 'a')
+{
+    using (Html.BeginForm())
+    {
+        <button type="submit" name="action" value="a">Добавить</button>
+    }
+}
