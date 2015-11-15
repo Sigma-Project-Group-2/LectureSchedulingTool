@@ -1,6 +1,8 @@
 ﻿@using LectureSchedulingTool.Models;
 
 <script type="text/javascript">
+    
+
     $(function () {
         $('[name = id_faculty]').change(function () {
             var id = $(this).val();
@@ -16,6 +18,12 @@
             });
         });
     });
+
+    $('[name = id_faculty]').ready(function () {
+        $('[name = id_faculty] :selected').change();
+    }
+        );
+
 </script>
 
 <h2>Аудитории</h2>
