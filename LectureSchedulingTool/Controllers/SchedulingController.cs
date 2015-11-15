@@ -542,9 +542,9 @@ namespace LectureSchedulingTool.Controllers
             return View();
         }
 
-        public ActionResult GetDepartments(int id, int default_department = 0)
+        public ActionResult GetDepartments(int id_faculty, int default_department = 0)
         {
-            List<Department> departments = DB.Department.Where(d => d.id_faculty == id).ToList();
+            List<Department> departments = DB.Department.Where(d => d.id_faculty == id_faculty).ToList();
 
             ViewBag.departments = departments;
             ViewBag.default_department = default_department;
