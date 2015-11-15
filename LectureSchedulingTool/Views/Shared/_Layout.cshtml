@@ -19,27 +19,46 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Раписание занятий", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Расписание", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Факультеты", "Faculty", "Scheduling")</li>
-                    <li>@Html.ActionLink("Кафедры", "Department", "Scheduling")</li>
-                    
-                        <li>@Html.ActionLink("Группы", "Students_group", "Scheduling")</li>
-                    @*
-                        <li>@Html.ActionLink("Преподаватели", "Teacher", "Scheduling")</li>
-                        <li>@Html.ActionLink("Предметы", "Subject", "Scheduling")</li>
-                    *@
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            Факультеты
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>@Html.ActionLink("Факультеты", "Faculty", "Scheduling")</li>
+                            <li>@Html.ActionLink("Кафедры", "Department", "Scheduling")</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            Группы
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>@Html.ActionLink("Группы", "Students_group", "Scheduling")</li>
+                            <li>@Html.ActionLink("Загрузка групп", "Students_group_load", "Scheduling")</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            Преподаватели
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>@Html.ActionLink("Преподаватели", "Teacher", "Scheduling")</li>
+                            <li>@Html.ActionLink("Загрузка преподавателей", "Teacher_load", "Scheduling")</li>
+                        </ul>
+                    </li>
+                    <li>@Html.ActionLink("Предметы", "Subject", "Scheduling")</li>
                     <li>@Html.ActionLink("Аудитории", "Classroom", "Scheduling")</li>
-                    @*
-                        <li>@Html.ActionLink("Загрузка группы", "Students_group_load", "Scheduling")</li>
-                        <li>@Html.ActionLink("Загрузка преподавателя", "Teacher_load", "Scheduling")</li>
-                        <li>@Html.ActionLink("Занятия", "Lesson", "Scheduling")</li>
-                    *@
-                    <li>@Html.ActionLink("О нас", "About", "Home")</li>
-                    <li>@Html.ActionLink("Контакты", "Contact", "Home")</li>
-
+                    <li>@Html.ActionLink("Занятия", "Lesson", "Scheduling")</li>
+                    <li>@Html.ActionLink("Настройки", "Lesson", "Scheduling")</li>
+                    @*<li>@Html.ActionLink("О нас", "About", "Home")</li>
+                        <li>@Html.ActionLink("Контакты", "Contact", "Home")</li>*@
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -49,7 +68,13 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - SGP2</p>
+            <p>
+                Запущено при поддержке
+                <a href="http://www.asp.net/mvc">ASP.Net MVC</a>,
+                <a href="https://azure.microsoft.com">Microsoft Azure</a> и
+                <a href="https://somee.com">Somee hosting</a>
+            </p>
         </footer>
     </div>
 
