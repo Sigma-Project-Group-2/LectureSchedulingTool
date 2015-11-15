@@ -246,6 +246,7 @@
     <Content Include="Views\Scheduling\Department.cshtml" />
     <Content Include="Views\Scheduling\Classroom.cshtml" />
     <Content Include="Views\Scheduling\GetItems.cshtml" />
+    <Content Include="Views\Scheduling\GetDepartments.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

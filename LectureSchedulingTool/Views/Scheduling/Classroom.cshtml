@@ -7,7 +7,7 @@
 
             $.ajax({
                 type: 'GET',
-                url: '@Url.Action("GetItems")/' + id,
+                url: '@Url.Action("GetDepartments")/' + id,
                 success: function (data) {
                     $('[name = id_department]').empty();
                     $('[name = id_department]').append(data);
@@ -15,9 +15,9 @@
             });
         });
 
-        $('[name = id_faculty]').ready(function () {
+       /* $('[name = id_faculty]').ready(function () {
             $('[name = id_faculty]').change();
-        });
+        });*/
     });
 </script>
 
