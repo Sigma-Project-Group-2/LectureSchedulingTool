@@ -8,8 +8,10 @@ namespace LectureSchedulingTool.Models
         [Key]
         public int id_faculty { get; set; }
         [Required]
+        [StringLength(100)]
         public string name { get; set; }
         [Required]
+        [StringLength(10)]
         public string abbreviation { get; set; }
 
         public Faculty()
@@ -29,8 +31,10 @@ namespace LectureSchedulingTool.Models
         [Key]
         public int id_department { get; set; }
         [Required]
+        [StringLength(100)]
         public string name { get; set; }
         [Required]
+        [StringLength(10)]
         public string abbreviation { get; set; }
         [Required]
         public int is_producing { get; set; }
@@ -56,6 +60,7 @@ namespace LectureSchedulingTool.Models
         [Key]
         public int id_students_group { get; set; }
         [Required]
+        [StringLength(20)]
         public string name { get; set; }
         [Required]
         public int people_amount { get; set; }
@@ -80,15 +85,20 @@ namespace LectureSchedulingTool.Models
         [Key]
         public int id_teacher { get; set; }
         [Required]
+        [StringLength(20)]
         public string surname { get; set; }
         [Required]
+        [StringLength(20)]
         public string name { get; set; }
         [Required]
+        [StringLength(20)]
         public string patronymic { get; set; }
         [Required]
         public int max_hours { get; set; }
         [Required]
+        [StringLength(20)]
         public string working_position { get; set; }
+        [StringLength(20)]
         public string regalia { get; set; }
         [Required]
         public int id_department { get; set; }
@@ -114,8 +124,10 @@ namespace LectureSchedulingTool.Models
         [Key]
         public int id_subject { get; set; }
         [Required]
+        [StringLength(50)]
         public string name { get; set; }
         [Required]
+        [StringLength(20)]
         public string type { get; set; }
         [Required]
         public int id_department { get; set; }
@@ -138,6 +150,7 @@ namespace LectureSchedulingTool.Models
         [Key]
         public int id_classroom { get; set; }
         [Required]
+        [StringLength(20)]
         public string number { get; set; }
         [Required]
         public int people_capacity { get; set; }
