@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Web.Mvc;
+using System.Collections.Generic;
 using LectureSchedulingTool.Models;
 
 namespace LectureSchedulingTool.Controllers
@@ -300,7 +301,7 @@ namespace LectureSchedulingTool.Controllers
 
             return View();
         }
-
+        
         //Контроллер аудиторий
         public ActionResult Classroom(char action = '0', int row = -1, int id_classroom = -1)
         {
@@ -539,6 +540,16 @@ namespace LectureSchedulingTool.Controllers
             ViewBag.teacher_loads = DB.Teacher_load.ToList();
             ViewBag.lessons = DB.Lesson.ToList();
             return View();
+        }
+
+        public ActionResult GetDepartments(int id_faculty, int default_department = 0)
+        {
+            List<Department> departments = DB.Department.Where(d => d.id_faculty == id_faculty).ToList();
+
+            ViewBag.departments = departments;
+            ViewBag.default_department = default_department;
+
+            return PartialView();
         }
     }
 }

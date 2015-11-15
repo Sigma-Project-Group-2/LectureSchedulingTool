@@ -2093,6 +2093,7 @@ fieldset[disabled] .btn-default.active {
   color: #ffffff;
   background-color: #428bca;
   border-color: #357ebd;
+  width:123px;
 }
 
 .btn-primary:hover,
@@ -2175,6 +2176,7 @@ fieldset[disabled] .btn-warning.active {
   color: #ffffff;
   background-color: #d9534f;
   border-color: #d43f3a;
+  width:90px;
 }
 
 .btn-danger:hover,

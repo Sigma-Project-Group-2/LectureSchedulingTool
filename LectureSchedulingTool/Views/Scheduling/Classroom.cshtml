@@ -1,10 +1,26 @@
 ﻿@using LectureSchedulingTool.Models;
 
+<script type="text/javascript">
+    $(function () {
+        $('[name = id_faculty]').change(function () {
+            var id = $(this).val();
+
+            $.ajax({
+                type: 'GET',
+                url: '@Url.Action("GetDepartments")/' + id,
+                success: function (data) {
+                    $('[name = id_department]').empty();
+                    $('[name = id_department]').append(data);
+                }
+            });
+        });
+    });
+</script>
+
 <h2>Аудитории</h2>
 
 <br /><br /><br />
 
-@* Шапка таблицы *@
 <table class="table-bordered table-condensed" align="center">
     <thead>
         <tr>
@@ -131,6 +147,5 @@
                                                                     }
                                                                 }
         }
-
     </tbody>
 </table>
