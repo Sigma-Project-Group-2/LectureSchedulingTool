@@ -1,5 +1,23 @@
 ﻿@using LectureSchedulingTool.Models;
 
+<script type="text/javascript">
+    $(function () {
+        $('[name = id_faculty]').change(function () {
+            var id = $(this).val();
+
+            $.ajax({
+                type: 'GET',
+                data: { id_faculty: id },
+                url: '@Url.Action("GetDepartments")',
+                success: function (data) {
+                    $('[name = id_department]').empty();
+                    $('[name = id_department]').append(data);
+                }
+            });
+        });
+    });
+</script>
+
 <h2>Группы</h2>
 
 <br /><br /><br />
