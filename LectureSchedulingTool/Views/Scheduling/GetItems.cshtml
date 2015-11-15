@@ -1,9 +1,13 @@
 ﻿@using LectureSchedulingTool.Models
-@model IEnumerable<Department>
 
-@foreach (var item in Model)
-{
-    <option value="@item.id_faculty">
-        @item.abbreviation (@item.name)
-    </option>
+@{
+    List<Department> departments = ViewBag.departments;
+    int default_department = ViewBag.default_department;
+
+    for (int i = 0; i < departments.Count; i++)
+    {
+        <option value="@departments[i].id_department" @(departments[i].id_department == default_department ? "selected" : "")>
+            @departments[i].abbreviation (@departments[i].name)
+        </option>
+    }
 }
