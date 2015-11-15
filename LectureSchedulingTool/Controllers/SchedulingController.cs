@@ -301,6 +301,8 @@ namespace LectureSchedulingTool.Controllers
             return View();
         }
 
+
+
         //Контроллер аудиторий
         public ActionResult Classroom(char action = '0', int row = -1, int id_classroom = -1)
         {
@@ -539,6 +541,11 @@ namespace LectureSchedulingTool.Controllers
             ViewBag.teacher_loads = DB.Teacher_load.ToList();
             ViewBag.lessons = DB.Lesson.ToList();
             return View();
+        }
+
+        public ActionResult GetItems(int id)
+        {
+            return PartialView(DB.Department.Where(d => d.id_faculty == id).ToList());
         }
     }
 }
