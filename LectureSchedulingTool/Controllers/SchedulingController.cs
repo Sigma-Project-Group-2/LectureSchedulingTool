@@ -140,8 +140,8 @@ namespace LectureSchedulingTool.Controllers
                     int id_department = Convert.ToInt32(Request.Form["id_department"]);
                     if (name.Length != 0 && people_amount > 0 && id_department > 0)
                     {
-                        Students_group group = new Students_group(name, people_amount, id_department);
-                        DB.Students_group.Add(group);
+                        Students_group students_group = new Students_group(name, people_amount, id_department);
+                        DB.Students_group.Add(students_group);
                         DB.SaveChanges();
                     }
                     break;
