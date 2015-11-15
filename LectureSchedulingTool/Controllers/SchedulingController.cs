@@ -316,7 +316,7 @@ namespace LectureSchedulingTool.Controllers
                 //Сохранение нового элемента
                 case 's':
                     string number = Request.Form["number"];
-                    int people_capacity = Convert.ToInt32(Request.Form["peolple_capacity"]);
+                    int people_capacity = Convert.ToInt32(Request.Form["people_capacity"]);
                     int id_department = Convert.ToInt32(Request.Form["id_department"]);
                     if (number.Length != 0 && people_capacity > 0 && id_department > 0)
                     {
@@ -333,7 +333,7 @@ namespace LectureSchedulingTool.Controllers
                 //Обновление существующего элемента
                 case 'u':
                     number = Request.Form["number"];
-                    people_capacity = Convert.ToInt32(Request.Form["peolple_capacity"]);
+                    people_capacity = Convert.ToInt32(Request.Form["people_capacity"]);
                     id_department = Convert.ToInt32(Request.Form["id_department"]);
                     if (number.Length != 0 && people_capacity > 0 && id_department > 0)
                     {
