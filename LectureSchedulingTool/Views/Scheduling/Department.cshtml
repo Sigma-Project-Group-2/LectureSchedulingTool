@@ -4,17 +4,15 @@
 
 <br /><br /><br />
 
-@* Создание шапки таблицы *@
-<table align="center" border="1">
+@* Шапка таблицы *@
+<table class="table-bordered table-condensed" align="center">
     <thead>
         <tr>
             <td>№</td>
-            <td>Название</td>
-            <td>Аббревиатура</td>
             <td>Факультет</td>
+            <td>Название</td>
+            <td>Аббревиатура</td>            
             <td>Тип</td>
-            <td></td>
-            <td></td>
         </tr>
     </thead>
     <tbody>
@@ -31,8 +29,6 @@
                             <input type="hidden" name="row" value="@i" />
                             <input type="hidden" name="id_department" value="@departments[i].id_department" />
                             <td>@(i + 1)</td>
-                            <td><input type="text" name="name" value="@departments[i].name" class="form-control" /></td>
-                            <td><input type="text" name="abbreviation" value="@departments[i].abbreviation" class="form-control" /></td>
                             <td>
                                 <select name="id_faculty" class="form-control">
                                     @{
@@ -45,14 +41,16 @@
                                     }
                                 </select>
                             </td>
+                            <td><input type="text" name="name" value="@departments[i].name" class="form-control" /></td>
+                            <td><input type="text" name="abbreviation" value="@departments[i].abbreviation" class="form-control" /></td>
                             <td>
                                 <select name="is_producing" class="form-control">
                                     <option value="1" @(departments[i].is_producing == 1 ? "selected" : "")>Выпускающая</option>
                                     <option value="0" @(departments[i].is_producing != 1 ? "selected" : "")>Не выпускающая</option>
                                 </select>
                             </td>
-                            <td><button type="submit" name="action" value="u" class="btn btn-default">Обновить</button></td>
-                            <td><button type="submit" name="action" value="0" class="btn btn-default">Отменить</button></td>
+                            <td><button type="submit" name="action" value="u" class="btn btn-primary">Обновить</button></td>
+                            <td><button type="submit" name="action" value="0" class="btn btn-warning">Отменить</button></td>
                         </tr>
                                             }
                                         }
@@ -61,16 +59,17 @@
                                             using (Html.BeginForm())
                                             {
                                                 Faculty faculty = faculties.Find(f => f.id_faculty == departments[i].id_faculty);
+
                                                 <tr>
                                                     <input type="hidden" name="row" value="@i" />
                                                     <input type="hidden" name="id_department" value="@departments[i].id_department" />
                                                     <td>@(i + 1)</td>
+                                                    <td>@faculty.abbreviation</td>
                                                     <td>@departments[i].name</td>
                                                     <td>@departments[i].abbreviation</td>
-                                                    <td>@faculty.abbreviation (@faculty.name)</td>
                                                     <td>@(departments[i].is_producing == 1 ? "Выпускающая" : "Не выпускающая")</td>
-                                                    <td><button type="submit" name="action" value="e" class="btn btn-default"> Редактировать </button></td>
-                                                    <td><button type="submit" name="action" value="r" class="btn btn-default"> Удалить </button></td>
+                                                    <td><button type="submit" name="action" value="e" class="btn btn-primary"> Редактировать </button></td>
+                                                    <td><button type="submit" name="action" value="r" class="btn btn-danger"> Удалить </button></td>
                                                 </tr>
                                                 }
                                             }
@@ -81,8 +80,6 @@
                                             {
                                                 <tr>
                                                     <td>@(departments.Count + 1)</td>
-                                                    <td><input type="text" name="name" class="form-control" /></td>
-                                                    <td><input type="text" name="abbreviation" class="form-control" /></td>
                                                     <td>
                                                         <select name="id_faculty" class="form-control">
                                                             @{
@@ -95,24 +92,28 @@
                                                             }
                                                         </select>
                                                     </td>
+                                                    <td><input type="text" name="name" class="form-control" /></td>
+                                                    <td><input type="text" name="abbreviation" class="form-control" /></td>
                                                     <td>
                                                         <select name="is_producing" class="form-control">
                                                             <option value="1">Выпускающая</option>
                                                             <option value="0">Не выпускающая</option>
                                                         </select>
                                                     </td>
-                                                    <td><button type="submit" name="action" value="s" class="btn btn-default">Сохранить</button></td>
-                                                    <td><button type="submit" name="action" value="0" class="btn btn-default">Отменить</button></td>
+                                                    <td><button type="submit" name="action" value="s" class="btn btn-primary">Сохранить</button></td>
+                                                    <td><button type="submit" name="action" value="0" class="btn btn-warning">Отменить</button></td>
                                                 </tr>
+                                                                    }
+                                                                }
+                                                                else
+                                                                {
+                                                                    using (Html.BeginForm())
+                                                                    {
+                                                                        <tr>
+                                                                            <td><button type="submit" name="action" value="a" class="btn btn-info">+</button></td>
+                                                                        </tr>
                                                                     }
                                                                 }
         }
     </tbody>
 </table>
-@if (ViewBag.action != 'a')
-{
-    using (Html.BeginForm())
-    {
-        <button type="submit" name="action" value="a" class="btn btn-default">Добавить</button>
-    }
-}

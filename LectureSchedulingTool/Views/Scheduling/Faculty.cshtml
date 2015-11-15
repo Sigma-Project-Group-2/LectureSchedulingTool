@@ -4,15 +4,13 @@
 
 <br /><br /><br />
 
-@* Создание шапки таблицы *@
-<table align="center" border="1">
+@* Шапка таблицы *@
+<table class="table-bordered table-condensed" align="center">
     <thead>
         <tr>
             <td>№</td>
             <td>Название</td>
             <td>Аббревиатура</td>
-            <td></td>
-            <td></td>
         </tr>
     </thead>
     <tbody>
@@ -30,8 +28,8 @@
                             <td>@(i + 1)</td>
                             <td><input type="text" name="name" value="@faculties[i].name" class="form-control" /></td>
                             <td><input type="text" name="abbreviation" value="@faculties[i].abbreviation" class="form-control" /></td>
-                            <td><button type="submit" name="action" value="u" class="btn btn-default">Обновить</button></td>
-                            <td><button type="submit" name="action" value="0" class="btn btn-default">Отменить</button></td>
+                            <td><button type="submit" name="action" value="u" class="btn btn-primary">Обновить</button></td>
+                            <td><button type="submit" name="action" value="0" class="btn btn-warning">Отменить</button></td>
                         </tr>
                     }
                 }
@@ -42,11 +40,11 @@
                         <tr>
                             <input type="hidden" name="row" value="@i" />
                             <input type="hidden" name="id_department" value="@faculties[i].id_faculty" />
-                            <td>@(i + 1) </td >
-                            <td> @faculties[i].name </td >
-                            <td> @faculties[i].abbreviation </td >
-                            <td><button type="submit" name="action" value="e" class="btn btn-default"> Редактировать</button></td>
-                            <td><button type="submit" name="action" value="r" class="btn btn-default"> Удалить</button></td>
+                            <td>@(i + 1) </td>
+                            <td> @faculties[i].name </td>
+                            <td> @faculties[i].abbreviation </td>
+                            <td><button type="submit" name="action" value="e" class="btn btn-primary"> Редактировать</button></td>
+                            <td><button type="submit" name="action" value="r" class="btn btn-danger"> Удалить</button></td>
                         </tr>
                     }
                 }
@@ -59,18 +57,20 @@
                         <td>@(faculties.Count + 1)</td>
                         <td><input type="text" name="name" class="form-control" /></td>
                         <td><input type="text" name="abbreviation" class="form-control" /></td>
-                        <td><button type="submit" name="action" value="s" class="btn btn-default">Сохранить</button></td>
-                        <td><button type="submit" name="action" value="0" class="btn btn-default">Отменить</button></td>
+                        <td><button type="submit" name="action" value="s" class="btn btn-primary">Сохранить</button></td>
+                        <td><button type="submit" name="action" value="0" class="btn btn-warning">Отменить</button></td>
+                    </tr>
+                }
+            }
+            else
+            {
+                using (Html.BeginForm())
+                {
+                    <tr>
+                        <td><button type="submit" name="action" value="a" class="btn btn-info">+</button></td>
                     </tr>
                 }
             }
         }
     </tbody>
 </table>
-@if (ViewBag.action != 'a')
-{
-    using (Html.BeginForm())
-    {
-        <button type="submit" name="action" value="a" class="btn btn-default">Добавить</button>
-    }
-}
