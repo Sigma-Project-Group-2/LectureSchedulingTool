@@ -1,5 +1,31 @@
 ﻿@using LectureSchedulingTool.Models;
 
+<script type="text/javascript">
+    $(function () {
+        $('[name = id_faculty]').change(function ()     //событие, происходящее после выбора в выпадающем списке факультетов
+        {
+            var id = $(this).val();
+
+            $.ajax({
+                type: 'GET',
+                url: '@Url.Action("GetItems")/' + id,
+                success: function (data) {
+                    
+                    $('[name = id_department]').empty();
+                    $('[name = id_department]').append(data);
+                    // заменяем содержимое присланным частичным представлением
+                    //$('#Departament').replaceWith(data);
+                }
+            });
+        });
+
+        $('[name = id_faculty]').ready(function () {
+            $('[name = id_faculty]').change();
+        }
+        );
+    });
+</script>
+
 <h2>Аудитории</h2>
 
 <br /><br /><br />
