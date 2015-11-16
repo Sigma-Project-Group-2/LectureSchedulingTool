@@ -10,16 +10,44 @@
         <dt>Пароль:</dt>
         <dd>
             [
-            @if (Model.HasPassword)
-            {
-                @Html.ActionLink("изменить Ваш пароль", "ChangePassword")
-            }
-            else
-            {
-                @Html.ActionLink("Create", "SetPassword")
-            }
+            @Html.ActionLink("изменить Ваш пароль", "ChangePassword")
             ]
         </dd>
     </dl>
+    <dl class="dl-horizontal">
+        <dt>Кол-во недель:</dt>
+        <dd>
+            [
+            <select>
+                <option value="1">1 неделя</option>
+                <option value="2">1/2 неделя</option>
+                <option value="2">1/2/3 недели</option>
+            </select>
+            ]
+        </dd>
+    </dl>
+    <dl class="dl-horizontal">
+        <dt>Данные:</dt>
+        <dd>
+            [
+            @Html.ActionLink("загрузить тестовые данные", "ChangePassword")
+            ]
+        </dd>
+        <dd>
+            [
+            @Html.ActionLink("удалить все данные", "ChangePassword")
+            ]
+        </dd>
+    </dl>
+    <dl class="dl-horizontal">
+        <dt>Расписание:</dt>
+        <dd>
+            [
+            @Html.ActionLink("сгенерировать расписание", "ChangePassword")
+            ]
+        </dd>
+    </dl>
+    
+    <button class="btn btn-primary">Сохранить</button>
+    <button class="btn btn-danger">Отменить</button>
 </div>
-<hr />
