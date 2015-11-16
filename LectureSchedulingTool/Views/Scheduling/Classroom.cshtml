@@ -5,14 +5,16 @@
         $('[name = id_faculty]').change(function () {
             var id = $(this).val();
             $('[name = id_department]').empty();
-            $('[name = id_department]').append('<option>Ждите</option>');   
+            $('[name = id_department]').append('<option>Ждите</option>');
+            $('[class $= btn-primary]').prop('disabled', 'true');
             $.ajax({
                 type: 'GET',
                 data: { id_faculty: id },
                 url: '@Url.Action("GetDepartments")',
                 success: function (data) {
                     $('[name = id_department]').empty();
-                    $('[name = id_department]').append(data);  
+                    $('[name = id_department]').append(data);
+                    $('[class $= btn-primary]').removeAttr('disabled');
                 }
             });
         });
