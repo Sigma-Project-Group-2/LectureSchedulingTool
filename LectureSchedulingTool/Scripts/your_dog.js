@@ -34,7 +34,7 @@ dog_site.loop = function () {
     setTimeout(dog_site.loop, 1000 / 60);
 
     if (dog_site.pets > 10) {
-        dog_site.dog.style.animation = "spin " + 50 / dog_site.pets + "s linear infinite";
+        dog_site.dog.style.animation = "spin " + 500 / dog_site.pets + "s linear infinite";
     }
 }
 

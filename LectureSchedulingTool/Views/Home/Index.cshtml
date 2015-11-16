@@ -2,10 +2,11 @@
     ViewBag.Title = "Home Page";
 }
 
-<script src="~/Scripts/SpinYourDog.js" type="text/javascript"></script>
+<script src="~/Scripts/your_dog.js" type="text/javascript"></script>
+@Styles.Render("/Content/your_dog.css")
 
 <div class="jumbotron" style="position: relative;">
-    <div id="g_god_div" style="position: absolute; right: 25px; bottom: 5px; visibility: hidden;">
+    <div id="g_god_div" style="position: absolute; right: 25px; bottom: 25px; visibility: hidden;">
         <div class="text-center">
             <p id="pets">PETS: <span id="pet_count">0</span></p>
         </div>
