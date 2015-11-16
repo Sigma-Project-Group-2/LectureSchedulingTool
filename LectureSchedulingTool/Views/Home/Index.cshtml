@@ -2,10 +2,22 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
+<script src="~/Scripts/SpinYourDog.js" type="text/javascript"></script>
+
+<div class="jumbotron" style="position: relative;">
+    <div id="g_god_div" style="position: absolute; right: 25px; bottom: 5px; visibility: hidden;">
+        <div class="text-center">
+            <p id="pets">PETS: <span id="pet_count">0</span></p>
+        </div>
+        <div id="dog_div">
+            <img id="dog" src="/Content/dog_l.png"/>
+            <img src="/Content/dog_happy_l.png" style="visibility: hidden; width: 0px; height: 0px;" />
+        </div>
+        <audio id="dog_music" src="/Content/mus_dogsong.ogg" loop></audio>
+    </div>
     <h1>Система генерации расписания</h1>
     <p class="lead">Самая лучшая, крутая и пафосная система генерации расписания сделанная на ASP.NET с использованием HTML, CSS, JavaScript и костылей.</p>
-    <p><a class="btn btn-primary btn-default" href="http://lecture-scheduling-tool.azurewebsites.net">Тыкай сюда &raquo;</a></p>
+    <p><button type="button" class="btn btn-primary btn-default" onclick="dog_site.getVisible()">Тыкай сюда &raquo;</button></p>
 </div>
 
 <div class="row">
