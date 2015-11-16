@@ -33,7 +33,7 @@ dog_site.loop = function () {
     dog_site.pet_count.innerHTML = dog_site.pets;
     setTimeout(dog_site.loop, 1000 / 60);
 
-    if (dog_site.pets > 10) {
+    if (dog_site.pets > 5) {
         dog_site.dog.style.animation = "spin " + 500 / dog_site.pets + "s linear infinite";
     }
 }

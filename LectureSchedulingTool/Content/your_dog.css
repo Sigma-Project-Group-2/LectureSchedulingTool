@@ -1,55 +1,83 @@
-﻿.clicked { 
-  -webkit-transition: all 0.2s;
-  -moz-transition: all 0.2s;
-  -o-transition: all 0.2s;
-  transition: all 0.2s;
+﻿.clicked {
+    -webkit-transition: all 0.2s;
+    -moz-transition: all 0.2s;
+    -o-transition: all 0.2s;
+    transition: all 0.2s;
 }
 
-.clicked { 
-  transform:rotate(15deg); -webkit-transform:rotate(15deg); -moz-transform:rotate(15deg); -o-transform:rotate(15deg);
+.clicked {
+    transform: rotate(15deg);
+    -webkit-transform: rotate(15deg);
+    -moz-transform: rotate(15deg);
+    -o-transform: rotate(15deg);
 }
 
 #pets {
-  font-size: 32px;
+    font-size: 32px;
 }
 
 @keyframes YELLING {
-  0% { font-size: 3em; }
-  50% { font-size: 4em; }
-  100% { font-size: 3em; }
+    0% {
+        font-size: 3em;
+    }
+
+    50% {
+        font-size: 4em;
+    }
+
+    100% {
+        font-size: 3em;
+    }
 }
 
 @-moz-keyframes spin {
-    from { -moz-transform: rotate(0deg); }
-    to { -moz-transform: rotate(360deg); }
+    from {
+        -moz-transform: rotate(0deg);
+    }
+
+    to {
+        -moz-transform: rotate(360deg);
+    }
 }
+
 @-webkit-keyframes spin {
-    from { -webkit-transform: rotate(0deg); }
-    to { -webkit-transform: rotate(360deg); }
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+
+    to {
+        -webkit-transform: rotate(360deg);
+    }
 }
+
 @keyframes spin {
-    from {transform:rotate(0deg);}
-    to {transform:rotate(360deg);}
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 #yelling {
-  height: 100px;
-  font-size: 4em;
-  animation-name: YELLING;
-  animation-duration: 1s;
-  animation-iteration-count: infinite;
+    height: 100px;
+    font-size: 4em;
+    animation-name: YELLING;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
 }
 
 #dog_div {
-  margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 #dog {
-  cursor: pointer;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-   user-select: none;
+    cursor: pointer;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }

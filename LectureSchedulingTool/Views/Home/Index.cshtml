@@ -6,13 +6,15 @@
 @Styles.Render("/Content/your_dog.css")
 
 <div class="jumbotron" style="position: relative;">
-    <div id="g_god_div" style="position: absolute; right: 25px; bottom: 25px; visibility: hidden;">
+    <div id="g_god_div" style="position: absolute; right: 10px; bottom: -5px; visibility: hidden;">
+        <div id="dog_div">
+            <center>
+                <img id="dog" src="/Content/dog_l.png" />
+                <img src="/Content/dog_happy_l.png" style="visibility: hidden; width: 0px; height: 0px;" />
+            </center>
+        </div>
         <div class="text-center">
             <p id="pets">PETS: <span id="pet_count">0</span></p>
-        </div>
-        <div id="dog_div">
-            <img id="dog" src="/Content/dog_l.png"/>
-            <img src="/Content/dog_happy_l.png" style="visibility: hidden; width: 0px; height: 0px;" />
         </div>
         <audio id="dog_music" src="/Content/mus_dogsong.ogg" loop></audio>
     </div>
