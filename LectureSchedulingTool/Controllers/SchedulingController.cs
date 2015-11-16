@@ -200,9 +200,10 @@ namespace LectureSchedulingTool.Controllers
                     int max_hours = Convert.ToInt32(Request.Form["max_hours"]);
                     string working_position = Request.Form["working_position"];
                     string regalia = Request.Form["regalia"];
+                    int id_department = Convert.ToInt32(Request.Form["id_department"]);
                     if (surname.Length != 0 && name.Length != 0 && patronymic.Length != 0 && max_hours > 0 && working_position.Length != 0)
                     {
-                        Teacher teacher = new Teacher(surname, name, patronymic, max_hours, working_position, regalia);
+                        Teacher teacher = new Teacher(surname, name, patronymic, max_hours, working_position, regalia, id_department);
                         DB.Teacher.Add(teacher);
                         DB.SaveChanges();
                     }
