@@ -4,7 +4,8 @@
     $(function () {
         $('[name = id_faculty]').change(function () {
             var id = $(this).val();
-
+            $('[name = id_department]').empty();
+            $('[name = id_department]').append('<option>Ждите</option>');
             $.ajax({
                 type: 'GET',
                 data: { id_faculty: id },
