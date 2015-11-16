@@ -16,7 +16,6 @@ namespace LectureSchedulingTool.Models
 
         public Faculty()
         {
-
         }
         public Faculty(string name, string abbreviation)
         {
