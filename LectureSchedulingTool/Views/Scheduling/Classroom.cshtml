@@ -4,8 +4,7 @@
     $(function () {
         $('[name = id_faculty]').change(function () {
             var id = $(this).val();
-            $('[name = id_department]').empty();
-            $('[name = id_department]').append('<option>Ждите</option>');
+            $('[name = id_department]').prop('disabled', 'true');
             $('[class $= btn-primary]').filter('[value = u]').prop('disabled', 'true');
             $.ajax({
                 type: 'GET',
@@ -14,6 +13,7 @@
                 success: function (data) {
                     $('[name = id_department]').empty();
                     $('[name = id_department]').append(data);
+                    $('[name = id_department]').removeAttr('disabled');
                     $('[class $= btn-primary]').filter('[value = u]').removeAttr('disabled');
                 }
             });
