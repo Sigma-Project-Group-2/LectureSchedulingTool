@@ -106,7 +106,7 @@ namespace LectureSchedulingTool.Models
         {
 
         }
-        public Teacher(string surname, string name, string patronymic, int max_hours, string working_position, string regalia = null)
+        public Teacher(string surname, string name, string patronymic, int max_hours, string working_position, string regalia, int id_department)
         {
             this.surname = surname;
             this.name = name;
@@ -114,6 +114,7 @@ namespace LectureSchedulingTool.Models
             this.max_hours = max_hours;
             this.working_position = working_position;
             this.regalia = regalia;
+            this.id_department = id_department;
         }
     }
 
