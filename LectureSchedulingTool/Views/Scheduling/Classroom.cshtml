@@ -17,6 +17,16 @@
         });
     });
 
+    $('body').on('click','[class $= btn-danger]',
+        function () {
+            if (confirm('Вы уверенны, что хотите удалить запись?')) {
+                $(this).parent('form').submit();
+            }
+            else {
+                return false;
+            }
+    });
+
     $('[name = id_faculty]').ready(function () {
         $('[name = id_faculty] :selected').change();
     });
@@ -100,7 +110,7 @@
                                                     <td>@classrooms[i].number</td>
                                                     <td>@classrooms[i].people_capacity</td>
                                                     <td><button type="submit" name="action" value="e" class="btn btn-primary"> Редактировать </button></td>
-                                                    <td><button type="submit" name="action" value="r" class="btn btn-danger"> Удалить </button></td>
+                                                    <td><button type="submit" name="action" value="r" class="btn btn-danger" > Удалить </button></td>
                                                 </tr>
                                                 }
                                             }
