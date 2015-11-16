@@ -6,6 +6,7 @@ using LectureSchedulingTool.Models;
 
 namespace LectureSchedulingTool.Controllers
 {
+    [Authorize]
     public class SchedulingController : Controller
     {
         //База данных
