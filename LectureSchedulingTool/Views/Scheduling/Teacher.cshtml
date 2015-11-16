@@ -1,0 +1,181 @@
+﻿@using LectureSchedulingTool.Models;
+
+<script type="text/javascript">
+    $(function () {
+        $('[name = id_faculty]').change(function () {
+            var id = $(this).val();
+
+            $.ajax({
+                type: 'GET',
+                data: { id_faculty: id },
+                url: '@Url.Action("GetDepartments")',
+                success: function (data) {
+                    $('[name = id_department]').empty();
+                    $('[name = id_department]').append(data);
+                }
+            });
+        });
+    });
+
+    $('[name = id_faculty]').ready(function () {
+        $('[name = id_faculty] :selected').change();
+    });
+</script>
+
+<h2>Преподователи</h2>
+
+<hr />
+
+<table class="table-bordered table-condensed" align="center">
+    <thead>
+        <tr>
+            <td>№</td>
+            <td>Факультет</td>
+            <td>Кафедра</td>
+            <td>Фамилия</td>
+            <td>Имя</td>
+            <td>Отчество</td>
+            <td>Максимальная нагрузка</td>
+            <td>Должность</td>
+            <td>Регалии</td>
+            
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            List<Faculty> faculties = ViewBag.faculties;
+            List<Department> departments = ViewBag.departments;
+            List<Teacher> teachers = ViewBag.teachers;
+
+            for (int i = 0; i < teachers.Count; i++)
+            {
+                Department department = departments.Find(d => d.id_department == teachers[i].id_department);
+                Faculty faculty = faculties.Find(f => f.id_faculty == department.id_faculty);
+
+                if (ViewBag.action == 'e' && i == Convert.ToInt32(ViewBag.row))
+                {
+                    using (Html.BeginForm())
+                    {
+                        <tr>
+                            <input type="hidden" name="row" value="@i" />
+                            <input type="hidden" name="id_teacher" value="@teachers[i].id_teacher" />
+                            <td>@(i + 1)</td>
+                            <td>
+                                <select name="id_faculty" class="form-control">
+                                    @{
+                                        for (int j = 0; j < faculties.Count; j++)
+                                        {
+                                            <option value="@faculties[j].id_faculty" )>
+                                                @faculties[j].abbreviation (@faculties[j].name)
+                                            </option>
+                                        }
+                                    }
+                                </select>
+                            </td>
+
+                            <td>
+                                <select name="id_department" class="form-control">
+                                    @{
+                                        for (int j = 0; j < departments.Count; j++)
+                                        {
+                                            <option value="@departments[j].id_department" @(departments[j].id_department == department.id_department ? "selected" : "")>
+                                                @departments[j].abbreviation (@departments[j].name)
+                                            </option>
+                                        }
+                                    }
+                                </select>
+                            </td>
+                            <td><input type="text" name="surname" value="@teachers[i].surname" class="form-control" /></td>
+                            <td><input type="text" name="name" value="@teachers[i].name" class="form-control" /></td>
+                            <td><input type="text" name="patronymic" value="@teachers[i].patronymic" class="form-control" /></td>
+                            <td><input type="text" name="max_hours" value="@teachers[i].max_hours" class="form-control" /></td>
+                            <td><input type="text" name="working_position" value="@teachers[i].working_position" class="form-control" /></td>
+                            <td><input type="text" name="regalia" value="@teachers[i].regalia" class="form-control" /></td>
+                            <td><button type="submit" name="action" value="u" class="btn btn-primary">Обновить</button></td>
+                            <td><button type="submit" name="action" value="0" class="btn btn-warning">Отменить</button></td>
+                        </tr>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            using (Html.BeginForm())
+                                            {
+                                                <tr>
+                                                    <input type="hidden" name="row" value="@i" />
+                                                    <input type="hidden" name="id_teacher" value="@teachers[i].id_teacher" />
+                                                    <td>@(i + 1)</td>
+                                                    <td>@faculty.abbreviation</td>
+                                                    <td>@department.abbreviation</td>
+                                                    <td>@teachers[i].surname</td>
+                                                    <td>@teachers[i].name</td>
+                                                    <td>@teachers[i].patronymic</td>
+                                                    <td>@teachers[i].max_hours</td>
+                                                    <td>@teachers[i].working_position</td>
+                                                    <td>@teachers[i].regalia</td>
+                                                    <td><button type="submit" name="action" value="e" class="btn btn-primary"> Редактировать </button></td>
+                                                    <td><button type="submit" name="action" value="r" class="btn btn-danger"> Удалить </button></td>
+                                                </tr>
+                                                }
+                                            }
+                                        }
+
+                                        if (ViewBag.action == 'a')
+                                        {
+                                            using (Html.BeginForm())
+                                            {
+                                                <tr>
+                                                    <td>@(teachers.Count + 1)</td>
+                                                    <td>
+                                                        <select name="id_teacher" class="form-control">
+                                                            @{
+                                                                for (int j = 0; j < faculties.Count; j++)
+                                                                {
+                                                                    <option value="@faculties[j].id_faculty" )>
+                                                                        @faculties[j].abbreviation (@faculties[j].name)
+                                                                    </option>
+                                                                }
+                                                            }
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <select name="id_department" class="form-control">
+                                                            @{
+                                                                for (int j = 0; j < departments.Count; j++)
+                                                                {
+                                                                    <option value="@departments[j].id_department" )>
+                                                                        @departments[j].abbreviation (@departments[j].name)
+                                                                    </option>
+                                                                }
+                                                            }
+                                                        </select>
+                                                    </td>
+                                                    <td><input type="text" name="surname" class="form-control" /></td>
+                                                    <td><input type="text" name="name" class="form-control" /></td>
+                                                    <td><input type="text" name="patronymic" class="form-control" /></td>
+                                                    <td><input type="text" name="max_hours" class="form-control" /></td>
+                                                    <td><input type="text" name="working_position" class="form-control" /></td>
+                                                    <td><input type="text" name="regalia" class="form-control" /></td>
+                                                    <td><button type="submit" name="action" value="s" class="btn btn-primary">Сохранить</button></td>
+                                                    <td><button type="submit" name="action" value="0" class="btn btn-warning">Отменить</button></td>
+                                                </tr>
+                                                                    }
+                                                                }
+                                                                else
+                                                                {
+                                                                    using (Html.BeginForm())
+                                                                    {
+                                                                        <tr>
+                                                                            <td><button type="submit" name="action" value="a" class="btn btn-info">+</button></td>
+                                                                        </tr>
+                                                                    }
+                                                                }
+        }
+
+    </tbody>
+</table>
+@{
+    ViewBag.Title = "Teacher";
+}
+
+<h2>Teacher</h2>
+
