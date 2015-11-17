@@ -1,0 +1,130 @@
+﻿@using LectureSchedulingTool.Models;
+
+<script src="~/Scripts/Scheduling/scheduling_remove_alert.js"></script>
+
+<h2>Нагрузка преподователя</h2>
+<hr />
+
+<table class="table-bordered table-condensed" align="center">
+    <thead>
+        <tr>
+            <td>№</td>
+            <td>Преподователь</td>
+            <td>Предмет</td>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            List<Subject> subjects = ViewBag.subjects;
+            List<Teacher> teachers = ViewBag.teachers;
+            List<Teacher_load> teacher_loads = ViewBag.teacher_loads;
+
+            for (int i = 0; i < teacher_loads.Count; i++)
+            {
+                Teacher teacher = teachers.Find(g => g.id_teacher == teacher_loads[i].id_teacher);
+                Subject subject = subjects.Find(s => s.id_subject == teacher_loads[i].id_subject);
+
+                if (ViewBag.action == 'e' && i == Convert.ToInt32(ViewBag.row))
+                {
+                    using (Html.BeginForm())
+                    {
+                        <tr>
+                            <input type="hidden" name="row" value="@i" />
+                            <input type="hidden" name="id_teacher_load" value="@teacher_loads[i].id_teacher_load" />
+
+                            <td>@(i + 1)</td>
+                            <td>
+                                <select name="id_teacher" class="form-control">
+                                    @{
+                                        for (int j = 0; j < teachers.Count; j++)
+                                        {
+                                            <option value="@teachers[j].id_teacher" @(teachers[j].id_teacher == teacher.id_teacher ? "selected" : "")>
+                                                @teachers[j].name @teachers[j].surname @teachers[j].patronymic
+                                            </option>
+                                        }
+                                    }
+                                </select>
+                            </td>
+                            <td>
+                                <select name="id_subject" class="form-control">
+                                    @{
+                                        for (int j = 0; j < subjects.Count; j++)
+                                        {
+                                            <option value="@subjects[j].id_subject" @(subjects[j].id_subject == subject.id_subject ? "selected" : "")>
+                                                @subjects[j].name (@subjects[j].type)
+                                            </option>
+                                        }
+                                    }
+                                </select>
+                            </td>
+                            
+                            <td><button type="submit" name="action" value="u" class="btn btn-primary">Обновить</button></td>
+                            <td><button type="submit" name="action" value="0" class="btn btn-warning">Отменить</button></td>
+                        </tr>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            using (Html.BeginForm())
+                                            {
+                                                <tr>
+                                                    <input type="hidden" name="row" value="@i" />
+                                                    <input type="hidden" name="id_teacher_load" value="@teacher_loads[i].id_teacher_load" />
+                                                    <td>@(i + 1)</td>
+                                                    <td>@teacher.name @teacher.surname @teacher.patronymic</td>
+                                                    <td>@subject.name (@subject.type)</td>
+                                                    <td><button type="submit" name="action" value="e" class="btn btn-primary"> Редактировать </button></td>
+                                                    <td><button type="submit" name="action" value="r" class="btn btn-danger"> Удалить </button></td>
+                                                </tr>
+                                                }
+                                            }
+                                        }
+
+                                        if (ViewBag.action == 'a')
+                                        {
+                                            using (Html.BeginForm())
+                                            {
+                                                <tr>
+                                                    <td>@(teacher_loads.Count + 1)</td>
+                                                    <td>
+                                                        <select name="id_teacher" class="form-control">
+                                                            @{
+                                                                for (int j = 0; j < teachers.Count; j++)
+                                                                {
+                                                                    <option value="@teachers[j].id_teacher" )>
+                                                                        @teachers[j].name @teachers[j].surname @teachers[j].patronymic 
+                                                                    </option>
+                                                                }
+                                                            }
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <select name="id_subject" class="form-control">
+                                                            @{
+                                                                for (int j = 0; j < subjects.Count; j++)
+                                                                {
+                                                                    <option value="@subjects[j].id_subject" )>
+                                                                        @subjects[j].name (@subjects[j].type)
+                                                                    </option>
+                                                                }
+                                                            }
+                                                        </select>
+                                                    </td>
+                                                    
+                                                    <td><button type="submit" name="action" value="s" class="btn btn-primary">Сохранить</button></td>
+                                                    <td><button type="submit" name="action" value="0" class="btn btn-warning">Отменить</button></td>
+                                                </tr>
+                                                                    }
+                                                                }
+                                                                else
+                                                                {
+                                                                    using (Html.BeginForm())
+                                                                    {
+                                                                        <tr>
+                                                                            <td><button type="submit" name="action" value="a" class="btn btn-info">+</button></td>
+                                                                        </tr>
+                                                                    }
+                                                                }
+        }
+    </tbody>
+</table>
