@@ -414,7 +414,8 @@ namespace LectureSchedulingTool.Controllers
             ViewBag.faculties = DB.Faculty.ToList();
             ViewBag.departments = DB.Department.ToList();
             ViewBag.students_groups = DB.Students_group.ToList();
-            ViewBag.students_group_loads = DB.Students_group.ToList();
+            ViewBag.subjects = DB.Subject.ToList();
+            ViewBag.students_group_loads = DB.Students_group_load.ToList();
 
             return View();
         }

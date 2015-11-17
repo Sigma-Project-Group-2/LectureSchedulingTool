@@ -189,7 +189,7 @@ namespace LectureSchedulingTool.Models
         {
             this.hours = hours;
             this.id_students_group = id_students_group;
-            this.id_students_group_load = id_subject;
+            this.id_subject = id_subject;
         }
     }
 
