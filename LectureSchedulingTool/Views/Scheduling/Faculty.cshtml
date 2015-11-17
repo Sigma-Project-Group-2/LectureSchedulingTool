@@ -1,5 +1,17 @@
 ﻿@using LectureSchedulingTool.Models;
 
+<script type="text/javascript">
+    $('body').on('click', '[class $= btn-danger]',
+        function () {
+            if (confirm('Вы уверенны, что хотите удалить запись?')) {
+                $(this).parent('form').submit();
+            }
+            else {
+                return false;
+            }
+        });
+</script>
+
 <h2>Факультеты</h2>
 
 <hr />
@@ -42,8 +54,16 @@
                             <td>@(i + 1) </td>
                             <td> @faculties[i].name </td>
                             <td> @faculties[i].abbreviation </td>
-                            <td><button type="submit" name="action" value="e" class="btn btn-primary"> Редактировать</button></td>
-                            <td><button type="submit" name="action" value="r" class="btn btn-danger"> Удалить</button></td>
+                            @if (ViewBag.action != 'e' && ViewBag.action != 'a')
+                            {
+                                <td><button type="submit" name="action" value="e" class="btn btn-primary"> Редактировать </button></td>
+                                <td><button type="submit" name="action" value="r" class="btn btn-danger"> Удалить </button></td>
+                            }
+                            else
+                            {
+                                <td><button type="submit" name="action" value="e" class="btn btn-primary" disabled> Редактировать </button></td>
+                                <td><button type="submit" name="action" value="r" class="btn btn-danger" disabled> Удалить </button></td>
+                            }
                         </tr>
                     }
                 }
