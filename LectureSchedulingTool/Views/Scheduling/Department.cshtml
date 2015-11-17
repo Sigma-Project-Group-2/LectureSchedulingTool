@@ -1,19 +1,8 @@
 ﻿@using LectureSchedulingTool.Models;
 
-<script type="text/javascript">
-    $('body').on('click', '[class $= btn-danger]',
-        function () {
-            if (confirm('Вы уверенны, что хотите удалить запись?')) {
-                $(this).parent('form').submit();
-            }
-            else {
-                return false;
-            }
-        });
-</script>
-
 <h2>Кафедры</h2>
 
+<input name="ActionName" id="ActionName" type="hidden" value="@ViewBag.action">
 <hr />
 
 <table class="table-bordered table-condensed" align="center">

@@ -1,42 +1,9 @@
 ﻿@using LectureSchedulingTool.Models;
 
-<script type="text/javascript">
-    $(function () {
-        $('[name = id_faculty]').change(function () {
-            var id = $(this).val();
-            $('[name = id_department]').prop('disabled', 'true');
-            $('[class $= btn-primary]').filter('[value = u]').prop('disabled', 'true');
-            $.ajax({
-                type: 'GET',
-                data: { id_faculty: id },
-                url: '@Url.Action("GetDepartments")',
-                success: function (data) {
-                    $('[name = id_department]').empty();
-                    $('[name = id_department]').append(data);
-                    $('[name = id_department]').removeAttr('disabled');
-                    $('[class $= btn-primary]').filter('[value = u]').removeAttr('disabled');
-                }
-            });
-        });
-    });
-
-    $('body').on('click', '[class $= btn-danger]',
-        function () {
-            if (confirm('Вы уверенны, что хотите удалить запись?')) {
-                $(this).parent('form').submit();
-            }
-            else {
-                return false;
-            }
-        });
-
-    $('[name = id_faculty]').ready(function () {
-        $('[name = id_faculty] :selected').change();
-    });
-</script>
-
 <h2>Группы</h2>
 
+<input name="DepListGetter" id="DepListGetter" type="hidden" value="@Url.Action("GetDepartments")" />
+<input name="ActionName" id="ActionName" type="hidden" value="@ViewBag.action">
 <hr />
 
 <table class="table-bordered table-condensed" align="center">
