@@ -64,7 +64,7 @@
                                 </select>
                             </td>
                             <td><input type="text" name="name" value="@students_groups[i].name" class="form-control" /></td>
-                            <td><input type="number" name="people_amount" value="@students_groups[i].people_amount" class="form-control" /></td>
+                            <td><input type="number" min="1" name="people_amount" value="@students_groups[i].people_amount" class="form-control" /></td>
                             <td><button type="submit" name="action" value="u" class="btn btn-primary">Обновить</button></td>
                             <td><button type="submit" name="action" value="0" class="btn btn-warning">Отменить</button></td>
                         </tr>
@@ -128,7 +128,7 @@
                                                         </select>
                                                     </td>
                                                     <td><input type="text" name="name" class="form-control" /></td>
-                                                    <td><input type="number" name="people_amount" class="form-control" /></td>
+                                                    <td><input type="number" min="1" name="people_amount" class="form-control" /></td>
                                                     <td><button type="submit" name="action" value="s" class="btn btn-primary">Сохранить</button></td>
                                                     <td><button type="submit" name="action" value="0" class="btn btn-warning">Отменить</button></td>
                                                 </tr>
