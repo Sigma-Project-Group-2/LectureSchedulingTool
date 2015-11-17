@@ -22,7 +22,7 @@
             <td>Максимальная нагрузка</td>
             <td>Должность</td>
             <td>Регалии</td>
-            
+
         </tr>
     </thead>
     <tbody>
@@ -72,7 +72,7 @@
                             <td><input type="text" name="surname" value="@teachers[i].surname" class="form-control" /></td>
                             <td><input type="text" name="name" value="@teachers[i].name" class="form-control" /></td>
                             <td><input type="text" name="patronymic" value="@teachers[i].patronymic" class="form-control" /></td>
-                            <td><input type="text" name="max_hours" value="@teachers[i].max_hours" class="form-control" /></td>
+                            <td><input type="number" name="max_hours" value="@teachers[i].max_hours" class="form-control" /></td>
                             <td><input type="text" name="working_position" value="@teachers[i].working_position" class="form-control" /></td>
                             <td><input type="text" name="regalia" value="@teachers[i].regalia" class="form-control" /></td>
                             <td><button type="submit" name="action" value="u" class="btn btn-primary">Обновить</button></td>
@@ -96,16 +96,8 @@
                                                     <td>@teachers[i].max_hours</td>
                                                     <td>@teachers[i].working_position</td>
                                                     <td>@teachers[i].regalia</td>
-                                                    @if (ViewBag.action != 'e' && ViewBag.action != 'a')
-                                                    {
-                                                        <td><button type="submit" name="action" value="e" class="btn btn-primary"> Редактировать </button></td>
-                                                        <td><button type="submit" name="action" value="r" class="btn btn-danger"> Удалить </button></td>
-                                                    }
-                                                    else
-                                                    {
-                                                        <td><button type="submit" name="action" value="e" class="btn btn-primary" disabled> Редактировать </button></td>
-                                                        <td><button type="submit" name="action" value="r" class="btn btn-danger" disabled> Удалить </button></td>
-                                                    }
+                                                    <td><button type="submit" name="action" value="e" class="btn btn-primary"> Редактировать </button></td>
+                                                    <td><button type="submit" name="action" value="r" class="btn btn-danger"> Удалить </button></td>
                                                 </tr>
                                                 }
                                             }
@@ -118,7 +110,7 @@
                                                 <tr>
                                                     <td>@(teachers.Count + 1)</td>
                                                     <td>
-                                                        <select name="id_teacher" class="form-control">
+                                                        <select name="id_faculty" class="form-control">
                                                             @{
                                                                 for (int j = 0; j < faculties.Count; j++)
                                                                 {
@@ -144,7 +136,7 @@
                                                     <td><input type="text" name="surname" class="form-control" /></td>
                                                     <td><input type="text" name="name" class="form-control" /></td>
                                                     <td><input type="text" name="patronymic" class="form-control" /></td>
-                                                    <td><input type="text" name="max_hours" class="form-control" /></td>
+                                                    <td><input type="number" name="max_hours" class="form-control" /></td>
                                                     <td><input type="text" name="working_position" class="form-control" /></td>
                                                     <td><input type="text" name="regalia" class="form-control" /></td>
                                                     <td><button type="submit" name="action" value="s" class="btn btn-primary">Сохранить</button></td>
@@ -165,9 +157,3 @@
 
     </tbody>
 </table>
-@{
-    ViewBag.Title = "Teacher";
-}
-
-<h2>Teacher</h2>
-

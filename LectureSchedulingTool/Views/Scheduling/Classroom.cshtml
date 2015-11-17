@@ -38,7 +38,6 @@
                         <tr>
                             <input type="hidden" name="row" value="@i" />
                             <input type="hidden" name="id_classroom" value="@classrooms[i].id_classroom" />
-                            <input type="hidden" name="default_department" value="@classrooms[i].id_department" />
                             <td>@(i + 1)</td>
                             <td>
                                 <select name="id_faculty" class="form-control">
@@ -65,7 +64,7 @@
                                 </select>
                             </td>
                             <td><input type="text" name="number" value="@classrooms[i].number" class="form-control" /></td>
-                            <td><input type="text" name="people_capacity" value="@classrooms[i].people_capacity" class="form-control" /></td>
+                            <td><input type="number" name="people_capacity" value="@classrooms[i].people_capacity" class="form-control" /></td>
                             <td><button type="submit" name="action" value="u" class="btn btn-primary">Обновить</button></td>
                             <td><button type="submit" name="action" value="0" class="btn btn-warning">Отменить</button></td>
                         </tr>
@@ -129,7 +128,7 @@
                                                         </select>
                                                     </td>
                                                     <td><input type="text" name="number" class="form-control" /></td>
-                                                    <td><input type="text" name="people_capacity" class="form-control" /></td>
+                                                    <td><input type="number" name="people_capacity" class="form-control" /></td>
                                                     <td><button type="submit" name="action" value="s" class="btn btn-primary">Сохранить</button></td>
                                                     <td><button type="submit" name="action" value="0" class="btn btn-warning">Отменить</button></td>
                                                 </tr>
