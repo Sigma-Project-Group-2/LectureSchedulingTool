@@ -1,5 +1,5 @@
 ﻿$(window).load(function () {
-    $('[name = id_faculty]').change(function () {     //функция отвечающая за перечень кафедр в зависимости от выбранного факультета
+    $('[name = id_faculty]').change(function () {
         var id = $(this).val();
         $('[class $= btn-primary]').filter('[value = u]').prop('disabled', 'true');
         $('[class $= btn-primary]').filter('[value = s]').prop('disabled', 'true');
