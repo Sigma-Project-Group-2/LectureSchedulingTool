@@ -207,7 +207,10 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Scripts\SchedulingScripts.js" />
+    <Content Include="Scripts\Scheduling\scheduling_department_dynamic.js" />
+    <Content Include="Scripts\Scheduling\scheduling_disable_buttons.js" />
+    <Content Include="Scripts\Scheduling\scheduling_remove_alert.js" />
+    <Content Include="Scripts\scheduling_scripts.js" />
     <Content Include="Scripts\your_dog.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="SQL\insert_test_data.sql" />

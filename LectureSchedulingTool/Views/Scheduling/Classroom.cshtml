@@ -1,9 +1,13 @@
 ﻿@using LectureSchedulingTool.Models;
 
-<h2>Аудитории</h2>
+<script src="~/Scripts/Scheduling/scheduling_department_dynamic.js"></script>
+<script src="~/Scripts/Scheduling/scheduling_disable_buttons.js"></script>
+<script src="~/Scripts/Scheduling/scheduling_remove_alert.js"></script>
 
-<input name="DepListGetter" id="DepListGetter" type="hidden" value="@Url.Action("GetDepartments")" />
-<input name="ActionName" id="ActionName" type="hidden" value="@ViewBag.action">
+<input name="department_list_getter" id="department_list_getter" type="hidden" value="@Url.Action("GetDepartments")" />
+<input name="curent_action" id="curent_action" type="hidden" value="@ViewBag.action">
+
+<h2>Аудитории</h2>
 <hr />
 
 <table class="table-bordered table-condensed" align="center">

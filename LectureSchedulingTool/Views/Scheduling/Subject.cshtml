@@ -1,29 +1,13 @@
 ﻿@using LectureSchedulingTool.Models;
 
-<script type="text/javascript">
-    $(function () {
-        $('[name = id_faculty]').change(function () {
-            var id = $(this).val();
+<script src="~/Scripts/Scheduling/scheduling_department_dynamic.js"></script>
+<script src="~/Scripts/Scheduling/scheduling_disable_buttons.js"></script>
+<script src="~/Scripts/Scheduling/scheduling_remove_alert.js"></script>
 
-            $.ajax({
-                type: 'GET',
-                data: { id_faculty: id },
-                url: '@Url.Action("GetDepartments")',
-                success: function (data) {
-                    $('[name = id_department]').empty();
-                    $('[name = id_department]').append(data);
-                }
-            });
-        });
-    });
-
-    $('[name = id_faculty]').ready(function () {
-        $('[name = id_faculty] :selected').change();
-    });
-</script>
+<input name="department_list_getter" id="department_list_getter" type="hidden" value="@Url.Action("GetDepartments")" />
+<input name="curent_action" id="curent_action" type="hidden" value="@ViewBag.action">
 
 <h2>Предметы</h2>
-
 <hr />
 
 <table class="table-bordered table-condensed" align="center">
