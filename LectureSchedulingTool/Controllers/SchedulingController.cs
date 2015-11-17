@@ -247,7 +247,7 @@ namespace LectureSchedulingTool.Controllers
             return View();
         }
 
-        //Контроллер преподавателя
+        //Контроллер предмета
         public ActionResult Subject(char action = '0', int row = -1, int id_subject = -1)
         {
             ViewBag.row = -1;
