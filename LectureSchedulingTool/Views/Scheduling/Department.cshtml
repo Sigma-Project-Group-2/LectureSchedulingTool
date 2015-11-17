@@ -2,6 +2,7 @@
 
 <h2>Кафедры</h2>
 
+<input name="ActionName" id="ActionName" type="hidden" value="@ViewBag.action">
 <hr />
 
 <table class="table-bordered table-condensed" align="center">
@@ -10,7 +11,7 @@
             <td>№</td>
             <td>Факультет</td>
             <td>Название</td>
-            <td>Аббревиатура</td>            
+            <td>Аббревиатура</td>
             <td>Тип</td>
         </tr>
     </thead>
@@ -67,8 +68,16 @@
                                                     <td>@departments[i].name</td>
                                                     <td>@departments[i].abbreviation</td>
                                                     <td>@(departments[i].is_producing == 1 ? "Выпускающая" : "Не выпускающая")</td>
-                                                    <td><button type="submit" name="action" value="e" class="btn btn-primary"> Редактировать </button></td>
-                                                    <td><button type="submit" name="action" value="r" class="btn btn-danger"> Удалить </button></td>
+                                                    @if (ViewBag.action != 'e' && ViewBag.action != 'a')
+                                                    {
+                                                        <td><button type="submit" name="action" value="e" class="btn btn-primary"> Редактировать </button></td>
+                                                        <td><button type="submit" name="action" value="r" class="btn btn-danger"> Удалить </button></td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td><button type="submit" name="action" value="e" class="btn btn-primary" disabled> Редактировать </button></td>
+                                                        <td><button type="submit" name="action" value="r" class="btn btn-danger" disabled> Удалить </button></td>
+                                                    }
                                                 </tr>
                                                 }
                                             }

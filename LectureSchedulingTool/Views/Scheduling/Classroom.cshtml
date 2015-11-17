@@ -1,39 +1,9 @@
 ﻿@using LectureSchedulingTool.Models;
 
-<script type="text/javascript">
-    $(function () {
-        $('[name = id_faculty]').change(function () {
-            var id = $(this).val();
-
-            $.ajax({
-                type: 'GET',
-                data: { id_faculty: id },
-                url: '@Url.Action("GetDepartments")',
-                success: function (data) {
-                    $('[name = id_department]').empty();
-                    $('[name = id_department]').append(data);  
-                }
-            });
-        });
-    });
-
-    $('body').on('click','[class $= btn-danger]',
-        function () {
-            if (confirm('Вы уверенны, что хотите удалить запись?')) {
-                $(this).parent('form').submit();
-            }
-            else {
-                return false;
-            }
-    });
-
-    $('[name = id_faculty]').ready(function () {
-        $('[name = id_faculty] :selected').change();
-    });
-</script>
-
 <h2>Аудитории</h2>
 
+<input name="DepListGetter" id="DepListGetter" type="hidden" value="@Url.Action("GetDepartments")" />
+<input name="ActionName" id="ActionName" type="hidden" value="@ViewBag.action">
 <hr />
 
 <table class="table-bordered table-condensed" align="center">
@@ -109,8 +79,16 @@
                                                     <td>@department.abbreviation</td>
                                                     <td>@classrooms[i].number</td>
                                                     <td>@classrooms[i].people_capacity</td>
-                                                    <td><button type="submit" name="action" value="e" class="btn btn-primary"> Редактировать </button></td>
-                                                    <td><button type="submit" name="action" value="r" class="btn btn-danger" > Удалить </button></td>
+                                                    @if (ViewBag.action != 'e' && ViewBag.action != 'a')
+                                                    {
+                                                        <td><button type="submit" name="action" value="e" class="btn btn-primary"> Редактировать </button></td>
+                                                        <td><button type="submit" name="action" value="r" class="btn btn-danger"> Удалить </button></td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td><button type="submit" name="action" value="e" class="btn btn-primary" disabled> Редактировать </button></td>
+                                                        <td><button type="submit" name="action" value="r" class="btn btn-danger" disabled> Удалить </button></td>
+                                                    }
                                                 </tr>
                                                 }
                                             }
