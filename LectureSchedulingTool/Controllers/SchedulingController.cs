@@ -303,7 +303,7 @@ namespace LectureSchedulingTool.Controllers
 
             return View();
         }
-        
+
         //Контроллер аудиторий
         public ActionResult Classroom(char action = '0', int row = -1, int id_classroom = -1)
         {
@@ -544,14 +544,29 @@ namespace LectureSchedulingTool.Controllers
             return View();
         }
 
-        public ActionResult GetDepartments(int id_faculty, int default_department = 0)
+        //Получение кафедр
+        public ActionResult GetDepartments(int id_faculty)
         {
             List<Department> departments = DB.Department.Where(d => d.id_faculty == id_faculty).ToList();
 
             ViewBag.departments = departments;
-            ViewBag.default_department = default_department;
 
             return PartialView();
+        }
+
+        public List<Faculty> GetSafeFaculies()
+        {
+            List<Faculty> faculties = DB.Faculty.ToList();
+            List<Department> departments = DB.Department.ToList();
+
+            List<Faculty> save_facultie = new List<Models.Faculty>();
+            for (int i = 0; i < departments.Count; i++)
+            {
+                if (!save_facultie.Exists(f => f.id_faculty == departments[i].id_faculty))
+                    save_facultie.Add(faculties.Find(f => f.id_faculty == departments[i].id_faculty));
+            }
+
+            return save_facultie;
         }
     }
 }

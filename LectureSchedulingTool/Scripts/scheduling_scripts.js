@@ -20,7 +20,7 @@
         var id = $(this).val();
         $('[name = id_department]').prop('disabled', 'true');
         $('[class $= btn-primary]').filter('[value = u]').prop('disabled', 'true');
-        $('[class $= btn-primary]').filter('[value = s').prop('disabled', 'true');
+        $('[class $= btn-primary]').filter('[value = s]').prop('disabled', 'true');
         $.ajax({
             type: 'GET',
             data: { id_faculty: id },

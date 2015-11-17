@@ -242,6 +242,7 @@
     <Content Include="Views\Scheduling\Students_group.cshtml" />
     <Content Include="Views\Scheduling\Teacher.cshtml" />
     <Content Include="Views\Scheduling\Subject.cshtml" />
+    <Content Include="Views\Scheduling\GetDepartments.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
