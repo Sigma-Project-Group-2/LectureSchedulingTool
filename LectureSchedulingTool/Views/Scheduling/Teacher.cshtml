@@ -22,7 +22,7 @@
             <td>Максимальная нагрузка</td>
             <td>Должность</td>
             <td>Регалии</td>
-            
+
         </tr>
     </thead>
     <tbody>
@@ -96,16 +96,8 @@
                                                     <td>@teachers[i].max_hours</td>
                                                     <td>@teachers[i].working_position</td>
                                                     <td>@teachers[i].regalia</td>
-                                                    @if (ViewBag.action != 'e' && ViewBag.action != 'a')
-                                                    {
-                                                        <td><button type="submit" name="action" value="e" class="btn btn-primary"> Редактировать </button></td>
-                                                        <td><button type="submit" name="action" value="r" class="btn btn-danger"> Удалить </button></td>
-                                                    }
-                                                    else
-                                                    {
-                                                        <td><button type="submit" name="action" value="e" class="btn btn-primary" disabled> Редактировать </button></td>
-                                                        <td><button type="submit" name="action" value="r" class="btn btn-danger" disabled> Удалить </button></td>
-                                                    }
+                                                    <td><button type="submit" name="action" value="e" class="btn btn-primary"> Редактировать </button></td>
+                                                    <td><button type="submit" name="action" value="r" class="btn btn-danger"> Удалить </button></td>
                                                 </tr>
                                                 }
                                             }
@@ -165,9 +157,3 @@
 
     </tbody>
 </table>
-@{
-    ViewBag.Title = "Teacher";
-}
-
-<h2>Teacher</h2>
-
