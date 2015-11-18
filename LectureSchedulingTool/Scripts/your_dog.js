@@ -16,9 +16,9 @@ dog_site.init = function () {
 
 dog_site.mousedown = function () {
     if (dog_site.pets > 50)
-        dog_site.dog.src = "/Content/dog_l.png";
+        dog_site.dog.src = "/Content/Easter_Eggs/dog_l.png";
     else
-        dog_site.dog.src = "/Content/dog_happy_l.png";
+        dog_site.dog.src = "/Content/Easter_Eggs/dog_happy_l.png";
     dog_site.pets++;
     if (dog_site.pets < 10) {
         dog_site.dog.className += " clicked";
@@ -28,9 +28,9 @@ dog_site.mousedown = function () {
 
 dog_site.mouseup = function () {
     if (dog_site.pets > 50)
-        dog_site.dog.src = "/Content/dog_happy_l.png";
+        dog_site.dog.src = "/Content/Easter_Eggs/dog_happy_l.png";
     else
-        dog_site.dog.src = "/Content/dog_l.png";
+        dog_site.dog.src = "/Content/Easter_Eggs/dog_l.png";
     dog_site.dog.className -= " clicked";
     dog_site.pet_count.className -= " clicked";
 }

@@ -185,16 +185,17 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\dog_happy_l.png" />
-    <Content Include="Content\dog_l.png" />
-    <Content Include="Content\your_dog.css" />
+    <Content Include="Content\Easter_Eggs\alert.mp3" />
+    <Content Include="Content\Easter_Eggs\dog_happy_l.png" />
+    <Content Include="Content\Easter_Eggs\dog_l.png" />
+    <Content Include="Content\Easter_Eggs\your_dog.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Content\mus_dogsong.ogg" />
+    <Content Include="Content\Easter_Eggs\mus_dogsong.ogg" />
     <None Include="Properties\PublishProfiles\lecture-scheduling-tool.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -210,7 +211,6 @@
     <Content Include="Scripts\Scheduling\scheduling_department_dynamic.js" />
     <Content Include="Scripts\Scheduling\scheduling_disable_buttons.js" />
     <Content Include="Scripts\Scheduling\scheduling_remove_alert.js" />
-    <Content Include="Scripts\scheduling_scripts.js" />
     <Content Include="Scripts\your_dog.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="SQL\insert_test_data.sql" />
