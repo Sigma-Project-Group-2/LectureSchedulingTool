@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using LectureSchedulingTool.Models;
+using System.Configuration;
 
 namespace LectureSchedulingTool.Controllers
 {
@@ -32,9 +33,9 @@ namespace LectureSchedulingTool.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -50,40 +51,43 @@ namespace LectureSchedulingTool.Controllers
             }
         }
 
-        //
-        // GET: /Manage/Index
-        public async Task<ActionResult> Index(ManageMessageId? message)
+        public ActionResult Index(char action = '0')
         {
-            ViewBag.StatusMessage =
-                message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
-                : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
-                : message == ManageMessageId.SetTwoFactorSuccess ? "Your two-factor authentication provider has been set."
-                : message == ManageMessageId.Error ? "An error has occurred."
-                : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
-                : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
-                : "";
-
-            var userId = User.Identity.GetUserId();
-            var model = new IndexViewModel
+            switch (action)
             {
-                HasPassword = HasPassword(),
-                PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
-                TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
-                Logins = await UserManager.GetLoginsAsync(userId),
-                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
-            };
-            return View(model);
+                case 's':
+                    int lessons_count = 6;
+                    int weeks_count = 1;
+
+                    try
+                    {
+                        lessons_count = Int32.Parse(Request.Form["lessons_count"]);
+                        weeks_count = Int32.Parse(Request.Form["weeks_count"]);
+                    }
+                    catch (Exception ex)
+                    {
+                        ViewBag.errors = ex.Message;
+                    }
+
+                    if (lessons_count >= 1 && lessons_count <= 8)
+                        ConfigurationManager.AppSettings["LessonsCount"] = lessons_count.ToString();
+
+                    if (weeks_count >= 1 && weeks_count <= 3)
+                        ConfigurationManager.AppSettings["WeeksCount"] = weeks_count.ToString();
+                    break;
+            }
+            
+            ViewBag.lessons_count = ConfigurationManager.AppSettings["LessonsCount"];
+            ViewBag.weeks_count = ConfigurationManager.AppSettings["WeeksCount"];
+
+            return View();
         }
 
-        //
-        // GET: /Manage/ChangePassword
         public ActionResult ChangePassword()
         {
             return View();
         }
 
-        //
-        // POST: /Manage/ChangePassword
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ChangePassword(ChangePasswordViewModel model)
@@ -117,7 +121,7 @@ namespace LectureSchedulingTool.Controllers
             base.Dispose(disposing);
         }
 
-#region Helpers
+        #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 
@@ -137,26 +141,6 @@ namespace LectureSchedulingTool.Controllers
             }
         }
 
-        private bool HasPassword()
-        {
-            var user = UserManager.FindById(User.Identity.GetUserId());
-            if (user != null)
-            {
-                return user.PasswordHash != null;
-            }
-            return false;
-        }
-
-        private bool HasPhoneNumber()
-        {
-            var user = UserManager.FindById(User.Identity.GetUserId());
-            if (user != null)
-            {
-                return user.PhoneNumber != null;
-            }
-            return false;
-        }
-
         public enum ManageMessageId
         {
             AddPhoneSuccess,
@@ -168,6 +152,6 @@ namespace LectureSchedulingTool.Controllers
             Error
         }
 
-#endregion
+        #endregion
     }
 }

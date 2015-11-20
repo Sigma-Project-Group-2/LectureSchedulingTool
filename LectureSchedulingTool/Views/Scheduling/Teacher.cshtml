@@ -11,6 +11,13 @@
 <h2>Преподователи</h2>
 <hr />
 
+@if (ViewBag.errors != null)
+{
+    <p class="text-danger">
+        @ViewBag.errors
+    </p>
+}
+
 <table class="table-bordered table-condensed" align="center">
     <thead>
         <tr>
