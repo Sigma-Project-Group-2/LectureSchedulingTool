@@ -250,7 +250,6 @@
     <Content Include="Views\Scheduling\Students_group_load.cshtml" />
     <Content Include="Views\Scheduling\Teacher_load.cshtml" />
     <Content Include="Views\Scheduling\GetDepartments.cshtml" />
-    <Content Include="Views\Scheduling\Faculty - Copy.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
