@@ -7,94 +7,10 @@ using LectureSchedulingTool.Models;
 namespace LectureSchedulingTool.Controllers
 {
     [Authorize]
-    public class SchedulingController : Controller
+    public partial class SchedulingController : Controller
     {
         //База данных
         private SchedulingContext DB = new SchedulingContext();
-
-        //Контроллер факультета
-        public ActionResult Faculty(char action = '0', int row = -1, int id_faculty = -1)
-        {
-            ViewBag.row = -1;
-            ViewBag.action = '0';
-
-            switch (action)
-            {
-                //Добавление нового элемента
-                case 'a':
-                    ViewBag.action = 'a';
-                    break;
-                //Сохранение нового элемента
-                case 's':
-                    string name = Request.Form["name"];
-                    string abbreviation = Request.Form["abbreviation"];
-                    if (name.Length != 0 && abbreviation.Length != 0)
-                    {
-                        try
-                        {
-                            Faculty faculty = new Faculty(name, abbreviation);
-                            DB.Faculty.Add(faculty);
-                            DB.SaveChanges();
-                        }
-                        catch (Exception ex)
-                        {
-                            ViewBag.errors = ex.Message;
-                        }
-                    }
-                    else
-                        ViewBag.errors = "Некорретные данные. Проверьте правильность данных и повторите еще раз!";
-                    break;
-                //Редактирование существующего элемента
-                case 'e':
-                    ViewBag.action = 'e';
-                    ViewBag.row = row;
-                    break;
-                //Обновление существующего элемента
-                case 'u':
-                    name = Request.Form["name"];
-                    abbreviation = Request.Form["abbreviation"];
-                    if (name.Length != 0 && abbreviation.Length != 0)
-                    {
-                        try
-                        {
-                            DB.Faculty.Find(id_faculty).name = name;
-                            DB.Faculty.Find(id_faculty).abbreviation = abbreviation;
-                            DB.SaveChanges();
-                        }
-                        catch (Exception ex)
-                        {
-                            ViewBag.errors = ex.Message;
-                        }
-                    }
-                    else
-                        ViewBag.errors = "Некорретные данные. Проверьте правильность данных и повторите еще раз!";
-                    break;
-                //Удаление существующего элемента
-                case 'r':
-                    try
-                    {
-                        DB.Faculty.Remove(DB.Faculty.Find(id_faculty));
-                        DB.SaveChanges();
-                    }
-                    catch (Exception ex)
-                    {
-                        ViewBag.errors = ex.Message;
-                    }
-                    break;
-            }
-
-            //Передача списков в представление
-            try
-            {
-                ViewBag.faculties = DB.Faculty.ToList();
-            }
-            catch (Exception ex)
-            {
-                ViewBag.errors = ex.Message;
-            }
-
-            return View();
-        }
 
         //Контроллер кафедры
         public ActionResult Department(char action = '0', int row = -1, int id_department = -1)

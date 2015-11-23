@@ -9,9 +9,11 @@ namespace LectureSchedulingTool.Models
         public int id_faculty { get; set; }
         [Required]
         [StringLength(100)]
+        [Display(Name = "Название")]
         public string name { get; set; }
         [Required]
         [StringLength(10)]
+        [Display(Name = "Аббревиатура")]
         public string abbreviation { get; set; }
 
         public Faculty()
