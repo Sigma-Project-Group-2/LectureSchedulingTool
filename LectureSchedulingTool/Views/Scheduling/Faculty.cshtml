@@ -35,7 +35,7 @@
                             <input type="hidden" name="id_faculty" value="@(faculties[i].id_faculty)" />
                             <td><center>@(i + (elements_on_page * (page - 1)) + 1)</center></td>
                             <td>@(Html.TextBoxFor(m => m.name, new { @class = "form-control" }))</td>
-                            <td>@(Html.TextBoxFor(m => m.abbreviation, new { @class = "form-control"}))</td>
+                            <td>@(Html.TextBoxFor(m => m.abbreviation, new { @class = "form-control" }))</td>
                             <td width="10%"><center><button type="submit" id="update" name="action" value="u" class="btn btn-primary"> Обновить </button></center></td>
                             <td width="9%"><center><button type="submit" id="cancel" name="action" value="0" class="btn btn-warning"> Отменить </button></center></td>
                         </tr>
@@ -98,13 +98,12 @@
     </tbody>
 </table>
 
-<hr />
-
 @{
-    using (Html.BeginForm("Faculty", "Scheduling"))
+    if (pages != 1)
     {
-        if (pages != 1)
+        using (Html.BeginForm("Faculty", "Scheduling"))
         {
+            <hr />
             <table>
                 <tr>
                     <td><button type="submit" id="page" name="page" value="1" class="btn btn-default"> << </button></td>
