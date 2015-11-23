@@ -22,7 +22,8 @@
             int page = ViewBag.page != null ? ViewBag.page : 1;
             int pages = ViewBag.pages != null ? ViewBag.pages : 1;
 
-            List<Faculty> faculties = ViewBag.faculties;
+            List<Faculty> faculties = ViewBag.faculties != null ? ViewBag.faculties : null;
+
             for (int i = 0; i < faculties.Count; i++)
             {
                 if (action == "e" && edit_row == i)
