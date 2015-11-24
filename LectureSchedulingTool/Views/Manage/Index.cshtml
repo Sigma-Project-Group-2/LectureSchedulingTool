@@ -1,75 +1,60 @@
 ﻿@using LectureSchedulingTool.Models;
+@model IndexViewModel
 
 <h2>Настройки</h2>
+<h4>Настройки системы генерации расписания и Вашего аккаунта</h4>
+<hr />
+@(Html.ValidationSummary("", new { @class = "text-danger" }))
 
-<p class="text-success">@ViewBag.StatusMessage</p>
+
+
 <div>
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("Index", "Manage"))
     {
-        <h4>Настройки системы генерации расписания и Вашего аккаунта</h4>
-        <hr />
-
-        if (ViewBag.errors != null)
-        {
-            <p class="text-danger">
-                @ViewBag.errors
-            </p>
-        }
-
         <dl class="dl-horizontal">
             <dt>Пароль:</dt>
             <dd>
-                [
-                @Html.ActionLink("изменить Ваш пароль", "ChangePassword")
-                ]
+                [@(Html.ActionLink("изменить Ваш пароль", "ChangePassword"))]
             </dd>
         </dl>
-        <dl class="dl-horizontal">
-            <dt>Кол-во недель:</dt>
-            <dd>
-                [
-                @{
-                    int weeks_count = Int32.Parse(ViewBag.weeks_count);
-                }
-                <select name="weeks_count">
-                    <option value="1" @(weeks_count == 1 ? "selected" : "")>1 неделя</option>
-                    <option value="2" @(weeks_count == 2 ? "selected" : "")>1/2 недели</option>
-                    <option value="3" @(weeks_count == 3 ? "selected" : "")>1/2/3 недели</option>
-                </select>
-                ]
-            </dd>
-        </dl>
+        @*<dl class="dl-horizontal">
+                <dt>Кол-во недель:</dt>
+                <dd>
+                    @{
+                        IEnumerable<SelectListItem> Iweeks_count = ViewBag.Iweeks_count;
+
+                        Html.DropDownListFor(m => m.WeeksCount, Iweeks_count, new { @class = "form-control" });
+                        Html.DropDownList("123", Iweeks_count);
+                    }
+                </dd>
+            </dl>*@
         <dl class="dl-horizontal">
             <dt>Кол-во занятий в день:</dt>
             <dd>
-                [
-                <input type="number" name="lessons_count" min="1" max="10" value="@(ViewBag.lessons_count)" />
-                ]
+                @(Html.TextBoxFor(m => m.LessonsCount, new { @class = "form-control" }))
+            </dd>
+        </dl>
+        <dl class="dl-horizontal">
+            <dt>Кол-во элементов на странице:</dt>
+            <dd>
+                @(Html.TextBoxFor(m => m.ElementsOnPage, new { @class = "form-control" }))
             </dd>
         </dl>
         <dl class="dl-horizontal">
             <dt>Данные:</dt>
             <dd>
-                [
-                @Html.ActionLink("загрузить тестовые данные", "ChangePassword")
-                ]
+                [@(Html.ActionLink("загрузить тестовые данные", "ChangePassword"))]
             </dd>
             <dd>
-                [
-                @Html.ActionLink("удалить все данные", "ChangePassword")
-                ]
+                [@(Html.ActionLink("удалить все данные", "ChangePassword"))]
             </dd>
         </dl>
         <dl class="dl-horizontal">
             <dt>Расписание:</dt>
             <dd>
-                [
-                @Html.ActionLink("сгенерировать расписание", "ChangePassword")
-                ]
+                [@(Html.ActionLink("сгенерировать расписание", "ChangePassword"))]
             </dd>
         </dl>
-        <input id="action" type="hidden" value="s" />
-        <button class="btn btn-primary" name="action" value="s" type="submit">Сохранить</button>
-        <button class="btn btn-danger" type="submit">Отменить</button>
-                    }
+        <button class="btn btn-primary" type="submit">Сохранить</button>
+    }
 </div>

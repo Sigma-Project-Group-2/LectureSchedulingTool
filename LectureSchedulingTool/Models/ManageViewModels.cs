@@ -2,14 +2,30 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
+using System;
+using System.Configuration;
 
 namespace LectureSchedulingTool.Models
 {
     public class IndexViewModel
     {
         public bool BrowserRemembered { get; set; }
-        public int WeeksCount { get; set; }
+
+        [Required]
+        [Range((int)1, (int)10)]
+        [Display(Name = "Кол-во занятий в день")]
         public int LessonsCount { get; set; }
+
+        [Required]
+        [Range((int)10, (int)100)]
+        [Display(Name = "Кол-во эелементов на странице")]
+        public int ElementsOnPage { get; set; }
+
+        public IndexViewModel()
+        {
+            LessonsCount = Int32.Parse(ConfigurationManager.AppSettings["LessonsCount"]);
+            ElementsOnPage = Int32.Parse(ConfigurationManager.AppSettings["ElementsOnPage"]);
+        }
     }
 
     public class ChangePasswordViewModel
@@ -29,5 +45,21 @@ namespace LectureSchedulingTool.Models
         [Display(Name = "Подтверждение нового пароля")]
         [Compare("NewPassword", ErrorMessage = "Новый пароль и подтверждение нового пароля не совпадают.")]
         public string ConfirmPassword { get; set; }
+    }
+
+    public class WeeksCountItem
+    {
+        public int WeeksCount;
+        public string WeeksText;
+
+        public WeeksCountItem()
+        {
+
+        }
+        public WeeksCountItem(int WeeksCount, string WeeksText)
+        {
+            this.WeeksCount = WeeksCount;
+            this.WeeksText = WeeksText;
+        }
     }
 }

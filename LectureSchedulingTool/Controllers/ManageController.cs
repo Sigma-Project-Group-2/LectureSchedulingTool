@@ -8,6 +8,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using LectureSchedulingTool.Models;
 using System.Configuration;
+using System.Collections.Generic;
 
 namespace LectureSchedulingTool.Controllers
 {
@@ -51,36 +52,15 @@ namespace LectureSchedulingTool.Controllers
             }
         }
 
-        public ActionResult Index(char action = '0')
+        public ActionResult Index(IndexViewModel model)
         {
-            switch (action)
+            if (ModelState.IsValid)
             {
-                case 's':
-                    int lessons_count = 6;
-                    int weeks_count = 1;
-
-                    try
-                    {
-                        lessons_count = Int32.Parse(Request.Form["lessons_count"]);
-                        weeks_count = Int32.Parse(Request.Form["weeks_count"]);
-                    }
-                    catch (Exception ex)
-                    {
-                        ViewBag.errors = ex.Message;
-                    }
-
-                    if (lessons_count >= 1 && lessons_count <= 8)
-                        ConfigurationManager.AppSettings["LessonsCount"] = lessons_count.ToString();
-
-                    if (weeks_count >= 1 && weeks_count <= 3)
-                        ConfigurationManager.AppSettings["WeeksCount"] = weeks_count.ToString();
-                    break;
+                ConfigurationManager.AppSettings["LessonsCount"] = model.LessonsCount.ToString();
+                ConfigurationManager.AppSettings["ElementsOnPage"] = model.ElementsOnPage.ToString();
             }
-            
-            ViewBag.lessons_count = ConfigurationManager.AppSettings["LessonsCount"];
-            ViewBag.weeks_count = ConfigurationManager.AppSettings["WeeksCount"];
 
-            return View();
+            return View(model);
         }
 
         public ActionResult ChangePassword()
