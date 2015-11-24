@@ -7,7 +7,7 @@
                 document.getElementById('music_alert').currentTime = 0;
                 document.getElementById('music_alert').play();
             }
-            if (confirm('Вы уверенны, что хотите удалить запись?')) {
+            if (confirm('Вы уверенны, что хотите удалить эти данные?')) {
                 $(this).parent('form').submit();
             }
             else {
