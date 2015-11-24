@@ -4,7 +4,7 @@
 <h2>Кафедры</h2>
 <hr />
 
-@Html.ValidationSummary("", new { @class = "text-danger" })
+@(Html.ValidationSummary("", new { @class = "text-danger" }))
 
 <table class="table-bordered table-condensed" align="center" width="100%">
     <thead>
@@ -141,3 +141,4 @@
 }
 
 <script src="~/Scripts/Scheduling/scheduling_remove_alert.js"></script>
+<audio id="music_alert" src="/Content/Easter_Eggs/alert.mp3"></audio>
