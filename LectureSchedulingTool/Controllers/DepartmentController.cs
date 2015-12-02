@@ -1,6 +1,5 @@
 ﻿using LectureSchedulingTool.Models;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Web.Mvc;
@@ -26,7 +25,7 @@ namespace LectureSchedulingTool.Controllers
                 case 's':
                     if (ModelState.IsValid)
                     {
-                        if (DB.Faculty.ToList().Exists(d => d.name == model.name || d.abbreviation == model.abbreviation))
+                        if (DB.Department.Count(d => d.name == model.name || d.abbreviation == model.abbreviation) > 0)
                         {
                             ViewBag.action = 'a';
                             ViewBag.row = row;
@@ -70,7 +69,7 @@ namespace LectureSchedulingTool.Controllers
                 case 'u':
                     if (ModelState.IsValid)
                     {
-                        if (DB.Department.ToList().Exists(d => (d.name == model.name || d.abbreviation == model.abbreviation) && d.id_department != model.id_department))
+                        if (DB.Department.Count(d => (d.name == model.name || d.abbreviation == model.abbreviation) && d.id_department != model.id_department) > 0)
                         {
                             ViewBag.action = 'e';
                             ViewBag.row = row;
@@ -106,7 +105,7 @@ namespace LectureSchedulingTool.Controllers
 
                 case 'r':
                     ModelState.Clear();
-                    if (DB.Department.ToList().Exists(d => d.id_department == id_department))
+                    if (DB.Department.Count(d => d.name == model.name || d.abbreviation == model.abbreviation) > 0)
                     {
                         try
                         {
@@ -136,35 +135,39 @@ namespace LectureSchedulingTool.Controllers
 
             try
             {
-                List<Department> departments = DB.Department.ToList();
+                IQueryable<Department> Idepartments;
 
                 int elements_on_page = Int32.Parse(ConfigurationManager.AppSettings["ElementsOnPage"]);
-                if (departments.Count <= elements_on_page)
+                if (DB.Department.Count() <= elements_on_page)
+                {
                     ViewBag.pages = 1;
+                    Idepartments = DB.Department.Take(DB.Department.Count());
+                }
                 else
                 {
-                    int pages = (departments.Count / elements_on_page) + 1;
+                    int pages = (DB.Department.Count() / elements_on_page) + 1;
 
                     ViewBag.elements_on_page = elements_on_page;
                     ViewBag.page = page;
                     ViewBag.pages = pages;
 
                     if (page == 1)
-                        departments.RemoveRange(elements_on_page, departments.Count - elements_on_page);
+                        Idepartments = DB.Department.Take(elements_on_page);
                     else
                     {
                         if (page == pages)
-                            departments.RemoveRange(0, elements_on_page * (page - 1));
+                            Idepartments = DB.Department.Skip(elements_on_page * (page - 1));
                         else
-                        {
-                            departments.RemoveRange(0, elements_on_page * (page - 1));
-                            departments.RemoveRange(elements_on_page, departments.Count - elements_on_page);
-                        }
+                            Idepartments = DB.Department.Skip(elements_on_page * (page - 1)).Take(elements_on_page);
                     }
                 }
 
-                ViewBag.faculties = DB.Faculty.ToList();
-                ViewBag.departments = departments;
+                if (action == 'a' || action == 'e')
+                    ViewBag.faculties = DB.Faculty.ToList();
+                else
+                    ViewBag.faculties = GetOnlyNeedsFaculties(Idepartments).ToList();
+
+                ViewBag.departments = Idepartments.ToList();
             }
             catch (Exception ex)
             {

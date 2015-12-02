@@ -9,7 +9,7 @@ namespace LectureSchedulingTool.Controllers
     public partial class SchedulingController : Controller
     {
         [Authorize]
-        public ActionResult Faculty(Faculty model, int page = 1, char action = '0', int row = -1, int id_faculty = -1)
+        public ActionResult Teacher(Teacher model, int page = 1, char action = '0', int row = -1, int id_teacher = -1)
         {
             switch (action)
             {
@@ -19,13 +19,13 @@ namespace LectureSchedulingTool.Controllers
                     ViewBag.action = action;
                     ViewBag.row = row;
 
-                    model = new Faculty();
+                    model = new Teacher();
                     break;
 
                 case 's':
                     if (ModelState.IsValid)
                     {
-                        if (DB.Faculty.Count(f => f.name == model.name || f.abbreviation == model.abbreviation) > 0)
+                        if (DB.Teacher.Count(t => t.surname == model.surname && t.name == model.name && t.patronymic == model.patronymic) > 0)
                         {
                             ViewBag.action = 'a';
                             ViewBag.row = row;
@@ -39,7 +39,7 @@ namespace LectureSchedulingTool.Controllers
 
                             try
                             {
-                                DB.Faculty.Add(model);
+                                DB.Teacher.Add(model);
                                 DB.SaveChanges();
                             }
                             catch (Exception ex)
@@ -63,13 +63,13 @@ namespace LectureSchedulingTool.Controllers
                     ViewBag.action = action;
                     ViewBag.row = row;
 
-                    model = DB.Faculty.Find(id_faculty);
+                    model = DB.Teacher.Find(id_teacher);
                     break;
 
                 case 'u':
                     if (ModelState.IsValid)
                     {
-                        if (DB.Faculty.Count(f => (f.name == model.name || f.abbreviation == model.abbreviation) && f.id_faculty != model.id_faculty) > 0)
+                        if (DB.Teacher.Count(t => t.surname == model.surname && t.name == model.name && t.patronymic == model.patronymic && t.id_department != model.id_department) > 0)
                         {
                             ViewBag.action = 'e';
                             ViewBag.row = row;
@@ -83,8 +83,13 @@ namespace LectureSchedulingTool.Controllers
 
                             try
                             {
-                                DB.Faculty.Find(id_faculty).name = model.name;
-                                DB.Faculty.Find(id_faculty).abbreviation = model.abbreviation;
+                                DB.Teacher.Find(id_teacher).surname = model.surname;
+                                DB.Teacher.Find(id_teacher).name = model.name;
+                                DB.Teacher.Find(id_teacher).patronymic = model.patronymic;
+                                DB.Teacher.Find(id_teacher).working_position = model.working_position;
+                                DB.Teacher.Find(id_teacher).regalia = model.regalia;
+                                DB.Teacher.Find(id_teacher).max_hours = model.max_hours;
+                                DB.Teacher.Find(id_teacher).id_department = model.id_department;
                                 DB.SaveChanges();
                             }
                             catch (Exception ex)
@@ -104,11 +109,11 @@ namespace LectureSchedulingTool.Controllers
 
                 case 'r':
                     ModelState.Clear();
-                    if (DB.Faculty.Count(f => f.name == model.name || f.abbreviation == model.abbreviation) > 0)
+                    if (DB.Teacher.Count(t => t.surname == model.surname && t.name == model.name && t.patronymic == model.patronymic) > 0)
                     {
                         try
                         {
-                            DB.Faculty.Remove(DB.Faculty.Find(id_faculty));
+                            DB.Teacher.Remove(DB.Teacher.Find(id_teacher));
                             DB.SaveChanges();
                         }
                         catch (Exception ex)
@@ -134,34 +139,45 @@ namespace LectureSchedulingTool.Controllers
 
             try
             {
-                IQueryable<Faculty> Ifaculies;
+                IQueryable<Teacher> Iteachers;
 
                 int elements_on_page = Int32.Parse(ConfigurationManager.AppSettings["ElementsOnPage"]);
-                if (DB.Faculty.Count() <= elements_on_page)
+                if (DB.Teacher.Count() <= elements_on_page)
                 {
                     ViewBag.pages = 1;
-                    Ifaculies = DB.Faculty.Take(DB.Faculty.Count());
+                    Iteachers = DB.Teacher.Take(DB.Teacher.Count());
                 }
                 else
                 {
-                    int pages = (DB.Faculty.Count() / elements_on_page) + 1;
+                    int pages = (DB.Teacher.Count() / elements_on_page) + 1;
 
                     ViewBag.elements_on_page = elements_on_page;
                     ViewBag.page = page;
                     ViewBag.pages = pages;
 
                     if (page == 1)
-                        Ifaculies = DB.Faculty.Take(elements_on_page);
+                        Iteachers = DB.Teacher.Take(elements_on_page);
                     else
                     {
                         if (page == pages)
-                            Ifaculies = DB.Faculty.Skip(elements_on_page * (page - 1));
+                            Iteachers = DB.Teacher.Skip(elements_on_page * (page - 1));
                         else
-                            Ifaculies = DB.Faculty.Skip(elements_on_page * (page - 1)).Take(elements_on_page);
+                            Iteachers = DB.Teacher.Skip(elements_on_page * (page - 1)).Take(elements_on_page);
                     }
                 }
 
-                ViewBag.faculties = Ifaculies.ToList();
+                ViewBag.teachers = Iteachers.ToList();
+                if (action == 'a' || action == 'e')
+                {
+                    ViewBag.departments = DB.Department.ToList();
+                    ViewBag.faculties = DB.Faculty.ToList();
+                }
+                else
+                {
+                    var departments = GetOnlyNeedsDepartments(Iteachers);
+                    ViewBag.departments = departments.ToList();
+                    ViewBag.faculties = GetOnlyNeedsFaculties(departments).ToList();
+                }
             }
             catch (Exception ex)
             {

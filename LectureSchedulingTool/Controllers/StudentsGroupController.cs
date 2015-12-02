@@ -1,6 +1,5 @@
 ﻿using LectureSchedulingTool.Models;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Web.Mvc;
@@ -26,7 +25,8 @@ namespace LectureSchedulingTool.Controllers
                 case 's':
                     if (ModelState.IsValid)
                     {
-                        if (DB.Students_group.ToList().Exists(sg => sg.name == model.name))
+
+                        if (DB.Students_group.Count(sg => sg.name == model.name) > 0)
                         {
                             ViewBag.action = 'a';
                             ViewBag.row = row;
@@ -70,7 +70,7 @@ namespace LectureSchedulingTool.Controllers
                 case 'u':
                     if (ModelState.IsValid)
                     {
-                        if (DB.Students_group.ToList().Exists(sg => sg.name == model.name && sg.id_students_group != model.id_students_group))
+                        if (DB.Students_group.Count(sg => sg.name == model.name && sg.id_students_group != model.id_students_group) > 0)
                         {
                             ViewBag.action = 'e';
                             ViewBag.row = row;
@@ -106,7 +106,7 @@ namespace LectureSchedulingTool.Controllers
 
                 case 'r':
                     ModelState.Clear();
-                    if (DB.Students_group.ToList().Exists(sg => sg.id_students_group == id_students_group))
+                    if (DB.Students_group.Count(sg => sg.name == model.name) > 0)
                     {
                         try
                         {
@@ -136,36 +136,46 @@ namespace LectureSchedulingTool.Controllers
 
             try
             {
-                List<Students_group> students_groups = DB.Students_group.ToList();
+                IQueryable<Students_group> Istudents_groups;
 
                 int elements_on_page = Int32.Parse(ConfigurationManager.AppSettings["ElementsOnPage"]);
-                if (students_groups.Count <= elements_on_page)
+                if (DB.Students_group.Count() <= elements_on_page)
+                {
                     ViewBag.pages = 1;
+                    Istudents_groups = DB.Students_group.Take(DB.Students_group.Count());
+                }
                 else
                 {
-                    int pages = (students_groups.Count / elements_on_page) + 1;
+                    int pages = (DB.Students_group.Count() / elements_on_page) + 1;
 
                     ViewBag.elements_on_page = elements_on_page;
                     ViewBag.page = page;
                     ViewBag.pages = pages;
 
                     if (page == 1)
-                        students_groups.RemoveRange(elements_on_page, students_groups.Count - elements_on_page);
+                        Istudents_groups = DB.Students_group.Take(elements_on_page);
                     else
                     {
                         if (page == pages)
-                            students_groups.RemoveRange(0, elements_on_page * (page - 1));
+                            Istudents_groups = DB.Students_group.Skip(elements_on_page * (page - 1));
                         else
-                        {
-                            students_groups.RemoveRange(0, elements_on_page * (page - 1));
-                            students_groups.RemoveRange(elements_on_page, students_groups.Count - elements_on_page);
-                        }
+                            Istudents_groups = DB.Students_group.Skip(elements_on_page * (page - 1)).Take(elements_on_page);
                     }
                 }
 
-                ViewBag.faculties = DB.Faculty.ToList();
-                ViewBag.departments = DB.Department.ToList();
-                ViewBag.students_groups = students_groups;
+                ViewBag.students_groups = Istudents_groups.ToList();
+                if (action == 'a' || action == 'e')
+                {
+                    ViewBag.departments = DB.Department.ToList();
+                    ViewBag.faculties = DB.Faculty.ToList();
+                }
+                else
+                {
+                    var departments = GetOnlyNeedsDepartments(Istudents_groups);
+                    ViewBag.departments = departments.ToList();
+                    ViewBag.faculties = GetOnlyNeedsFaculties(departments).ToList();
+                }
+
             }
             catch (Exception ex)
             {

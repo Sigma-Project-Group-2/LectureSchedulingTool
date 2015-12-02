@@ -184,11 +184,33 @@ namespace LectureSchedulingTool.Models
                 return null;
             }
         }
+        public Faculty GetFaculty(ref List<Faculty> faculties, ref List<Department> departments)
+        {
+            try
+            {
+                return GetDepartment(ref departments).GetFaculty(ref faculties);
+            }
+            catch
+            {
+                return null;
+            }
+        }
         public Department GetDepartment(ref SchedulingContext DB)
         {
             try
             {
                 return DB.Department.Find(this.id_department);
+            }
+            catch
+            {
+                return null;
+            }
+        }
+        public Department GetDepartment(ref List<Department> departments)
+        {
+            try
+            {
+                return departments.Find(d => d.id_department == this.id_department);
             }
             catch
             {

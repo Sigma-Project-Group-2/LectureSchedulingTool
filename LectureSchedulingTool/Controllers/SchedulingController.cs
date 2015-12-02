@@ -12,105 +12,6 @@ namespace LectureSchedulingTool.Controllers
         //База данных
         private SchedulingContext DB = new SchedulingContext();
 
-        //Контроллер преподавателя
-        public ActionResult Teacher(char action = '0', int row = -1, int id_teacher = -1)
-        {
-            ViewBag.row = -1;
-            ViewBag.action = '0';
-
-            switch (action)
-            {
-                //Добавление нового элемента
-                case 'a':
-                    ViewBag.action = 'a';
-                    break;
-                //Сохранение нового элемента
-                case 's':
-                    string surname = Request.Form["surname"];
-                    string name = Request.Form["name"];
-                    string patronymic = Request.Form["patronymic"];
-                    int max_hours = Convert.ToInt32(Request.Form["max_hours"]);
-                    string working_position = Request.Form["working_position"];
-                    string regalia = Request.Form["regalia"];
-                    int id_department = Convert.ToInt32(Request.Form["id_department"]);
-                    if (surname.Length != 0 && name.Length != 0 && patronymic.Length != 0 && max_hours > 0 && working_position.Length != 0)
-                    {
-                        try
-                        {
-                            Teacher teacher = new Teacher(surname, name, patronymic, max_hours, working_position, regalia, id_department);
-                            DB.Teacher.Add(teacher);
-                            DB.SaveChanges();
-                        }
-                        catch (Exception ex)
-                        {
-                            ViewBag.errors = ex.Message;
-                        }
-                    }
-                    else
-                        ViewBag.errors = "Некорретные данные. Проверьте правильность данных и повторите еще раз!";
-                    break;
-                //Редактирование существующего элемента
-                case 'e':
-                    ViewBag.action = 'e';
-                    ViewBag.row = row;
-                    break;
-                //Обновление существующего элемента
-                case 'u':
-                    surname = Request.Form["surname"];
-                    name = Request.Form["name"];
-                    patronymic = Request.Form["patronymic"];
-                    max_hours = Convert.ToInt32(Request.Form["max_hours"]);
-                    working_position = Request.Form["working_position"];
-                    regalia = Request.Form["regalia"];
-                    if (surname.Length != 0 && name.Length != 0 && patronymic.Length != 0 && max_hours > 0 && working_position.Length != 0)
-                    {
-                        try
-                        {
-                            DB.Teacher.Find(id_teacher).surname = surname;
-                            DB.Teacher.Find(id_teacher).name = name;
-                            DB.Teacher.Find(id_teacher).patronymic = patronymic;
-                            DB.Teacher.Find(id_teacher).max_hours = max_hours;
-                            DB.Teacher.Find(id_teacher).working_position = working_position;
-                            DB.Teacher.Find(id_teacher).regalia = regalia;
-                            DB.SaveChanges();
-                        }
-                        catch (Exception ex)
-                        {
-                            ViewBag.errors = ex.Message;
-                        }
-                    }
-                    else
-                        ViewBag.errors = "Некорретные данные. Проверьте правильность данных и повторите еще раз!";
-                    break;
-                //Удаление существующего элемента
-                case 'r':
-                    try
-                    {
-                        DB.Teacher.Remove(DB.Teacher.Find(id_teacher));
-                        DB.SaveChanges();
-                    }
-                    catch (Exception ex)
-                    {
-                        ViewBag.errors = ex.Message;
-                    }
-                    break;
-            }
-
-            //Передача списков в представление
-            try
-            {
-                ViewBag.faculties = DB.Faculty.ToList();
-                ViewBag.departments = DB.Department.ToList();
-                ViewBag.teachers = DB.Teacher.ToList();
-            }
-            catch (Exception ex)
-            {
-                ViewBag.errors = ex.Message;
-            }
-
-            return View();
-        }
-
         //Контроллер предмета
         public ActionResult Subject(char action = '0', int row = -1, int id_subject = -1)
         {
@@ -578,19 +479,26 @@ namespace LectureSchedulingTool.Controllers
             return PartialView();
         }
 
-        public List<Faculty> GetSafeFaculies()
+
+        public IQueryable<Faculty> GetOnlyNeedsFaculties(IQueryable<Department> departments)
         {
-            List<Faculty> faculties = DB.Faculty.ToList();
-            List<Department> departments = DB.Department.ToList();
-
-            List<Faculty> save_facultie = new List<Models.Faculty>();
-            for (int i = 0; i < departments.Count; i++)
-            {
-                if (!save_facultie.Exists(f => f.id_faculty == departments[i].id_faculty))
-                    save_facultie.Add(faculties.Find(f => f.id_faculty == departments[i].id_faculty));
-            }
-
-            return save_facultie;
+            return (from f in DB.Faculty join d in departments on f.id_faculty equals d.id_faculty select f);
+        }
+        public IQueryable<Department> GetOnlyNeedsDepartments(IQueryable<Students_group> students_groups)
+        {
+            return (from d in DB.Department join sg in students_groups on d.id_department equals sg.id_department select d);
+        }
+        public IQueryable<Department> GetOnlyNeedsDepartments(IQueryable<Teacher> teachers)
+        {
+            return (from d in DB.Department join t in teachers on d.id_department equals t.id_department select d);
+        }
+        public IQueryable<Department> GetOnlyNeedsDepartments(IQueryable<Subject> subjects)
+        {
+            return (from d in DB.Department join s in subjects on d.id_department equals s.id_department select d);
+        }
+        public IQueryable<Department> GetOnlyNeedsDepartments(IQueryable<Classroom> classrooms)
+        {
+            return (from d in DB.Department join c in classrooms on d.id_department equals c.id_department select d);
         }
     }
 }
