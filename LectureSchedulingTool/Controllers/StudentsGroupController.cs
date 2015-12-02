@@ -10,7 +10,7 @@ namespace LectureSchedulingTool.Controllers
     public partial class SchedulingController : Controller
     {
         [Authorize]
-        public ActionResult Department(Department model, int page = 1, char action = '0', int row = -1, int id_department = -1)
+        public ActionResult Students_group(Students_group model, int page = 1, char action = '0', int row = -1, int id_students_group = -1)
         {
             switch (action)
             {
@@ -20,13 +20,13 @@ namespace LectureSchedulingTool.Controllers
                     ViewBag.action = action;
                     ViewBag.row = row;
 
-                    model = new Department();
+                    model = new Students_group();
                     break;
 
                 case 's':
                     if (ModelState.IsValid)
                     {
-                        if (DB.Faculty.ToList().Exists(d => d.name == model.name || d.abbreviation == model.abbreviation))
+                        if (DB.Students_group.ToList().Exists(sg => sg.name == model.name))
                         {
                             ViewBag.action = 'a';
                             ViewBag.row = row;
@@ -40,7 +40,7 @@ namespace LectureSchedulingTool.Controllers
 
                             try
                             {
-                                DB.Department.Add(model);
+                                DB.Students_group.Add(model);
                                 DB.SaveChanges();
                             }
                             catch (Exception ex)
@@ -64,13 +64,13 @@ namespace LectureSchedulingTool.Controllers
                     ViewBag.action = action;
                     ViewBag.row = row;
 
-                    model = DB.Department.Find(id_department);
+                    model = DB.Students_group.Find(id_students_group);
                     break;
 
                 case 'u':
                     if (ModelState.IsValid)
                     {
-                        if (DB.Department.ToList().Exists(d => (d.name == model.name || d.abbreviation == model.abbreviation) && d.id_department != model.id_department))
+                        if (DB.Students_group.ToList().Exists(sg => sg.name == model.name && sg.id_students_group != model.id_students_group))
                         {
                             ViewBag.action = 'e';
                             ViewBag.row = row;
@@ -84,9 +84,9 @@ namespace LectureSchedulingTool.Controllers
 
                             try
                             {
-                                DB.Department.Find(id_department).name = model.name;
-                                DB.Department.Find(id_department).abbreviation = model.abbreviation;
-                                DB.Department.Find(id_department).id_faculty = model.id_faculty;
+                                DB.Students_group.Find(id_students_group).name = model.name;
+                                DB.Students_group.Find(id_students_group).people_amount = model.people_amount;
+                                DB.Students_group.Find(id_students_group).id_department = model.id_department;
                                 DB.SaveChanges();
                             }
                             catch (Exception ex)
@@ -106,11 +106,11 @@ namespace LectureSchedulingTool.Controllers
 
                 case 'r':
                     ModelState.Clear();
-                    if (DB.Department.ToList().Exists(d => d.id_department == id_department))
+                    if (DB.Students_group.ToList().Exists(sg => sg.id_students_group == id_students_group))
                     {
                         try
                         {
-                            DB.Department.Remove(DB.Department.Find(id_department));
+                            DB.Students_group.Remove(DB.Students_group.Find(id_students_group));
                             DB.SaveChanges();
                         }
                         catch (Exception ex)
@@ -136,35 +136,36 @@ namespace LectureSchedulingTool.Controllers
 
             try
             {
-                List<Department> departments = DB.Department.ToList();
+                List<Students_group> students_groups = DB.Students_group.ToList();
 
                 int elements_on_page = Int32.Parse(ConfigurationManager.AppSettings["ElementsOnPage"]);
-                if (departments.Count <= elements_on_page)
+                if (students_groups.Count <= elements_on_page)
                     ViewBag.pages = 1;
                 else
                 {
-                    int pages = (departments.Count / elements_on_page) + 1;
+                    int pages = (students_groups.Count / elements_on_page) + 1;
 
                     ViewBag.elements_on_page = elements_on_page;
                     ViewBag.page = page;
                     ViewBag.pages = pages;
 
                     if (page == 1)
-                        departments.RemoveRange(elements_on_page, departments.Count - elements_on_page);
+                        students_groups.RemoveRange(elements_on_page, students_groups.Count - elements_on_page);
                     else
                     {
                         if (page == pages)
-                            departments.RemoveRange(0, elements_on_page * (page - 1));
+                            students_groups.RemoveRange(0, elements_on_page * (page - 1));
                         else
                         {
-                            departments.RemoveRange(0, elements_on_page * (page - 1));
-                            departments.RemoveRange(elements_on_page, departments.Count - elements_on_page);
+                            students_groups.RemoveRange(0, elements_on_page * (page - 1));
+                            students_groups.RemoveRange(elements_on_page, students_groups.Count - elements_on_page);
                         }
                     }
                 }
 
                 ViewBag.faculties = DB.Faculty.ToList();
-                ViewBag.departments = departments;
+                ViewBag.departments = DB.Department.ToList();
+                ViewBag.students_groups = students_groups;
             }
             catch (Exception ex)
             {

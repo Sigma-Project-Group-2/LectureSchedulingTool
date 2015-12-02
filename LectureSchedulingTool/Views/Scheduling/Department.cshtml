@@ -29,7 +29,7 @@
 
             for (int i = 0; i < departments.Count; i++)
             {
-                Faculty faculty = faculties.Find(f => f.id_faculty == departments[i].id_faculty);
+                Faculty faculty = departments[i].GetFaculty(ref faculties);
 
                 if (action == "e" && edit_row == i)
                 {
@@ -139,6 +139,3 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
-
-<script src="~/Scripts/Scheduling/scheduling_remove_alert.js"></script>
-<audio id="music_alert" src="/Content/Easter_Eggs/alert.mp3"></audio>

@@ -49,7 +49,7 @@
                                         for (int j = 0; j < teachers.Count; j++)
                                         {
                                             <option value="@teachers[j].id_teacher" @(teachers[j].id_teacher == teacher.id_teacher ? "selected" : "")>
-                                                @teachers[j].name @teachers[j].surname @teachers[j].patronymic
+                                                @teachers[j].surname @teachers[j].name @teachers[j].patronymic
                                             </option>
                                         }
                                     }
@@ -81,7 +81,7 @@
                                                     <input type="hidden" name="row" value="@i" />
                                                     <input type="hidden" name="id_teacher_load" value="@teacher_loads[i].id_teacher_load" />
                                                     <td>@(i + 1)</td>
-                                                    <td>@teacher.name @teacher.surname @teacher.patronymic</td>
+                                                    <td>@teacher.surname @teacher.name @teacher.patronymic</td>
                                                     <td>@subject.name (@subject.type)</td>
                                                     <td><button type="submit" name="action" value="e" class="btn btn-primary"> Редактировать </button></td>
                                                     <td><button type="submit" name="action" value="r" class="btn btn-danger"> Удалить </button></td>
@@ -102,7 +102,7 @@
                                                                 for (int j = 0; j < teachers.Count; j++)
                                                                 {
                                                                     <option value="@teachers[j].id_teacher" )>
-                                                                        @teachers[j].name @teachers[j].surname @teachers[j].patronymic 
+                                                                        @teachers[j].surname @teachers[j].name @teachers[j].patronymic 
                                                                     </option>
                                                                 }
                                                             }

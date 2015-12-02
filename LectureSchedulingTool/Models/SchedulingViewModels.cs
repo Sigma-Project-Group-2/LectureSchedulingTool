@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace LectureSchedulingTool.Models
 {
@@ -53,6 +54,17 @@ namespace LectureSchedulingTool.Models
                 return null;
             }
         }
+        public Faculty GetFaculty(ref List<Faculty> faculties)
+        {
+            try
+            {
+                return faculties.Find(f => f.id_faculty == this.id_faculty);
+            }
+            catch
+            {
+                return null;
+            }
+        }
 
         public Department()
         {
@@ -91,11 +103,33 @@ namespace LectureSchedulingTool.Models
                 return null;
             }
         }
+        public Faculty GetFaculty(ref List<Faculty> faculties, ref List<Department> departments)
+        {
+            try
+            {
+                return GetDepartment(ref departments).GetFaculty(ref faculties);
+            }
+            catch
+            {
+                return null;
+            }
+        }
         public Department GetDepartment(ref SchedulingContext DB)
         {
             try
             {
                 return DB.Department.Find(this.id_department);
+            }
+            catch
+            {
+                return null;
+            }
+        }
+        public Department GetDepartment(ref List<Department> departments)
+        {
+            try
+            {
+                return departments.Find(d => d.id_department == this.id_department);
             }
             catch
             {
@@ -369,7 +403,7 @@ namespace LectureSchedulingTool.Models
         {
             try
             {
-                return GetStudentsGroup(ref DB).GetDepartment(ref DB);
+                return GetTeacher(ref DB).GetDepartment(ref DB);
             }
             catch
             {
@@ -452,7 +486,7 @@ namespace LectureSchedulingTool.Models
         {
             try
             {
-                return DB.Students_group.Find(this.id_students_group);
+                return GetStudentsGroupLoad(ref DB).GetStudentsGroup(ref DB);
             }
             catch
             {
