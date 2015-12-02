@@ -107,7 +107,7 @@
                         <td>@(Html.TextBoxFor(m => m.working_position, new { @class = "form-control" })) </td>
                         <td>@(Html.TextBoxFor(m => m.regalia, new { @class = "form-control" })) </td>
                         <td>@(Html.TextBoxFor(m => m.max_hours, new { @class = "form-control" })) </td>
-                        <td width="10%"><center><button type="submit" id="update" name="action" value="u" class="btn btn-primary"> Обновить</button></center></td>
+                        <td width="10%"><center><button type="submit" id="save" name="action" value="u" class="btn btn-primary"> Обновить</button></center></td>
                         <td width="9%"><center><button type="submit" id="cancel" name="action" value="0" class="btn btn-warning"> Отменить</button></center></td>
                     </tr>
                 }
@@ -162,3 +162,6 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+
+<script src="~/Scripts/Scheduling/scheduling_remove_alert.js" />
+<script src="~/Scripts/Scheduling/scheduling_department_dynamic.js" />

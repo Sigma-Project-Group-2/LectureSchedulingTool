@@ -84,7 +84,7 @@
                         <td>@(Html.DropDownListFor(m => m.id_faculty, Ifaculties, new { @class = "form-control" }))</td>
                         <td>@(Html.TextBoxFor(m => m.name, new { @class = "form-control" }))</td>
                         <td>@(Html.TextBoxFor(m => m.abbreviation, new { @class = "form-control" }))</td>
-                        <td width="10%"><center><button type="submit" id="update" name="action" value="s" class="btn btn-primary" width="inherit"> Добавить </button></center></td>
+                        <td width="10%"><center><button type="submit" id="save" name="action" value="s" class="btn btn-primary" width="inherit"> Добавить </button></center></td>
                         <td width="9%"><center><button type="submit" id="cancel" name="action" value="0" class="btn btn-warning" width="inherit"> Отменить </button></center></td>
                     </tr>
                 }
@@ -139,3 +139,5 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+
+<script src="~/Scripts/Scheduling/scheduling_remove_alert.js" />

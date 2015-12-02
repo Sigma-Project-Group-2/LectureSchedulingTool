@@ -215,7 +215,6 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\Scheduling\scheduling_department_dynamic.js" />
-    <Content Include="Scripts\Scheduling\scheduling_disable_buttons.js" />
     <Content Include="Scripts\Scheduling\scheduling_remove_alert.js" />
     <Content Include="Scripts\your_dog.js" />
     <Content Include="Scripts\_references.js" />
