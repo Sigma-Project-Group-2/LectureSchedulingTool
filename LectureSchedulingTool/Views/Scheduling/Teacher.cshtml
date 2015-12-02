@@ -36,8 +36,8 @@
 
             for (int i = 0; i < teachers.Count; i++)
             {
-                Faculty faculty = teachers[i].GetFaculty(ref faculties, ref departments);
-                Department department = teachers[i].GetDepartment(ref departments);
+                Faculty faculty = teachers[i].GetFaculty();
+                Department department = teachers[i].GetDepartment();
 
                 if (action == "e" && edit_row == i)
                 {

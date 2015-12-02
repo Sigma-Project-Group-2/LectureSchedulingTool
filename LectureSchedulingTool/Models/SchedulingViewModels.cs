@@ -8,10 +8,12 @@ namespace LectureSchedulingTool.Models
     {
         [Key]
         public int id_faculty { get; set; }
+
         [Required]
         [StringLength(100)]
         [Display(Name = "Название")]
         public string name { get; set; }
+
         [Required]
         [StringLength(10)]
         [Display(Name = "Аббревиатура")]
@@ -35,30 +37,23 @@ namespace LectureSchedulingTool.Models
         [Required]
         [StringLength(100)]
         public string name { get; set; }
+
         [Required]
         [StringLength(10)]
         public string abbreviation { get; set; }
+
         [Required]
         public int is_producing { get; set; }
+
         [Required]
         public int id_faculty { get; set; }
 
-        public Faculty GetFaculty(ref SchedulingContext DB)
+        private SchedulingContext DB = new SchedulingContext();
+        public Faculty GetFaculty()
         {
             try
             {
                 return DB.Faculty.Find(this.id_faculty);
-            }
-            catch
-            {
-                return null;
-            }
-        }
-        public Faculty GetFaculty(ref List<Faculty> faculties)
-        {
-            try
-            {
-                return faculties.Find(f => f.id_faculty == this.id_faculty);
             }
             catch
             {
@@ -84,52 +79,34 @@ namespace LectureSchedulingTool.Models
     {
         [Key]
         public int id_students_group { get; set; }
+
         [Required]
         [StringLength(20)]
         public string name { get; set; }
+
         [Required]
         public int people_amount { get; set; }
+
         [Required]
         public int id_department { get; set; }
 
-        public Faculty GetFaculty(ref SchedulingContext DB)
+        private SchedulingContext DB = new SchedulingContext();
+        public Faculty GetFaculty()
         {
             try
             {
-                return GetDepartment(ref DB).GetFaculty(ref DB);
+                return GetDepartment().GetFaculty();
             }
             catch
             {
                 return null;
             }
         }
-        public Faculty GetFaculty(ref List<Faculty> faculties, ref List<Department> departments)
-        {
-            try
-            {
-                return GetDepartment(ref departments).GetFaculty(ref faculties);
-            }
-            catch
-            {
-                return null;
-            }
-        }
-        public Department GetDepartment(ref SchedulingContext DB)
+        public Department GetDepartment()
         {
             try
             {
                 return DB.Department.Find(this.id_department);
-            }
-            catch
-            {
-                return null;
-            }
-        }
-        public Department GetDepartment(ref List<Department> departments)
-        {
-            try
-            {
-                return departments.Find(d => d.id_department == this.id_department);
             }
             catch
             {
@@ -154,63 +131,49 @@ namespace LectureSchedulingTool.Models
     {
         [Key]
         public int id_teacher { get; set; }
+
         [Required]
         [StringLength(20)]
         public string surname { get; set; }
+
         [Required]
         [StringLength(20)]
         public string name { get; set; }
+
         [Required]
         [StringLength(20)]
         public string patronymic { get; set; }
+
         [Required]
         public int max_hours { get; set; }
+
         [Required]
         [StringLength(20)]
         public string working_position { get; set; }
+
         [StringLength(20)]
         public string regalia { get; set; }
+
         [Required]
         public int id_department { get; set; }
 
-        public Faculty GetFaculty(ref SchedulingContext DB)
+        private SchedulingContext DB = new SchedulingContext();
+        public Faculty GetFaculty()
         {
             try
             {
-                return GetDepartment(ref DB).GetFaculty(ref DB);
+                return GetDepartment().GetFaculty();
             }
             catch
             {
                 return null;
             }
         }
-        public Faculty GetFaculty(ref List<Faculty> faculties, ref List<Department> departments)
-        {
-            try
-            {
-                return GetDepartment(ref departments).GetFaculty(ref faculties);
-            }
-            catch
-            {
-                return null;
-            }
-        }
-        public Department GetDepartment(ref SchedulingContext DB)
+        public Department GetDepartment()
         {
             try
             {
                 return DB.Department.Find(this.id_department);
-            }
-            catch
-            {
-                return null;
-            }
-        }
-        public Department GetDepartment(ref List<Department> departments)
-        {
-            try
-            {
-                return departments.Find(d => d.id_department == this.id_department);
             }
             catch
             {
@@ -239,27 +202,31 @@ namespace LectureSchedulingTool.Models
     {
         [Key]
         public int id_subject { get; set; }
+
         [Required]
         [StringLength(50)]
         public string name { get; set; }
+
         [Required]
         [StringLength(20)]
         public string type { get; set; }
+
         [Required]
         public int id_department { get; set; }
 
-        public Faculty GetFaculty(ref SchedulingContext DB)
+        private SchedulingContext DB = new SchedulingContext();
+        public Faculty GetFaculty()
         {
             try
             {
-                return GetDepartment(ref DB).GetFaculty(ref DB);
+                return GetDepartment().GetFaculty();
             }
             catch
             {
                 return null;
             }
         }
-        public Department GetDepartment(ref SchedulingContext DB)
+        public Department GetDepartment()
         {
             try
             {
@@ -288,26 +255,30 @@ namespace LectureSchedulingTool.Models
     {
         [Key]
         public int id_classroom { get; set; }
+
         [Required]
         [StringLength(20)]
         public string number { get; set; }
+
         [Required]
         public int people_capacity { get; set; }
+
         [Required]
         public int id_department { get; set; }
 
-        public Faculty GetFaculty(ref SchedulingContext DB)
+        private SchedulingContext DB = new SchedulingContext();
+        public Faculty GetFaculty()
         {
             try
             {
-                return GetDepartment(ref DB).GetFaculty(ref DB);
+                return GetDepartment().GetFaculty();
             }
             catch
             {
                 return null;
             }
         }
-        public Department GetDepartment(ref SchedulingContext DB)
+        public Department GetDepartment()
         {
             try
             {
@@ -336,36 +307,40 @@ namespace LectureSchedulingTool.Models
     {
         [Key]
         public int id_students_group_load { get; set; }
+
         [Required]
         public int hours { get; set; }
+
         [Required]
         public int id_students_group { get; set; }
+
         [Required]
         public int id_subject { get; set; }
 
-        public Faculty GetFaculty(ref SchedulingContext DB)
+        private SchedulingContext DB = new SchedulingContext();
+        public Faculty GetFaculty()
         {
             try
             {
-                return GetDepartment(ref DB).GetFaculty(ref DB);
+                return GetDepartment().GetFaculty();
             }
             catch
             {
                 return null;
             }
         }
-        public Department GetDepartment(ref SchedulingContext DB)
+        public Department GetDepartment()
         {
             try
             {
-                return GetStudentsGroup(ref DB).GetDepartment(ref DB);
+                return GetStudentsGroup().GetDepartment();
             }
             catch
             {
                 return null;
             }
         }
-        public Students_group GetStudentsGroup(ref SchedulingContext DB)
+        public Students_group GetStudentsGroup()
         {
             try
             {
@@ -376,7 +351,7 @@ namespace LectureSchedulingTool.Models
                 return null;
             }
         }
-        public Subject GetSubject(ref SchedulingContext DB)
+        public Subject GetSubject()
         {
             try
             {
@@ -405,34 +380,37 @@ namespace LectureSchedulingTool.Models
     {
         [Key]
         public int id_teacher_load { get; set; }
+
         [Required]
         public int id_teacher { get; set; }
+
         [Required]
         public int id_subject { get; set; }
 
-        public Faculty GetFaculty(ref SchedulingContext DB)
+        private SchedulingContext DB = new SchedulingContext();
+        public Faculty GetFaculty()
         {
             try
             {
-                return GetDepartment(ref DB).GetFaculty(ref DB);
+                return GetDepartment().GetFaculty();
             }
             catch
             {
                 return null;
             }
         }
-        public Department GetDepartment(ref SchedulingContext DB)
+        public Department GetDepartment()
         {
             try
             {
-                return GetTeacher(ref DB).GetDepartment(ref DB);
+                return GetTeacher().GetDepartment();
             }
             catch
             {
                 return null;
             }
         }
-        public Teacher GetTeacher(ref SchedulingContext DB)
+        public Teacher GetTeacher()
         {
             try
             {
@@ -443,7 +421,7 @@ namespace LectureSchedulingTool.Models
                 return null;
             }
         }
-        public Subject GetSubject(ref SchedulingContext DB)
+        public Subject GetSubject()
         {
             try
             {
@@ -471,73 +449,79 @@ namespace LectureSchedulingTool.Models
     {
         [Key]
         public int id_lesson { get; set; }
+
         [Required]
         public int week_count { get; set; }
+
         [Required]
         public int lesson_count { get; set; }
+
         [Required]
         public int id_classroom { get; set; }
+
         [Required]
         public int id_students_group_load { get; set; }
+
         [Required]
         public int id_teacher_load { get; set; }
 
-        public Faculty GetFaculty(ref SchedulingContext DB)
+        private SchedulingContext DB = new SchedulingContext();
+        public Faculty GetFaculty()
         {
             try
             {
-                return GetDepartment(ref DB).GetFaculty(ref DB);
+                return GetDepartment().GetFaculty();
             }
             catch
             {
                 return null;
             }
         }
-        public Department GetDepartment(ref SchedulingContext DB)
+        public Department GetDepartment()
         {
             try
             {
-                return GetStudentsGroup(ref DB).GetDepartment(ref DB);
+                return GetStudentsGroup().GetDepartment();
             }
             catch
             {
                 return null;
             }
         }
-        public Students_group GetStudentsGroup(ref SchedulingContext DB)
+        public Students_group GetStudentsGroup()
         {
             try
             {
-                return GetStudentsGroupLoad(ref DB).GetStudentsGroup(ref DB);
+                return GetStudentsGroupLoad().GetStudentsGroup();
             }
             catch
             {
                 return null;
             }
         }
-        public Teacher GetTeacher(ref SchedulingContext DB)
+        public Teacher GetTeacher()
         {
             try
             {
-                return GetTeacherLoad(ref DB).GetTeacher(ref DB);
+                return GetTeacherLoad().GetTeacher();
             }
             catch
             {
                 return null;
             }
         }
-        public Subject GetSubject(ref SchedulingContext DB)
+        public Subject GetSubject()
         {
             try
             {
-                return GetStudentsGroupLoad(ref DB).GetSubject(ref DB);
+                return GetStudentsGroupLoad().GetSubject();
             }
             catch
             {
                 return null;
             }
         }
-        public Classroom GetClassroom(ref SchedulingContext DB)
+        public Classroom GetClassroom()
         {
             try
             {
@@ -548,7 +532,7 @@ namespace LectureSchedulingTool.Models
                 return null;
             }
         }
-        public Students_group_load GetStudentsGroupLoad(ref SchedulingContext DB)
+        public Students_group_load GetStudentsGroupLoad()
         {
             try
             {
@@ -559,7 +543,7 @@ namespace LectureSchedulingTool.Models
                 return null;
             }
         }
-        public Teacher_load GetTeacherLoad(ref SchedulingContext DB)
+        public Teacher_load GetTeacherLoad()
         {
             try
             {
