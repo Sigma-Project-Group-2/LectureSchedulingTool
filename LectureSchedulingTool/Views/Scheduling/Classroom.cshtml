@@ -1,27 +1,15 @@
 ﻿@using LectureSchedulingTool.Models;
-
-<script src="~/Scripts/Scheduling/scheduling_department_dynamic.js"></script>
-<script src="~/Scripts/Scheduling/scheduling_disable_buttons.js"></script>
-<script src="~/Scripts/Scheduling/scheduling_remove_alert.js"></script>
-
-<input name="department_list_getter" id="department_list_getter" type="hidden" value="@Url.Action("GetDepartments")" />
-<input name="curent_action" id="curent_action" type="hidden" value="@ViewBag.action">
-<audio id="music_alert" src="/Content/Easter_Eggs/alert.mp3"></audio>
+@model Classroom
 
 <h2>Аудитории</h2>
 <hr />
 
-@if (ViewBag.errors != null)
-{
-    <p class="text-danger">
-        @ViewBag.errors
-    </p>
-}
+@(Html.ValidationSummary("", new { @class = "text-danger" }))
 
-<table class="table-bordered table-condensed" align="center">
+<table class="table-bordered table-condensed" align="center" width="100%">
     <thead>
         <tr>
-            <td>№</td>
+            <td><center>№</center></td>
             <td>Факультет</td>
             <td>Кафедра</td>
             <td>Номер</td>
@@ -30,127 +18,134 @@
     </thead>
     <tbody>
         @{
-            List<Faculty> faculties = ViewBag.faculties;
-            List<Department> departments = ViewBag.departments;
-            List<Classroom> classrooms = ViewBag.classrooms;
+            string action = ViewBag.action != null ? ViewBag.action.ToString() : "0";
+            int edit_row = ViewBag.row != null ? ViewBag.row : -1;
+            int elements_on_page = ViewBag.elements_on_page != null ? ViewBag.elements_on_page : 25;
+            int page = ViewBag.page != null ? ViewBag.page : 1;
+            int pages = ViewBag.pages != null ? ViewBag.pages : 1;
+
+            List<Faculty> faculties = ViewBag.faculties != null ? ViewBag.faculties : null;
+            IEnumerable<SelectListItem> Ifaculties = faculties.Select(f => new SelectListItem() { Value = f.id_faculty.ToString(), Text = f.abbreviation + " (" + f.name + ")" });
+            List<Department> departments = ViewBag.departments != null ? ViewBag.departments : null;
+            IEnumerable<SelectListItem> Idepartments = departments.Select(d => new SelectListItem() { Value = d.id_department.ToString(), Text = d.abbreviation + " (" + d.name + ")" });
+            List<Classroom> classrooms = ViewBag.classrooms != null ? ViewBag.classrooms : null;
 
             for (int i = 0; i < classrooms.Count; i++)
             {
-                Department department = departments.Find(d => d.id_department == classrooms[i].id_department);
-                Faculty faculty = faculties.Find(f => f.id_faculty == department.id_faculty);
+                Faculty faculty = classrooms[i].GetFaculty();
+                Department department = classrooms[i].GetDepartment();
 
-                if (ViewBag.action == 'e' && i == Convert.ToInt32(ViewBag.row))
+                if (action == "e" && edit_row == i)
                 {
-                    using (Html.BeginForm())
+                    using (Html.BeginForm("Classroom", "Scheduling"))
                     {
                         <tr>
-                            <input type="hidden" name="row" value="@i" />
-                            <input type="hidden" name="id_classroom" value="@classrooms[i].id_classroom" />
-                            <td>@(i + 1)</td>
-                            <td>
-                                <select name="id_faculty" class="form-control">
-                                    @{
-                                        for (int j = 0; j < faculties.Count; j++)
-                                        {
-                                            <option value="@faculties[j].id_faculty" @(faculties[j].id_faculty == department.id_faculty ? "selected" : "")>
-                                                @faculties[j].abbreviation (@faculties[j].name)
-                                            </option>
-                                        }
-                                    }
-                                </select>
-                            </td>
-                            <td>
-                                <select name="id_department" class="form-control">
-                                    @{
-                                        for (int j = 0; j < departments.Count; j++)
-                                        {
-                                            <option value="@departments[j].id_department" @(departments[j].id_department == department.id_department ? "selected" : "")>
-                                                @departments[j].abbreviation (@departments[j].name)
-                                            </option>
-                                        }
-                                    }
-                                </select>
-                            </td>
-                            <td><input type="text" name="number" value="@classrooms[i].number" class="form-control" /></td>
-                            <td><input type="number" min="1" name="people_capacity" value="@classrooms[i].people_capacity" class="form-control" /></td>
-                            <td><button type="submit" name="action" value="u" class="btn btn-primary">Обновить</button></td>
-                            <td><button type="submit" name="action" value="0" class="btn btn-warning">Отменить</button></td>
+                            <input type="hidden" name="page" value="@(page)" />
+                            <input type="hidden" name="row" value="@(i)" />
+                            <input type="hidden" name="id_classroom" value="@(classrooms[i].id_classroom)" />
+                            <td><center>@(i + (elements_on_page * (page - 1)) + 1) </center></td>
+                            <td>@(Html.DropDownList("id_faculty", Ifaculties, new { @class = "form-control" }))</td>
+                            <td>@(Html.DropDownListFor(m => m.id_department, Idepartments, new { @class = "form-control" }))</td>
+                            <td>@(Html.TextBoxFor(m => m.number, new { @class = "form-control" })) </td>
+                            <td>@(Html.TextBoxFor(m => m.people_capacity, new { @class = "form-control" })) </td>
+                            <td width="10%"><center><button type="submit" id="update" name="action" value="u" class="btn btn-primary"> Обновить</button></center></td>
+                            <td width="9%"><center><button type="submit" id="cancel" name="action" value="0" class="btn btn-warning"> Отменить</button></center></td>
                         </tr>
-                                            }
-                                        }
-                                        else
-                                        {
-                                            using (Html.BeginForm())
-                                            {
-                                                <tr>
-                                                    <input type="hidden" name="row" value="@i" />
-                                                    <input type="hidden" name="id_classroom" value="@classrooms[i].id_classroom" />
-                                                    <td>@(i + 1)</td>
-                                                    <td>@faculty.abbreviation</td>
-                                                    <td>@department.abbreviation</td>
-                                                    <td>@classrooms[i].number</td>
-                                                    <td>@classrooms[i].people_capacity</td>
-                                                    @if (ViewBag.action != 'e' && ViewBag.action != 'a')
-                                                    {
-                                                        <td><button type="submit" name="action" value="e" class="btn btn-primary"> Редактировать </button></td>
-                                                        <td><button type="submit" name="action" value="r" class="btn btn-danger"> Удалить </button></td>
-                                                    }
-                                                    else
-                                                    {
-                                                        <td><button type="submit" name="action" value="e" class="btn btn-primary" disabled> Редактировать </button></td>
-                                                        <td><button type="submit" name="action" value="r" class="btn btn-danger" disabled> Удалить </button></td>
-                                                    }
-                                                </tr>
-                                                }
-                                            }
-                                        }
-
-                                        if (ViewBag.action == 'a')
-                                        {
-                                            using (Html.BeginForm())
-                                            {
-                                                <tr>
-                                                    <td>@(classrooms.Count + 1)</td>
-                                                    <td>
-                                                        <select name="id_faculty" class="form-control">
-                                                            @{
-                                                                for (int j = 0; j < faculties.Count; j++)
-                                                                {
-                                                                    <option value="@faculties[j].id_faculty" )>
-                                                                        @faculties[j].abbreviation (@faculties[j].name)
-                                                                    </option>
-                                                                }
-                                                            }
-                                                        </select>
-                                                    </td>
-                                                    <td>
-                                                        <select name="id_department" class="form-control">
-                                                            @{
-                                                                for (int j = 0; j < departments.Count; j++)
-                                                                {
-                                                                    <option value="@departments[j].id_department" )>
-                                                                        @departments[j].abbreviation (@departments[j].name)
-                                                                    </option>
-                                                                }
-                                                            }
-                                                        </select>
-                                                    </td>
-                                                    <td><input type="text" name="number" class="form-control" /></td>
-                                                    <td><input type="number" min="1" name="people_capacity" class="form-control" /></td>
-                                                    <td><button type="submit" name="action" value="s" class="btn btn-primary">Сохранить</button></td>
-                                                    <td><button type="submit" name="action" value="0" class="btn btn-warning">Отменить</button></td>
-                                                </tr>
-                                                                    }
-                                                                }
-                                                                else
-                                                                {
-                                                                    using (Html.BeginForm())
-                                                                    {
-                                                                        <tr>
-                                                                            <td><button type="submit" name="action" value="a" class="btn btn-primary">Добавить</button></td>
-                                                                        </tr>
-                                                                    }
-                                                                }
+                    }
+                }
+                else
+                {
+                    using (Html.BeginForm("Classroom", "Scheduling"))
+                    {
+                        <tr>
+                            <input type="hidden" name="page" value="@(page)" />
+                            <input type="hidden" name="row" value="@(i)" />
+                            <input type="hidden" name="id_classroom" value="@(classrooms[i].id_classroom)" />
+                            <td><center>@(i + (elements_on_page * (page - 1)) + 1)</center></td>
+                            <td>@(faculty.abbreviation)</td>
+                            <td>@(department.abbreviation)</td>
+                            <td>@(classrooms[i].number)</td>
+                            <td>@(classrooms[i].people_capacity)</td>
+                            @if (action == "e" || action == "a")
+                            {
+                                <td width="10%"><center><button type="submit" id="edit" name="action" value="e" class="btn btn-primary" width="inherit" disabled> Редактировать</button></center></td>
+                                <td width="9%"><center><button type="submit" id="remove" name="action" value="r" class="btn btn-danger" width="inherit" disabled> Удалить</button></center></td>
+                            }
+                            else
+                            {
+                                <td width="10%"><center><button type="submit" id="edit" name="action" value="e" class="btn btn-primary" width="inherit"> Редактировать</button></center></td>
+                                <td width="9%"><center><button type="submit" id="remove" name="action" value="r" class="btn btn-danger" width="inherit"> Удалить</button></center></td>
+                            }
+                        </tr>
+                    }
+                }
+            }
+            if (action == "a")
+            {
+                using (Html.BeginForm("Classroom", "Scheduling"))
+                {
+                    <tr>
+                        <input type="hidden" name="page" value="@(page)" />
+                        <td><center>* </center></td>
+                        <td>@(Html.DropDownList("id_faculty", Ifaculties, new { @class = "form-control" }))</td>
+                        <td>@(Html.DropDownListFor(m => m.id_department, Idepartments, new { @class = "form-control" }))</td>
+                        <td>@(Html.TextBoxFor(m => m.number, new { @class = "form-control" })) </td>
+                        <td>@(Html.TextBoxFor(m => m.people_capacity, new { @class = "form-control" })) </td>
+                        <td width="10%"><center><button type="submit" id="save" name="action" value="u" class="btn btn-primary"> Обновить</button></center></td>
+                        <td width="9%"><center><button type="submit" id="cancel" name="action" value="0" class="btn btn-warning"> Отменить</button></center></td>
+                    </tr>
+                }
+            }
+            using (Html.BeginForm("Classroom", "Scheduling"))
+            {
+                <tr>
+                    <input type="hidden" name="page" value="@(page)" />
+                    @if (action == "e" || action == "a")
+                    {
+                        <td width="3%"><button type="submit" id="add" name="action" value="a" class="btn btn-info" disabled> + </button></td>
+                    }
+                    else
+                    {
+                        <td width="3%"><button type="submit" id="add" name="action" value="a" class="btn btn-info"> + </button></td>
+                    }
+                </tr>
+            }
         }
     </tbody>
 </table>
+
+@{
+    if (pages != 1)
+    {
+        using (Html.BeginForm("Classroom", "Scheduling"))
+        {
+            <hr />
+            <table>
+                <tr>
+                    <td><button type="submit" id="page" name="page" value="1" class="btn btn-default"> <<</button></td>
+                    @for (int i = 1; i <= pages; i++)
+                    {
+                        if (i == page)
+                        {
+                            <td><button type="submit" id="page" name="page" value="@(i)" class="btn btn-info"> @(i) </button></td>
+                        }
+                        else
+                        {
+                            <td><button type="submit" id="page" name="page" value="@(i)" class="btn btn-default"> @(i) </button></td>
+                        }
+                    }
+                    <td><button type="submit" id="page" name="page" value="@(pages)" class="btn btn-default"> >> </button></td>
+                </tr>
+            </table>
+        }
+
+        <input type="hidden" name="page" value="@(page)" />
+    }
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<script src="~/Scripts/Scheduling/scheduling_remove_alert.js" />
+<script src="~/Scripts/Scheduling/scheduling_department_dynamic.js" />

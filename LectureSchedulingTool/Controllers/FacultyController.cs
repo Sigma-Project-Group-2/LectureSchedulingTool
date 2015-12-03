@@ -156,9 +156,9 @@ namespace LectureSchedulingTool.Controllers
                     else
                     {
                         if (page == pages)
-                            Ifaculies = DB.Faculty.Skip(elements_on_page * (page - 1));
+                            Ifaculies = DB.Faculty.OrderBy(f => f.id_faculty).Skip(elements_on_page * (page - 1));
                         else
-                            Ifaculies = DB.Faculty.Skip(elements_on_page * (page - 1)).Take(elements_on_page);
+                            Ifaculies = DB.Faculty.OrderBy(f => f.id_faculty).Skip(elements_on_page * (page - 1)).Take(elements_on_page);
                     }
                 }
 

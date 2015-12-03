@@ -17,7 +17,7 @@ namespace LectureSchedulingTool.Models
         public int LessonsCount { get; set; }
 
         [Required]
-        [Range((int)10, (int)100)]
+        [Range((int)5, (int)100)]
         [Display(Name = "Кол-во эелементов на странице")]
         public int ElementsOnPage { get; set; }
 

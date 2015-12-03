@@ -158,9 +158,9 @@ namespace LectureSchedulingTool.Controllers
                     else
                     {
                         if (page == pages)
-                            Istudents_groups = DB.Students_group.Skip(elements_on_page * (page - 1));
+                            Istudents_groups = DB.Students_group.OrderBy(sg => sg.id_students_group).Skip(elements_on_page * (page - 1));
                         else
-                            Istudents_groups = DB.Students_group.Skip(elements_on_page * (page - 1)).Take(elements_on_page);
+                            Istudents_groups = DB.Students_group.OrderBy(sg => sg.id_students_group).Skip(elements_on_page * (page - 1)).Take(elements_on_page);
                     }
                 }
 

@@ -157,9 +157,9 @@ namespace LectureSchedulingTool.Controllers
                     else
                     {
                         if (page == pages)
-                            Idepartments = DB.Department.Skip(elements_on_page * (page - 1));
+                            Idepartments = DB.Department.OrderBy(d => d.id_department).Skip(elements_on_page * (page - 1));
                         else
-                            Idepartments = DB.Department.Skip(elements_on_page * (page - 1)).Take(elements_on_page);
+                            Idepartments = DB.Department.OrderBy(d => d.id_department).Skip(elements_on_page * (page - 1)).Take(elements_on_page);
                     }
                 }
 

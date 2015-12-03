@@ -161,9 +161,9 @@ namespace LectureSchedulingTool.Controllers
                     else
                     {
                         if (page == pages)
-                            Iteachers = DB.Teacher.Skip(elements_on_page * (page - 1));
+                            Iteachers = DB.Teacher.OrderBy(t => t.id_teacher).Skip(elements_on_page * (page - 1));
                         else
-                            Iteachers = DB.Teacher.Skip(elements_on_page * (page - 1)).Take(elements_on_page);
+                            Iteachers = DB.Teacher.OrderBy(t => t.id_teacher).Skip(elements_on_page * (page - 1)).Take(elements_on_page);
                     }
                 }
 
