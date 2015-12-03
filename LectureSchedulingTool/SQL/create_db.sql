@@ -10,7 +10,6 @@ CREATE TABLE Departments
 	id_department        int IDENTITY ( 1,1 ) ,
 	name                 nvarchar(100) COLLATE Cyrillic_General_CI_AS  NOT NULL ,
 	abbreviation         nvarchar(10) COLLATE Cyrillic_General_CI_AS  NOT NULL ,
-	is_producing         int  NOT NULL ,
 	id_faculty           int  NOT NULL 
 )
 

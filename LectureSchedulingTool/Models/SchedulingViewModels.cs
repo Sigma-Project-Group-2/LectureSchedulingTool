@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LectureSchedulingTool.Models
 {
@@ -43,9 +45,6 @@ namespace LectureSchedulingTool.Models
         public string abbreviation { get; set; }
 
         [Required]
-        public int is_producing { get; set; }
-
-        [Required]
         public int id_faculty { get; set; }
 
         private SchedulingContext DB = new SchedulingContext();
@@ -65,11 +64,10 @@ namespace LectureSchedulingTool.Models
         {
 
         }
-        public Department(string name, string abbreviation, int is_producing, int id_faculty)
+        public Department(string name, string abbreviation, int id_faculty)
         {
             this.name = name;
             this.abbreviation = abbreviation;
-            this.is_producing = is_producing;
             this.id_faculty = id_faculty;
         }
     }
@@ -89,6 +87,22 @@ namespace LectureSchedulingTool.Models
 
         [Required]
         public int id_department { get; set; }
+
+        [NotMapped]
+        public int id_faculty
+        {
+            get
+            {
+                try
+                {
+                    return GetFaculty().id_faculty;
+                }
+                catch (Exception ex)
+                {
+                    return -1;
+                }
+            }
+        }
 
         private SchedulingContext DB = new SchedulingContext();
         public Faculty GetFaculty()
@@ -157,6 +171,22 @@ namespace LectureSchedulingTool.Models
         [Required]
         public int id_department { get; set; }
 
+        [NotMapped]
+        public int id_faculty
+        {
+            get
+            {
+                try
+                {
+                    return GetFaculty().id_faculty;
+                }
+                catch (Exception ex)
+                {
+                    return -1;
+                }
+            }
+        }
+
         private SchedulingContext DB = new SchedulingContext();
         public Faculty GetFaculty()
         {
@@ -214,6 +244,22 @@ namespace LectureSchedulingTool.Models
         [Required]
         public int id_department { get; set; }
 
+        [NotMapped]
+        public int id_faculty
+        {
+            get
+            {
+                try
+                {
+                    return GetFaculty().id_faculty;
+                }
+                catch (Exception ex)
+                {
+                    return -1;
+                }
+            }
+        }
+
         private SchedulingContext DB = new SchedulingContext();
         public Faculty GetFaculty()
         {
@@ -266,6 +312,22 @@ namespace LectureSchedulingTool.Models
         [Required]
         public int id_department { get; set; }
 
+        [NotMapped]
+        public int id_faculty
+        {
+            get
+            {
+                try
+                {
+                    return GetFaculty().id_faculty;
+                }
+                catch (Exception ex)
+                {
+                    return -1;
+                }
+            }
+        }
+
         private SchedulingContext DB = new SchedulingContext();
         public Faculty GetFaculty()
         {
@@ -316,6 +378,37 @@ namespace LectureSchedulingTool.Models
 
         [Required]
         public int id_subject { get; set; }
+
+        [NotMapped]
+        public int id_faculty
+        {
+            get
+            {
+                try
+                {
+                    return GetFaculty().id_faculty;
+                }
+                catch (Exception ex)
+                {
+                    return -1;
+                }
+            }
+        }
+        [NotMapped]
+        public int id_department
+        {
+            get
+            {
+                try
+                {
+                    return GetStudentsGroup().id_department;
+                }
+                catch (Exception ex)
+                {
+                    return -1;
+                }
+            }
+        }
 
         private SchedulingContext DB = new SchedulingContext();
         public Faculty GetFaculty()
@@ -386,6 +479,37 @@ namespace LectureSchedulingTool.Models
 
         [Required]
         public int id_subject { get; set; }
+
+        [NotMapped]
+        public int id_faculty
+        {
+            get
+            {
+                try
+                {
+                    return GetFaculty().id_faculty;
+                }
+                catch (Exception ex)
+                {
+                    return -1;
+                }
+            }
+        }
+        [NotMapped]
+        public int id_department
+        {
+            get
+            {
+                try
+                {
+                    return GetTeacher().id_department;
+                }
+                catch (Exception ex)
+                {
+                    return -1;
+                }
+            }
+        }
 
         private SchedulingContext DB = new SchedulingContext();
         public Faculty GetFaculty()
@@ -464,6 +588,83 @@ namespace LectureSchedulingTool.Models
 
         [Required]
         public int id_teacher_load { get; set; }
+
+        [NotMapped]
+        public int id_faculty
+        {
+            get
+            {
+                try
+                {
+                    return GetFaculty().id_faculty;
+                }
+                catch (Exception ex)
+                {
+                    return -1;
+                }
+            }
+        }
+        [NotMapped]
+        public int id_department
+        {
+            get
+            {
+                try
+                {
+                    return GetStudentsGroup().id_department;
+                }
+                catch (Exception ex)
+                {
+                    return -1;
+                }
+            }
+        }
+
+        [NotMapped]
+        public int id_students_group
+        {
+            get
+            {
+                try
+                {
+                    return GetStudentsGroupLoad().id_students_group;
+                }
+                catch (Exception ex)
+                {
+                    return -1;
+                }
+            }
+        }
+        [NotMapped]
+        public int id_teacher
+        {
+            get
+            {
+                try
+                {
+                    return GetTeacherLoad().id_teacher;
+                }
+                catch (Exception ex)
+                {
+                    return -1;
+                }
+            }
+        }
+        [NotMapped]
+        public int id_subject
+        {
+            get
+            {
+                try
+                {
+                    return GetStudentsGroupLoad().id_subject;
+                }
+                catch (Exception ex)
+                {
+                    return -1;
+                }
+            }
+        }
 
         private SchedulingContext DB = new SchedulingContext();
         public Faculty GetFaculty()
