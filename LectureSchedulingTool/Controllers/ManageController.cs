@@ -58,6 +58,7 @@ namespace LectureSchedulingTool.Controllers
             {
                 ConfigurationManager.AppSettings["LessonsCount"] = model.LessonsCount.ToString();
                 ConfigurationManager.AppSettings["ElementsOnPage"] = model.ElementsOnPage.ToString();
+                ConfigurationManager.AppSettings["WeeksAmount"] = model.ElementsOnPage.ToString();
             }
 
             return View(model);

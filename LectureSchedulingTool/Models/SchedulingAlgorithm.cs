@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using LectureSchedulingTool.Models;
+using System.Configuration;
 
 namespace LectureSchedulingTool.Models
 {
@@ -11,56 +12,123 @@ namespace LectureSchedulingTool.Models
     {
         private SchedulingContext DB = new SchedulingContext();
 
-        private List<Lesson> scheduling_lessons;
-        private List<LessonGen> lessons_gens;
-
-        public SchedulingAlgorithm()
+        public void Generate()
         {
-            scheduling_lessons = new List<Lesson>();
-            lessons_gens = new List<LessonGen>();
+            List<Students_Group_Day> sg_day = new List<Students_Group_Day>();
+            foreach (var sg in DB.Students_group)
+                sg_day.Add(new Students_Group_Day(sg.id_students_group));
+
+            List<Teacher_Day> t_day = new List<Teacher_Day>();
+            foreach (var t in DB.Teacher)
+                t_day.Add(new Teacher_Day(t.id_teacher));
+
+            List<Classroom_Day> c_day = new List<Classroom_Day>();
+            foreach (var c in DB.Classroom)
+                c_day.Add(new Classroom_Day(c.id_classroom));
+
+            for (int i = 0; i < DB.Faculty.Count(); i++)
+            {
+
+            }
+
+            for (int i = 0; i < DB.Faculty.Count(); i++)
+            {
+
+            }
         }
 
-        public void Run()
+        private class Students_Group_Day
         {
-            
+            public readonly int id_students_group;
+
+            List<List<bool>> day;
+
+            public Students_Group_Day(int id_students_group)
+            {
+                this.id_students_group = id_students_group;
+
+                day = new List<List<bool>>();
+
+                int lessons = Int32.Parse(ConfigurationManager.AppSettings["LessonsCount"]);
+
+                for (int i = 0; i < 5; i++)
+                {
+                    day[i] = new List<bool>(lessons);
+
+                    for (int j = 0; j < lessons; j++)
+                        day[i][j] = false;
+                }
+            }
+        }
+        private class Teacher_Day
+        {
+            public readonly int id_teacher;
+
+            List<List<bool>> day;
+
+            public Teacher_Day(int id_teacher)
+            {
+                this.id_teacher = id_teacher;
+
+                day = new List<List<bool>>();
+
+                int lessons = Int32.Parse(ConfigurationManager.AppSettings["LessonsCount"]);
+
+                for (int i = 0; i < 5; i++)
+                {
+                    day[i] = new List<bool>(lessons);
+
+                    for (int j = 0; j < lessons; j++)
+                        day[i][j] = false;
+                }
+            }
+        }
+        private class Classroom_Day
+        {
+            public readonly int id_classroom;
+
+            List<List<bool>> day;
+
+            public Classroom_Day(int id_classroom)
+            {
+                this.id_classroom = id_classroom;
+
+                day = new List<List<bool>>();
+
+                int lessons = Int32.Parse(ConfigurationManager.AppSettings["LessonsCount"]);
+
+                for (int i = 0; i < 5; i++)
+                {
+                    day[i] = new List<bool>(lessons);
+
+                    for (int j = 0; j < lessons; j++)
+                        day[i][j] = false;
+                }
+            }
         }
 
-        public List<Lesson> GetLessons()
+        private List<Lesson> GetEmptyLessons(int id_faculty, bool for_internal_groups)
         {
-            if (scheduling_lessons == null || scheduling_lessons.Count == 0)
-                return null;
-            else
-                return scheduling_lessons;
-        }
-    }
+            List<Students_group_load> sgl = DB.Students_group_load.ToList();
+            List<Lesson> lessons = new List<Lesson>();
 
-    public class LessonGen : Lesson
-    {
-        public bool create_window_in_teacher_scheduling;
-        public bool remove_window_in_teacher_scheduling;
+            int weeks_amount = Int32.Parse(ConfigurationManager.AppSettings["WeeksAmount"]);
+            int weeks_count = Int32.Parse(ConfigurationManager.AppSettings["WeeksCount"]);
+            int min_hours = weeks_amount / 2 / weeks_count;
 
-        public int GetMark()
-        {
-            int mark = 0;
+            for (int i = 0; sgl.Count != 0; i++)
+            {
+                if (sgl[i].hours < min_hours / 2)
+                    sgl.Remove(sgl[i]);
 
-            if (create_window_in_teacher_scheduling == true)
-                mark--;
-            else
-                mark++;
+                if (sgl[i].hours >= min_hours / 2)
+                {
+                    lessons.Add(new Lesson { id_students_group_load = sgl[i].id_students_group_load });
+                    sgl[i].hours -= min_hours;
+                }
+            }
 
-            if (remove_window_in_teacher_scheduling == true)
-                mark++;
-            else
-                mark--;
-
-
-
-            return mark;
-        }
-
-        public Lesson GetLesson()
-        {
-            return new Lesson(week_count, lesson_count, id_classroom, id_students_group_load, id_teacher_load);
+            return lessons;
         }
     }
 }

@@ -21,10 +21,16 @@ namespace LectureSchedulingTool.Models
         [Display(Name = "Кол-во эелементов на странице")]
         public int ElementsOnPage { get; set; }
 
+        [Required]
+        [Range((int)1, (int)100)]
+        [Display(Name = "Кол-во эелементов на странице")]
+        public int WeeksAmount { get; set; }
+
         public IndexViewModel()
         {
             LessonsCount = Int32.Parse(ConfigurationManager.AppSettings["LessonsCount"]);
             ElementsOnPage = Int32.Parse(ConfigurationManager.AppSettings["ElementsOnPage"]);
+            WeeksAmount = Int32.Parse(ConfigurationManager.AppSettings["WeeksAmount"]);
         }
     }
 

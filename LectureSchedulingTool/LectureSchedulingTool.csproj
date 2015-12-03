@@ -169,15 +169,15 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\ClassroomController.cs" />
-    <Compile Include="Controllers\DepartmentController.cs" />
-    <Compile Include="Controllers\FacultyController.cs" />
+    <Compile Include="Controllers\SchedulingView\ClassroomController.cs" />
+    <Compile Include="Controllers\SchedulingView\DepartmentController.cs" />
+    <Compile Include="Controllers\SchedulingView\FacultyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\SchedulingController.cs" />
-    <Compile Include="Controllers\StudentsGroupController.cs" />
-    <Compile Include="Controllers\SubjectController.cs" />
-    <Compile Include="Controllers\TeacherController.cs" />
+    <Compile Include="Controllers\SchedulingView\StudentsGroupController.cs" />
+    <Compile Include="Controllers\SchedulingView\SubjectController.cs" />
+    <Compile Include="Controllers\SchedulingView\TeacherController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
