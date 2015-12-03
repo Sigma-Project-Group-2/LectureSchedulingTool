@@ -3,7 +3,7 @@
 
 <h2>Аудитории</h2>
 <hr />
-
+<input name="department_list_getter" id="department_list_getter" type="hidden" value="@Url.Action("GetDepartments", "Scheduling")" />
 @(Html.ValidationSummary("", new { @class = "text-danger" }))
 
 <table class="table-bordered table-condensed" align="center" width="100%">
@@ -147,5 +147,5 @@
     @Scripts.Render("~/bundles/jqueryval")
 }
 
-<script src="~/Scripts/Scheduling/scheduling_remove_alert.js" />
-<script src="~/Scripts/Scheduling/scheduling_department_dynamic.js" />
+<script src="~/Scripts/Scheduling/scheduling_remove_alert.js"></script>
+<script src="~/Scripts/Scheduling/scheduling_department_dynamic.js"></script>
