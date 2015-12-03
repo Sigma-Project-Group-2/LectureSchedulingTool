@@ -88,7 +88,6 @@ namespace LectureSchedulingTool.Controllers
                                 DB.Teacher.Find(id_teacher).patronymic = model.patronymic;
                                 DB.Teacher.Find(id_teacher).working_position = model.working_position;
                                 DB.Teacher.Find(id_teacher).regalia = model.regalia;
-                                DB.Teacher.Find(id_teacher).max_hours = model.max_hours;
                                 DB.Teacher.Find(id_teacher).id_department = model.id_department;
                                 DB.SaveChanges();
                             }

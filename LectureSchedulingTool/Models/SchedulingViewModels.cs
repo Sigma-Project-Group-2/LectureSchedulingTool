@@ -159,9 +159,6 @@ namespace LectureSchedulingTool.Models
         public string patronymic { get; set; }
 
         [Required]
-        public int max_hours { get; set; }
-
-        [Required]
         [StringLength(20)]
         public string working_position { get; set; }
 
@@ -215,12 +212,11 @@ namespace LectureSchedulingTool.Models
         {
 
         }
-        public Teacher(string surname, string name, string patronymic, int max_hours, string working_position, string regalia, int id_department)
+        public Teacher(string surname, string name, string patronymic, string working_position, string regalia, int id_department)
         {
             this.surname = surname;
             this.name = name;
             this.patronymic = patronymic;
-            this.max_hours = max_hours;
             this.working_position = working_position;
             this.regalia = regalia;
             this.id_department = id_department;
