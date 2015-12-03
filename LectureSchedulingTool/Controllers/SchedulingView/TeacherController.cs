@@ -171,7 +171,7 @@ namespace LectureSchedulingTool.Controllers
                 if (action == 'a' || action == 'e')
                 {
                     ViewBag.departments = DB.Department.ToList();
-                    ViewBag.faculties = DB.Faculty.ToList();
+                    ViewBag.faculties = GetSafeFaculties().ToList();
                 }
                 else
                 {
