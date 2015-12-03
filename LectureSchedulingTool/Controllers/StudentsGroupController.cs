@@ -106,6 +106,7 @@ namespace LectureSchedulingTool.Controllers
 
                 case 'r':
                     ModelState.Clear();
+                    model = DB.Students_group.Find(id_students_group);
                     if (DB.Students_group.Count(sg => sg.name == model.name) > 0)
                     {
                         try

@@ -109,6 +109,7 @@ namespace LectureSchedulingTool.Controllers
 
                 case 'r':
                     ModelState.Clear();
+                    model = DB.Teacher.Find(id_teacher);
                     if (DB.Teacher.Count(t => t.surname == model.surname && t.name == model.name && t.patronymic == model.patronymic) > 0)
                     {
                         try

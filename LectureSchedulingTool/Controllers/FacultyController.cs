@@ -104,6 +104,7 @@ namespace LectureSchedulingTool.Controllers
 
                 case 'r':
                     ModelState.Clear();
+                    model = DB.Faculty.Find(id_faculty);
                     if (DB.Faculty.Count(f => f.name == model.name || f.abbreviation == model.abbreviation) > 0)
                     {
                         try
