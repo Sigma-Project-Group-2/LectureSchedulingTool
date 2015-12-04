@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNet.Identity;
-using Microsoft.Owin.Security;
+﻿using System.ComponentModel.DataAnnotations;
 using System;
 using System.Configuration;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 
 namespace LectureSchedulingTool.Models
 {
@@ -12,25 +11,53 @@ namespace LectureSchedulingTool.Models
         public bool BrowserRemembered { get; set; }
 
         [Required]
+        [Range((int)1, (int)3)]
+        public int WeeksCount { get; set; }
+
+        [Required]
+        [Range((int)1, (int)52)]
+        public int WeeksAmount { get; set; }
+
+        [Required]
         [Range((int)1, (int)10)]
-        [Display(Name = "Кол-во занятий в день")]
         public int LessonsCount { get; set; }
 
         [Required]
-        [Range((int)5, (int)100)]
-        [Display(Name = "Кол-во эелементов на странице")]
-        public int ElementsOnPage { get; set; }
+        [Range((int)1, (int)10)]
+        public int LessonsAmount { get; set; }
 
         [Required]
-        [Range((int)1, (int)100)]
-        [Display(Name = "Кол-во эелементов на странице")]
-        public int WeeksAmount { get; set; }
+        [Range((int)5, (int)100)]
+        public int ElementsOnPage { get; set; }
+
+        [NotMapped]
+        public bool HaveDataInTables
+        {
+            get
+            {
+                SchedulingContext DB = new SchedulingContext();
+
+                try
+                {
+                    if (DB.Faculty.Count() > 0)
+                        return true;
+                    else
+                        return false;
+                }
+                catch (Exception ex)
+                {
+                    return true;
+                }
+            }
+        }
 
         public IndexViewModel()
         {
-            LessonsCount = Int32.Parse(ConfigurationManager.AppSettings["LessonsCount"]);
-            ElementsOnPage = Int32.Parse(ConfigurationManager.AppSettings["ElementsOnPage"]);
+            WeeksCount = Int32.Parse(ConfigurationManager.AppSettings["WeeksCount"]);
             WeeksAmount = Int32.Parse(ConfigurationManager.AppSettings["WeeksAmount"]);
+            LessonsCount = Int32.Parse(ConfigurationManager.AppSettings["LessonsCount"]);
+            LessonsAmount = Int32.Parse(ConfigurationManager.AppSettings["LessonsAmount"]);
+            ElementsOnPage = Int32.Parse(ConfigurationManager.AppSettings["ElementsOnPage"]);
         }
     }
 

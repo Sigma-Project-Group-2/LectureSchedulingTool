@@ -141,7 +141,7 @@ namespace LectureSchedulingTool.Controllers
                 if (DB.Faculty.Count() <= elements_on_page)
                 {
                     ViewBag.pages = 1;
-                    Ifaculies = DB.Faculty.Take(DB.Faculty.Count());
+                    Ifaculies = DB.Faculty;
                 }
                 else
                 {

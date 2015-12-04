@@ -143,7 +143,7 @@ namespace LectureSchedulingTool.Controllers
                 if (DB.Students_group.Count() <= elements_on_page)
                 {
                     ViewBag.pages = 1;
-                    Istudents_groups = DB.Students_group.Take(DB.Students_group.Count());
+                    Istudents_groups = DB.Students_group;
                 }
                 else
                 {

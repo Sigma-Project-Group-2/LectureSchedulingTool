@@ -142,7 +142,7 @@ namespace LectureSchedulingTool.Controllers
                 if (DB.Students_group_load.Count() <= elements_on_page)
                 {
                     ViewBag.pages = 1;
-                    Istudents_group_loads = DB.Students_group_load.Take(DB.Students_group_load.Count());
+                    Istudents_group_loads = DB.Students_group_load;
                 }
                 else
                 {
@@ -168,12 +168,6 @@ namespace LectureSchedulingTool.Controllers
                 {
                     ViewBag.students_groups = DB.Students_group.ToList();
                     ViewBag.subjects = DB.Subject.ToList();
-                }
-                else
-                {
-                    var students_groups = GetOnlyNeedsStudentsGroups(Istudents_group_loads);
-                    ViewBag.students_groups = students_groups.ToList();
-                    ViewBag.subjects = GetOnlyNeedsSubjects(Istudents_group_loads).ToList();
                 }
             }
             catch (Exception ex)

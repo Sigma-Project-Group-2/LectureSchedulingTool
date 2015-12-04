@@ -179,6 +179,7 @@
     <Compile Include="Controllers\SchedulingView\StudentsGroupLoadController.cs" />
     <Compile Include="Controllers\SchedulingView\SubjectController.cs" />
     <Compile Include="Controllers\SchedulingView\TeacherController.cs" />
+    <Compile Include="Controllers\SchedulingView\TeacherLoadController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -207,6 +208,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\Easter_Eggs\mus_dogsong.ogg" />
     <None Include="Properties\PublishProfiles\lecture-scheduling-tool.pubxml" />
+    <None Include="Properties\PublishProfiles\soome.com.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -256,7 +258,6 @@
     <Content Include="Views\Scheduling\Students_group_load.cshtml" />
     <Content Include="Views\Scheduling\Teacher_load.cshtml" />
     <Content Include="Views\Scheduling\GetDepartments.cshtml" />
-    <Content Include="Views\Scheduling\Students_group_load - Copy.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

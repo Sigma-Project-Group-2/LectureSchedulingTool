@@ -9,7 +9,7 @@ namespace LectureSchedulingTool.Controllers
     public partial class SchedulingController : Controller
     {
         [Authorize]
-        public ActionResult Classroom(Classroom model, int page = 1, char action = '0', int row = -1, int id_classroom = -1)
+        public ActionResult Teacher_load(Teacher_load model, int page = 1, char action = '0', int row = -1, int id_teacher_load = -1)
         {
             switch (action)
             {
@@ -19,13 +19,13 @@ namespace LectureSchedulingTool.Controllers
                     ViewBag.action = action;
                     ViewBag.row = row;
 
-                    model = new Classroom();
+                    model = new Teacher_load();
                     break;
 
                 case 's':
                     if (ModelState.IsValid)
                     {
-                        if (DB.Classroom.Count(c => c.number == model.number) > 0)
+                        if (DB.Teacher_load.Count(tl => tl.id_teacher == model.id_teacher && tl.id_subject == model.id_subject) > 0)
                         {
                             ViewBag.action = 'a';
                             ViewBag.row = row;
@@ -39,7 +39,7 @@ namespace LectureSchedulingTool.Controllers
 
                             try
                             {
-                                DB.Classroom.Add(model);
+                                DB.Teacher_load.Add(model);
                                 DB.SaveChanges();
                             }
                             catch (Exception ex)
@@ -63,13 +63,13 @@ namespace LectureSchedulingTool.Controllers
                     ViewBag.action = action;
                     ViewBag.row = row;
 
-                    model = DB.Classroom.Find(id_classroom);
+                    model = DB.Teacher_load.Find(id_teacher_load);
                     break;
 
                 case 'u':
                     if (ModelState.IsValid)
                     {
-                        if (DB.Classroom.Count(c => c.number == model.number && c.id_classroom != model.id_classroom) > 0)
+                        if (DB.Teacher_load.Count(tl => tl.id_teacher == model.id_teacher && tl.id_subject == model.id_subject && tl.id_teacher_load != model.id_teacher_load) > 0)
                         {
                             ViewBag.action = 'e';
                             ViewBag.row = row;
@@ -83,9 +83,8 @@ namespace LectureSchedulingTool.Controllers
 
                             try
                             {
-                                DB.Classroom.Find(id_classroom).number = model.number;
-                                DB.Classroom.Find(id_classroom).people_capacity = model.people_capacity;
-                                DB.Classroom.Find(id_classroom).id_department = model.id_department;
+                                DB.Teacher_load.Find(id_teacher_load).id_teacher = model.id_teacher;
+                                DB.Teacher_load.Find(id_teacher_load).id_subject = model.id_subject;
                                 DB.SaveChanges();
                             }
                             catch (Exception ex)
@@ -105,12 +104,12 @@ namespace LectureSchedulingTool.Controllers
 
                 case 'r':
                     ModelState.Clear();
-                    model = DB.Classroom.Find(id_classroom);
-                    if (DB.Classroom.Count(c => c.number == model.number) > 0)
+                    model = DB.Teacher_load.Find(id_teacher_load);
+                    if (DB.Teacher_load.Count(tl => tl.id_teacher == model.id_teacher && tl.id_subject == model.id_subject) > 0)
                     {
                         try
                         {
-                            DB.Classroom.Remove(DB.Classroom.Find(id_classroom));
+                            DB.Teacher_load.Remove(DB.Teacher_load.Find(id_teacher_load));
                             DB.SaveChanges();
                         }
                         catch (Exception ex)
@@ -136,37 +135,39 @@ namespace LectureSchedulingTool.Controllers
 
             try
             {
-                IQueryable<Classroom> Iclassrooms;
+                IQueryable<Teacher_load> Iteacher_loads;
 
                 int elements_on_page = Int32.Parse(ConfigurationManager.AppSettings["ElementsOnPage"]);
-                if (DB.Classroom.Count() <= elements_on_page)
+                if (DB.Teacher_load.Count() <= elements_on_page)
                 {
                     ViewBag.pages = 1;
-                    Iclassrooms = DB.Classroom;
+                    Iteacher_loads = DB.Teacher_load;
                 }
                 else
                 {
-                    int pages = (DB.Classroom.Count() / elements_on_page) + 1;
+                    int pages = (DB.Teacher_load.Count() / elements_on_page) + 1;
 
                     ViewBag.elements_on_page = elements_on_page;
                     ViewBag.page = page;
                     ViewBag.pages = pages;
 
                     if (page == 1)
-                        Iclassrooms = DB.Classroom.Take(elements_on_page);
+                        Iteacher_loads = DB.Teacher_load.Take(elements_on_page);
                     else
                     {
                         if (page == pages)
-                            Iclassrooms = DB.Classroom.OrderBy(c => c.id_classroom).Skip(elements_on_page * (page - 1));
+                            Iteacher_loads = DB.Teacher_load.OrderBy(t => t.id_teacher_load).Skip(elements_on_page * (page - 1));
                         else
-                            Iclassrooms = DB.Classroom.OrderBy(c => c.id_classroom).Skip(elements_on_page * (page - 1)).Take(elements_on_page);
+                            Iteacher_loads = DB.Teacher_load.OrderBy(t => t.id_teacher_load).Skip(elements_on_page * (page - 1)).Take(elements_on_page);
                     }
                 }
 
-                ViewBag.classrooms = Iclassrooms.ToList();
+                ViewBag.teacher_loads = Iteacher_loads.ToList();
                 if (action == 'a' || action == 'e')
                 {
-                    ViewBag.departments = DB.Department.ToList();
+                    ViewBag.teachers = DB.Teacher.ToList();
+                    ViewBag.subjects = DB.Subject.ToList();
+                    ViewBag.departments = GetSafeDepartmentsForTLoads().ToList();
                     ViewBag.faculties = GetSafeFaculties().ToList();
                 }
             }

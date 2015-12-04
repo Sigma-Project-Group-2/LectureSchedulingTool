@@ -1,7 +1,7 @@
 ﻿@using LectureSchedulingTool.Models;
 @model Students_group
 
-<h2>Группы</h2>
+<h2>Нагрузка групп</h2>
 <hr />
 
 @(Html.ValidationSummary("", new { @class = "text-danger" }))
@@ -20,26 +20,21 @@
         @{
             string action = ViewBag.action != null ? ViewBag.action.ToString() : "0";
             int edit_row = ViewBag.row != null ? ViewBag.row : -1;
-            int elements_on_page = ViewBag.elements_on_page != null ? ViewBag.elements_on_page : 25;
+            int elements_on_page = ViewBag.elements_on_page != null ? ViewBag.elements_on_page : 10;
             int page = ViewBag.page != null ? ViewBag.page : 1;
             int pages = ViewBag.pages != null ? ViewBag.pages : 1;
-
-            List<Faculty> faculties = ViewBag.faculties != null ? ViewBag.faculties : null;
-            List<Department> departments = ViewBag.departments != null ? ViewBag.departments : null;
-            List<Students_group> students_groups = ViewBag.students_groups != null ? ViewBag.students_groups : null;
 
             IEnumerable<SelectListItem> Ifaculties;
             IEnumerable<SelectListItem> Idepartments;
 
+            List<Students_group> students_groups = ViewBag.students_groups != null ? ViewBag.students_groups : null;
+
             for (int i = 0; i < students_groups.Count; i++)
             {
-                Faculty faculty = students_groups[i].GetFaculty();
-                Department department = students_groups[i].GetDepartment();
-
                 if (action == "e" && edit_row == i)
                 {
-                    Ifaculties = faculties.Select(f => new SelectListItem() { Value = f.id_faculty.ToString(), Text = f.ToString() });
-                    Idepartments = departments.Select(d => new SelectListItem() { Value = d.id_department.ToString(), Text = d.ToString() });
+                    Ifaculties = (ViewBag.faculties as List<Faculty>).Select(f => new SelectListItem() { Value = f.id_faculty.ToString(), Text = f.ToString() });
+                    Idepartments = (ViewBag.departments as List<Department>).Select(d => new SelectListItem() { Value = d.id_department.ToString(), Text = d.ToString() });
 
                     using (Html.BeginForm("Students_group", "Scheduling"))
                     {
@@ -59,6 +54,9 @@
                 }
                 else
                 {
+                    Faculty faculty = students_groups[i].GetFaculty();
+                    Department department = students_groups[i].GetDepartment();
+
                     using (Html.BeginForm("Students_group", "Scheduling"))
                     {
                         <tr>
@@ -86,8 +84,8 @@
             }
             if (action == "a")
             {
-                Ifaculties = faculties.Select(f => new SelectListItem() { Value = f.id_faculty.ToString(), Text = f.ToString() });
-                Idepartments = departments.Select(d => new SelectListItem() { Value = d.id_department.ToString(), Text = d.ToString() });
+                Ifaculties = (ViewBag.faculties as List<Faculty>).Select(f => new SelectListItem() { Value = f.id_faculty.ToString(), Text = f.ToString() });
+                Idepartments = (ViewBag.departments as List<Department>).Select(d => new SelectListItem() { Value = d.id_department.ToString(), Text = d.ToString() });
 
                 using (Html.BeginForm("Students_group", "Scheduling"))
                 {

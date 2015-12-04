@@ -145,7 +145,7 @@ namespace LectureSchedulingTool.Controllers
                 if (DB.Teacher.Count() <= elements_on_page)
                 {
                     ViewBag.pages = 1;
-                    Iteachers = DB.Teacher.Take(DB.Teacher.Count());
+                    Iteachers = DB.Teacher;
                 }
                 else
                 {
@@ -171,12 +171,6 @@ namespace LectureSchedulingTool.Controllers
                 {
                     ViewBag.departments = DB.Department.ToList();
                     ViewBag.faculties = GetSafeFaculties().ToList();
-                }
-                else
-                {
-                    var departments = GetOnlyNeedsDepartments(Iteachers);
-                    ViewBag.departments = departments.ToList();
-                    ViewBag.faculties = GetOnlyNeedsFaculties(departments).ToList();
                 }
             }
             catch (Exception ex)

@@ -19,12 +19,10 @@
         @{
             string action = ViewBag.action != null ? ViewBag.action.ToString() : "0";
             int edit_row = ViewBag.row != null ? ViewBag.row : -1;
-            int elements_on_page = ViewBag.elements_on_page != null ? ViewBag.elements_on_page : 25;
+            int elements_on_page = ViewBag.elements_on_page != null ? ViewBag.elements_on_page : 10;
             int page = ViewBag.page != null ? ViewBag.page : 1;
             int pages = ViewBag.pages != null ? ViewBag.pages : 1;
 
-            List<Students_group> students_groups = ViewBag.students_groups != null ? ViewBag.students_groups : null;
-            List<Subject> subjects = ViewBag.subjects != null ? ViewBag.subjects : null;
             List<Students_group_load> students_group_loads = ViewBag.students_group_loads != null ? ViewBag.students_group_loads : null;
 
             IEnumerable<SelectListItem> Istudents_groups;
@@ -32,13 +30,10 @@
 
             for (int i = 0; i < students_group_loads.Count; i++)
             {
-                Students_group students_group = students_group_loads[i].GetStudentsGroup();
-                Subject subject = students_group_loads[i].GetSubject();
-
                 if (action == "e" && edit_row == i)
                 {
-                    Istudents_groups = students_groups.Select(sg => new SelectListItem() { Value = sg.id_students_group.ToString(), Text = sg.name });
-                    Isubjects = subjects.Select(s => new SelectListItem() { Value = s.id_subject.ToString(), Text = s.ToString() });
+                    Istudents_groups = (ViewBag.students_groups as List<Students_group>).Select(sg => new SelectListItem() { Value = sg.id_students_group.ToString(), Text = sg.ToString() });
+                    Isubjects = (ViewBag.subjects as List<Subject>).Select(s => new SelectListItem() { Value = s.id_subject.ToString(), Text = s.ToString() });
 
                     using (Html.BeginForm("Students_group_load", "Scheduling"))
                     {
@@ -57,6 +52,9 @@
                 }
                 else
                 {
+                    Students_group students_group = students_group_loads[i].GetStudentsGroup();
+                    Subject subject = students_group_loads[i].GetSubject();
+
                     using (Html.BeginForm("Students_group_load", "Scheduling"))
                     {
                         <tr>
@@ -83,8 +81,8 @@
             }
             if (action == "a")
             {
-                Istudents_groups = students_groups.Select(sg => new SelectListItem() { Value = sg.id_students_group.ToString(), Text = sg.name });
-                Isubjects = subjects.Select(s => new SelectListItem() { Value = s.id_subject.ToString(), Text = s.ToString() });
+                Istudents_groups = (ViewBag.students_groups as List<Students_group>).Select(sg => new SelectListItem() { Value = sg.id_students_group.ToString(), Text = sg.ToString() });
+                Isubjects = (ViewBag.subjects as List<Subject>).Select(s => new SelectListItem() { Value = s.id_subject.ToString(), Text = s.ToString() });
 
                 using (Html.BeginForm("Students_group_load", "Scheduling"))
                 {
@@ -151,5 +149,3 @@
 }
 
 <script src="~/Scripts/Scheduling/scheduling_remove_alert.js"></script>
-<script src="~/Scripts/Scheduling/scheduling_department_dynamic.js"></script>
-<input name="department_list_getter" id="department_list_getter" type="hidden" value="@Url.Action("GetDepartments", "Scheduling")" />

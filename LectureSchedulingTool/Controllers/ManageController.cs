@@ -54,11 +54,16 @@ namespace LectureSchedulingTool.Controllers
 
         public ActionResult Index(IndexViewModel model)
         {
+            if (model.HaveDataInTables == true)
+                ModelState.AddModelError("-1", "Часть полей ввода заблокированна, так как есть данные в таблицах. Удалите все данные, в случае, если вам нужно редактировать одно из заблокированных полей.");
+
             if (ModelState.IsValid)
             {
+                ConfigurationManager.AppSettings["WeeksCount"] = model.WeeksCount.ToString();
+                ConfigurationManager.AppSettings["WeeksAmount"] = model.WeeksAmount.ToString();
                 ConfigurationManager.AppSettings["LessonsCount"] = model.LessonsCount.ToString();
+                ConfigurationManager.AppSettings["LessonsAmount"] = model.LessonsAmount.ToString();
                 ConfigurationManager.AppSettings["ElementsOnPage"] = model.ElementsOnPage.ToString();
-                ConfigurationManager.AppSettings["WeeksAmount"] = model.ElementsOnPage.ToString();
             }
 
             return View(model);

@@ -2,11 +2,9 @@
 @model IndexViewModel
 
 <h2>Настройки</h2>
-<h4>Настройки системы генерации расписания и Вашего аккаунта</h4>
 <hr />
+
 @(Html.ValidationSummary("", new { @class = "text-danger" }))
-
-
 
 <div>
     @using (Html.BeginForm("Index", "Manage"))
@@ -17,29 +15,56 @@
                 [@(Html.ActionLink("изменить Ваш пароль", "ChangePassword"))]
             </dd>
         </dl>
-        @*
-            <dl class="dl-horizontal">
-                <dt>Кол-во недель:</dt>
-                <dd>
-                    @{
-                        IEnumerable<SelectListItem> Iweeks_count = ViewBag.Iweeks_count;
-
-                        Html.DropDownListFor(m => m.WeeksCount, Iweeks_count, new { @class = "form-control" });
-                        Html.DropDownList("123", Iweeks_count);
-                    }
-                </dd>
-            </dl>
-        *@
+        <dl class="dl-horizontal">
+            <dt>Кол-во недель:</dt>
+            <dd>
+                @if (Model.HaveDataInTables == true)
+                {
+                    @(Html.TextBoxFor(m => m.WeeksCount, new { @class = "form-control", disabled = "disabled" }))
+                }
+                else
+                {
+                    @(Html.TextBoxFor(m => m.WeeksCount, new { @class = "form-control" }))
+                }
+            </dd>
+        </dl>
         <dl class="dl-horizontal">
             <dt>Кол-во учебных недель:</dt>
             <dd>
-                @(Html.TextBoxFor(m => m.WeeksAmount, new { @class = "form-control" }))
+                @if (Model.HaveDataInTables == true)
+                {
+                    @(Html.TextBoxFor(m => m.WeeksAmount, new { @class = "form-control", disabled = "disabled" }))
+                }
+                else
+                {
+                    @(Html.TextBoxFor(m => m.WeeksAmount, new { @class = "form-control" }))
+                }
             </dd>
         </dl>
         <dl class="dl-horizontal">
             <dt>Кол-во занятий в день:</dt>
             <dd>
-                @(Html.TextBoxFor(m => m.LessonsCount, new { @class = "form-control" }))
+                @if (Model.HaveDataInTables == true)
+                {
+                    @(Html.TextBoxFor(m => m.LessonsCount, new { @class = "form-control", disabled = "disabled" }))
+                }
+                else
+                {
+                    @(Html.TextBoxFor(m => m.LessonsCount, new { @class = "form-control" }))
+                }
+            </dd>
+        </dl>
+        <dl class="dl-horizontal">
+            <dt>Кол-во часов в одном занятии:</dt>
+            <dd>
+                @if (Model.HaveDataInTables == true)
+                {
+                    @(Html.TextBoxFor(m => m.LessonsAmount, new { @class = "form-control", disabled = "disabled" }))
+                }
+                else
+                {
+                    @(Html.TextBoxFor(m => m.LessonsAmount, new { @class = "form-control" }))
+                }
             </dd>
         </dl>
         <dl class="dl-horizontal">

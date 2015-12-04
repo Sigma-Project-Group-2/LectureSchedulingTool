@@ -19,22 +19,19 @@
         @{
             string action = ViewBag.action != null ? ViewBag.action.ToString() : "0";
             int edit_row = ViewBag.row != null ? ViewBag.row : -1;
-            int elements_on_page = ViewBag.elements_on_page != null ? ViewBag.elements_on_page : 25;
+            int elements_on_page = ViewBag.elements_on_page != null ? ViewBag.elements_on_page : 10;
             int page = ViewBag.page != null ? ViewBag.page : 1;
             int pages = ViewBag.pages != null ? ViewBag.pages : 1;
 
-            List<Faculty> faculties = ViewBag.faculties != null ? ViewBag.faculties : null;
             List<Department> departments = ViewBag.departments != null ? ViewBag.departments : null;
 
             IEnumerable<SelectListItem> Ifaculties;
 
             for (int i = 0; i < departments.Count; i++)
             {
-                Faculty faculty = departments[i].GetFaculty();
-
                 if (action == "e" && edit_row == i)
                 {
-                    Ifaculties = faculties.Select(f => new SelectListItem() { Value = f.id_faculty.ToString(), Text = f.ToString() });
+                    Ifaculties = (ViewBag.faculties as List<Faculty>).Select(f => new SelectListItem() { Value = f.id_faculty.ToString(), Text = f.ToString() });
 
                     using (Html.BeginForm("Department", "Scheduling"))
                     {
@@ -53,6 +50,8 @@
                 }
                 else
                 {
+                    Faculty faculty = departments[i].GetFaculty();
+
                     using (Html.BeginForm("Department", "Scheduling"))
                     {
                         <tr>
@@ -79,7 +78,7 @@
             }
             if (action == "a")
             {
-                Ifaculties = faculties.Select(f => new SelectListItem() { Value = f.id_faculty.ToString(), Text = f.ToString() });
+                Ifaculties = (ViewBag.faculties as List<Faculty>).Select(f => new SelectListItem() { Value = f.id_faculty.ToString(), Text = f.ToString() });
 
                 using (Html.BeginForm("Department", "Scheduling"))
                 {
