@@ -1,5 +1,5 @@
 ﻿@using LectureSchedulingTool.Models;
-@model Students_group_load
+@model SVM.Students_group_load
 
 <h2>Предметы</h2>
 <hr />
@@ -23,7 +23,7 @@
             int page = ViewBag.page != null ? ViewBag.page : 1;
             int pages = ViewBag.pages != null ? ViewBag.pages : 1;
 
-            List<Students_group_load> students_group_loads = ViewBag.students_group_loads != null ? ViewBag.students_group_loads : null;
+            List<SVM.Students_group_load> students_group_loads = ViewBag.students_group_loads != null ? ViewBag.students_group_loads : null;
 
             IEnumerable<SelectListItem> Istudents_groups;
             IEnumerable<SelectListItem> Isubjects;
@@ -32,8 +32,8 @@
             {
                 if (action == "e" && edit_row == i)
                 {
-                    Istudents_groups = (ViewBag.students_groups as List<Students_group>).Select(sg => new SelectListItem() { Value = sg.id_students_group.ToString(), Text = sg.ToString() });
-                    Isubjects = (ViewBag.subjects as List<Subject>).Select(s => new SelectListItem() { Value = s.id_subject.ToString(), Text = s.ToString() });
+                    Istudents_groups = (ViewBag.students_groups as List<SVM.Students_group>).Select(sg => new SelectListItem() { Value = sg.id_students_group.ToString(), Text = sg.ToString() });
+                    Isubjects = (ViewBag.subjects as List<SVM.Subject>).Select(s => new SelectListItem() { Value = s.id_subject.ToString(), Text = s.ToString() });
 
                     using (Html.BeginForm("Students_group_load", "Scheduling"))
                     {
@@ -52,8 +52,8 @@
                 }
                 else
                 {
-                    Students_group students_group = students_group_loads[i].GetStudentsGroup();
-                    Subject subject = students_group_loads[i].GetSubject();
+                    SVM.Students_group students_group = students_group_loads[i].GetStudentsGroup();
+                    SVM.Subject subject = students_group_loads[i].GetSubject();
 
                     using (Html.BeginForm("Students_group_load", "Scheduling"))
                     {
@@ -81,8 +81,8 @@
             }
             if (action == "a")
             {
-                Istudents_groups = (ViewBag.students_groups as List<Students_group>).Select(sg => new SelectListItem() { Value = sg.id_students_group.ToString(), Text = sg.ToString() });
-                Isubjects = (ViewBag.subjects as List<Subject>).Select(s => new SelectListItem() { Value = s.id_subject.ToString(), Text = s.ToString() });
+                Istudents_groups = (ViewBag.students_groups as List<SVM.Students_group>).Select(sg => new SelectListItem() { Value = sg.id_students_group.ToString(), Text = sg.ToString() });
+                Isubjects = (ViewBag.subjects as List<SVM.Subject>).Select(s => new SelectListItem() { Value = s.id_subject.ToString(), Text = s.ToString() });
 
                 using (Html.BeginForm("Students_group_load", "Scheduling"))
                 {

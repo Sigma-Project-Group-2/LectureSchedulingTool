@@ -1,12 +1,12 @@
 ﻿@using LectureSchedulingTool.Models
 
 @{
-    List<Department> departments = ViewBag.departments;
+    List<SVM.Department> departments = ViewBag.departments;
 
     for (int i = 0; i < departments.Count; i++)
     {
         <option value="@departments[i].id_department">
-            @departments[i].abbreviation (@departments[i].name)
+            @(departments[i].ToString())
         </option>
     }
 }

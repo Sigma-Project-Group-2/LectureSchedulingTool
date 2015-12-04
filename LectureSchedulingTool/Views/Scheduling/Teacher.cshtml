@@ -1,5 +1,5 @@
 ﻿@using LectureSchedulingTool.Models;
-@model Teacher
+@model SVM.Teacher
 
 <h2>Преподаватели</h2>
 <hr />
@@ -27,9 +27,9 @@
             int page = ViewBag.page != null ? ViewBag.page : 1;
             int pages = ViewBag.pages != null ? ViewBag.pages : 1;
 
-            List<Faculty> faculties = ViewBag.faculties != null ? ViewBag.faculties : null;
-            List<Department> departments = ViewBag.departments != null ? ViewBag.departments : null;
-            List<Teacher> teachers = ViewBag.teachers != null ? ViewBag.teachers : null;
+            List<SVM.Faculty> faculties = ViewBag.faculties != null ? ViewBag.faculties : null;
+            List<SVM.Department> departments = ViewBag.departments != null ? ViewBag.departments : null;
+            List<SVM.Teacher> teachers = ViewBag.teachers != null ? ViewBag.teachers : null;
 
             IEnumerable<SelectListItem> Ifaculties;
             IEnumerable<SelectListItem> Idepartments;
@@ -38,8 +38,8 @@
             {
                 if (action == "e" && edit_row == i)
                 {
-                    Ifaculties = (ViewBag.faculties as List<Faculty>).Select(f => new SelectListItem() { Value = f.id_faculty.ToString(), Text = f.ToString() });
-                    Idepartments = (ViewBag.departments as List<Department>).Select(d => new SelectListItem() { Value = d.id_department.ToString(), Text = d.ToString() });
+                    Ifaculties = (ViewBag.faculties as List<SVM.Faculty>).Select(f => new SelectListItem() { Value = f.id_faculty.ToString(), Text = f.ToString() });
+                    Idepartments = (ViewBag.departments as List<SVM.Department>).Select(d => new SelectListItem() { Value = d.id_department.ToString(), Text = d.ToString() });
 
                     using (Html.BeginForm("Teacher", "Scheduling"))
                     {
@@ -62,8 +62,8 @@
                 }
                 else
                 {
-                    Faculty faculty = teachers[i].GetFaculty();
-                    Department department = teachers[i].GetDepartment();
+                    SVM.Faculty faculty = teachers[i].GetFaculty();
+                    SVM.Department department = teachers[i].GetDepartment();
 
                     using (Html.BeginForm("Teacher", "Scheduling"))
                     {
@@ -95,8 +95,8 @@
             }
             if (action == "a")
             {
-                Ifaculties = (ViewBag.faculties as List<Faculty>).Select(f => new SelectListItem() { Value = f.id_faculty.ToString(), Text = f.ToString() });
-                Idepartments = (ViewBag.departments as List<Department>).Select(d => new SelectListItem() { Value = d.id_department.ToString(), Text = d.ToString() });
+                Ifaculties = (ViewBag.faculties as List<SVM.Faculty>).Select(f => new SelectListItem() { Value = f.id_faculty.ToString(), Text = f.ToString() });
+                Idepartments = (ViewBag.departments as List<SVM.Department>).Select(d => new SelectListItem() { Value = d.id_department.ToString(), Text = d.ToString() });
 
                 using (Html.BeginForm("Teacher", "Scheduling"))
                 {

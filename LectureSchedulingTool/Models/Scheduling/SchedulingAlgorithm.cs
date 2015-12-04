@@ -7,7 +7,7 @@ namespace LectureSchedulingTool.Models
 {
     public class SchedulingAlgorithm
     {
-        private SchedulingContext DB = new SchedulingContext();
+        private static SchedulingContext DB = new SchedulingContext();
 
         public void Generate()
         {
@@ -104,10 +104,10 @@ namespace LectureSchedulingTool.Models
             }
         }
 
-        private List<Lesson> GetEmptyLessons(int id_faculty, bool for_internal_groups)
+        private List<SVM.Lesson> GetEmptyLessons(int id_faculty, bool for_internal_groups)
         {
-            List<Students_group_load> sgl = DB.Students_group_load.ToList();
-            List<Lesson> lessons = new List<Lesson>();
+            List<SVM.Students_group_load> sgl = DB.Students_group_load.ToList();
+            List<SVM.Lesson> lessons = new List<SVM.Lesson>();
 
             int weeks_amount = Int32.Parse(ConfigurationManager.AppSettings["WeeksAmount"]);
             int weeks_count = Int32.Parse(ConfigurationManager.AppSettings["WeeksCount"]);
@@ -119,12 +119,12 @@ namespace LectureSchedulingTool.Models
             {
                 if (sgl[i].hours / min_hours == 1)
                 {
-                    lessons.Add(new Lesson { id_students_group_load = sgl[i].id_students_group_load });
+                    lessons.Add(new SVM.Lesson { id_students_group_load = sgl[i].id_students_group_load });
                     sgl.Remove(sgl[i]);
                 }
                 else
                 {
-                    lessons.Add(new Lesson { id_students_group_load = sgl[i].id_students_group_load });
+                    lessons.Add(new SVM.Lesson { id_students_group_load = sgl[i].id_students_group_load });
                     sgl[i].hours -= min_hours;
                 }
             }

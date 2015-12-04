@@ -9,7 +9,7 @@ namespace LectureSchedulingTool.Controllers
     public partial class SchedulingController : Controller
     {
         [Authorize]
-        public ActionResult Classroom(Classroom model, int page = 1, char action = '0', int row = -1, int id_classroom = -1)
+        public ActionResult Classroom(SVM.Classroom model, int page = 1, char action = '0', int row = -1, int id_classroom = -1)
         {
             switch (action)
             {
@@ -19,7 +19,7 @@ namespace LectureSchedulingTool.Controllers
                     ViewBag.action = action;
                     ViewBag.row = row;
 
-                    model = new Classroom();
+                    model = new SVM.Classroom();
                     break;
 
                 case 's':
@@ -136,7 +136,7 @@ namespace LectureSchedulingTool.Controllers
 
             try
             {
-                IQueryable<Classroom> Iclassrooms;
+                IQueryable<SVM.Classroom> Iclassrooms;
 
                 int elements_on_page = Int32.Parse(ConfigurationManager.AppSettings["ElementsOnPage"]);
                 if (DB.Classroom.Count() <= elements_on_page)

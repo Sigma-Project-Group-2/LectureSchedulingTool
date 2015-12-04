@@ -1,5 +1,5 @@
 ﻿@using LectureSchedulingTool.Models;
-@model Department
+@model SVM.Department
 
 <h2>Кафедры</h2>
 <hr />
@@ -23,7 +23,7 @@
             int page = ViewBag.page != null ? ViewBag.page : 1;
             int pages = ViewBag.pages != null ? ViewBag.pages : 1;
 
-            List<Department> departments = ViewBag.departments != null ? ViewBag.departments : null;
+            List<SVM.Department> departments = ViewBag.departments != null ? ViewBag.departments : null;
 
             IEnumerable<SelectListItem> Ifaculties;
 
@@ -31,7 +31,7 @@
             {
                 if (action == "e" && edit_row == i)
                 {
-                    Ifaculties = (ViewBag.faculties as List<Faculty>).Select(f => new SelectListItem() { Value = f.id_faculty.ToString(), Text = f.ToString() });
+                    Ifaculties = (ViewBag.faculties as List<SVM.Faculty>).Select(f => new SelectListItem() { Value = f.id_faculty.ToString(), Text = f.ToString() });
 
                     using (Html.BeginForm("Department", "Scheduling"))
                     {
@@ -50,7 +50,7 @@
                 }
                 else
                 {
-                    Faculty faculty = departments[i].GetFaculty();
+                    SVM.Faculty faculty = departments[i].GetFaculty();
 
                     using (Html.BeginForm("Department", "Scheduling"))
                     {
@@ -78,7 +78,7 @@
             }
             if (action == "a")
             {
-                Ifaculties = (ViewBag.faculties as List<Faculty>).Select(f => new SelectListItem() { Value = f.id_faculty.ToString(), Text = f.ToString() });
+                Ifaculties = (ViewBag.faculties as List<SVM.Faculty>).Select(f => new SelectListItem() { Value = f.id_faculty.ToString(), Text = f.ToString() });
 
                 using (Html.BeginForm("Department", "Scheduling"))
                 {

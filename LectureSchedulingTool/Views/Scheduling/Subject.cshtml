@@ -1,5 +1,5 @@
 ﻿@using LectureSchedulingTool.Models;
-@model Subject
+@model SVM.Subject
 
 <h2>Предметы</h2>
 <hr />
@@ -33,8 +33,8 @@
             {
                 if (action == "e" && edit_row == i)
                 {
-                    Ifaculties = (ViewBag.faculties as List<Faculty>).Select(f => new SelectListItem() { Value = f.id_faculty.ToString(), Text = f.ToString() });
-                    Idepartments = (ViewBag.departments as List<Department>).Select(d => new SelectListItem() { Value = d.id_department.ToString(), Text = d.ToString() });
+                    Ifaculties = (ViewBag.faculties as List<SVM.Faculty>).Select(f => new SelectListItem() { Value = f.id_faculty.ToString(), Text = f.ToString() });
+                    Idepartments = (ViewBag.departments as List<SVM.Department>).Select(d => new SelectListItem() { Value = d.id_department.ToString(), Text = d.ToString() });
 
                     using (Html.BeginForm("Subject", "Scheduling"))
                     {
@@ -54,8 +54,8 @@
                 }
                 else
                 {
-                    Faculty faculty = subjects[i].GetFaculty();
-                    Department department = subjects[i].GetDepartment();
+                    SVM.Faculty faculty = subjects[i].GetFaculty();
+                    SVM.Department department = subjects[i].GetDepartment();
 
                     using (Html.BeginForm("Subject", "Scheduling"))
                     {
@@ -84,8 +84,8 @@
             }
             if (action == "a")
             {
-                Ifaculties = (ViewBag.faculties as List<Faculty>).Select(f => new SelectListItem() { Value = f.id_faculty.ToString(), Text = f.ToString() });
-                Idepartments = (ViewBag.departments as List<Department>).Select(d => new SelectListItem() { Value = d.id_department.ToString(), Text = d.ToString() });
+                Ifaculties = (ViewBag.faculties as List<SVM.Faculty>).Select(f => new SelectListItem() { Value = f.id_faculty.ToString(), Text = f.ToString() });
+                Idepartments = (ViewBag.departments as List<SVM.Department>).Select(d => new SelectListItem() { Value = d.id_department.ToString(), Text = d.ToString() });
 
                 using (Html.BeginForm("Subject", "Scheduling"))
                 {

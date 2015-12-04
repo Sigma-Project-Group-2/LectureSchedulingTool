@@ -1,5 +1,5 @@
 ﻿@using LectureSchedulingTool.Models;
-@model Teacher_load
+@model SVM.Teacher_load
 
 <h2>Нагрузка преподавателей</h2>
 <hr />
@@ -24,7 +24,7 @@
             int page = ViewBag.page != null ? ViewBag.page : 1;
             int pages = ViewBag.pages != null ? ViewBag.pages : 1;
             
-            List<Teacher_load> teacher_loads = ViewBag.teacher_loads != null ? ViewBag.teacher_loads : null;
+            List<SVM.Teacher_load> teacher_loads = ViewBag.teacher_loads != null ? ViewBag.teacher_loads : null;
 
             IEnumerable<SelectListItem> Ifaculties;
             IEnumerable<SelectListItem> Idepartments;
@@ -35,10 +35,10 @@
             {
                 if (action == "e" && edit_row == i)
                 {
-                    Ifaculties = (ViewBag.faculties as List<Faculty>).Select(f => new SelectListItem() { Value = f.id_faculty.ToString(), Text = f.ToString() });
-                    Idepartments = (ViewBag.departments as List<Department>).Select(d => new SelectListItem() { Value = d.id_department.ToString(), Text = d.ToString() });
-                    Iteachers = (ViewBag.teachers as List<Teacher>).Select(t => new SelectListItem() { Value = t.id_teacher.ToString(), Text = t.ToString() });
-                    Isubjects = (ViewBag.subjects as List<Subject>).Select(s => new SelectListItem() { Value = s.id_subject.ToString(), Text = s.ToString() });
+                    Ifaculties = (ViewBag.faculties as List<SVM.Faculty>).Select(f => new SelectListItem() { Value = f.id_faculty.ToString(), Text = f.ToString() });
+                    Idepartments = (ViewBag.departments as List<SVM.Department>).Select(d => new SelectListItem() { Value = d.id_department.ToString(), Text = d.ToString() });
+                    Iteachers = (ViewBag.teachers as List<SVM.Teacher>).Select(t => new SelectListItem() { Value = t.id_teacher.ToString(), Text = t.ToString() });
+                    Isubjects = (ViewBag.subjects as List<SVM.Subject>).Select(s => new SelectListItem() { Value = s.id_subject.ToString(), Text = s.ToString() });
 
                     using (Html.BeginForm("Teacher_load", "Scheduling"))
                     {
@@ -58,10 +58,10 @@
                 }
                 else
                 {
-                    Faculty faculty = teacher_loads[i].GetFaculty();
-                    Department department = teacher_loads[i].GetDepartment();
-                    Teacher teacher = teacher_loads[i].GetTeacher();
-                    Subject subject = teacher_loads[i].GetSubject();
+                    SVM.Faculty faculty = teacher_loads[i].GetFaculty();
+                    SVM.Department department = teacher_loads[i].GetDepartment();
+                    SVM.Teacher teacher = teacher_loads[i].GetTeacher();
+                    SVM.Subject subject = teacher_loads[i].GetSubject();
 
                     using (Html.BeginForm("Teacher_load", "Scheduling"))
                     {
@@ -90,10 +90,10 @@
             }
             if (action == "a")
             {
-                Ifaculties = (ViewBag.faculties as List<Faculty>).Select(f => new SelectListItem() { Value = f.id_faculty.ToString(), Text = f.ToString() });
-                Idepartments = (ViewBag.departments as List<Department>).Select(d => new SelectListItem() { Value = d.id_department.ToString(), Text = d.ToString() });
-                Iteachers = (ViewBag.teachers as List<Teacher>).Select(t => new SelectListItem() { Value = t.id_teacher.ToString(), Text = t.ToString() });
-                Isubjects = (ViewBag.subjects as List<Subject>).Select(s => new SelectListItem() { Value = s.id_subject.ToString(), Text = s.ToString() });
+                Ifaculties = (ViewBag.faculties as List<SVM.Faculty>).Select(f => new SelectListItem() { Value = f.id_faculty.ToString(), Text = f.ToString() });
+                Idepartments = (ViewBag.departments as List<SVM.Department>).Select(d => new SelectListItem() { Value = d.id_department.ToString(), Text = d.ToString() });
+                Iteachers = (ViewBag.teachers as List<SVM.Teacher>).Select(t => new SelectListItem() { Value = t.id_teacher.ToString(), Text = t.ToString() });
+                Isubjects = (ViewBag.subjects as List<SVM.Subject>).Select(s => new SelectListItem() { Value = s.id_subject.ToString(), Text = s.ToString() });
 
                 using (Html.BeginForm("Teacher_load", "Scheduling"))
                 {
