@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using LectureSchedulingTool.Models;
 using System.Configuration;
 
 namespace LectureSchedulingTool.Models
@@ -114,14 +111,18 @@ namespace LectureSchedulingTool.Models
 
             int weeks_amount = Int32.Parse(ConfigurationManager.AppSettings["WeeksAmount"]);
             int weeks_count = Int32.Parse(ConfigurationManager.AppSettings["WeeksCount"]);
-            int min_hours = weeks_amount / 2 / weeks_count;
+            int lesson_amount = Int32.Parse(ConfigurationManager.AppSettings["LessonsAmount"]);
+
+            int min_hours = weeks_amount * 2 / weeks_count;
 
             for (int i = 0; sgl.Count != 0; i++)
             {
-                if (sgl[i].hours < min_hours / 2)
+                if (sgl[i].hours / min_hours == 1)
+                {
+                    lessons.Add(new Lesson { id_students_group_load = sgl[i].id_students_group_load });
                     sgl.Remove(sgl[i]);
-
-                if (sgl[i].hours >= min_hours / 2)
+                }
+                else
                 {
                     lessons.Add(new Lesson { id_students_group_load = sgl[i].id_students_group_load });
                     sgl[i].hours -= min_hours;

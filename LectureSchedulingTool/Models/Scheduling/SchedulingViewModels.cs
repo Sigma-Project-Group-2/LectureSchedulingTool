@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using LectureSchedulingTool.Models.CustomAttributes;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -28,6 +28,11 @@ namespace LectureSchedulingTool.Models
         {
             this.name = name;
             this.abbreviation = abbreviation;
+        }
+
+        public override string ToString()
+        {
+            return abbreviation + " (" + name + ")";
         }
     }
 
@@ -69,6 +74,11 @@ namespace LectureSchedulingTool.Models
             this.name = name;
             this.abbreviation = abbreviation;
             this.id_faculty = id_faculty;
+        }
+
+        public override string ToString()
+        {
+            return abbreviation + " (" + name + ")";
         }
     }
 
@@ -137,6 +147,11 @@ namespace LectureSchedulingTool.Models
             this.name = name;
             this.people_amount = people_amount;
             this.id_department = id_department;
+        }
+
+        public override string ToString()
+        {
+            return name;
         }
     }
 
@@ -221,6 +236,11 @@ namespace LectureSchedulingTool.Models
             this.regalia = regalia;
             this.id_department = id_department;
         }
+
+        public override string ToString()
+        {
+            return surname + " " + name + (patronymic.Length > 0 ? " " + patronymic : "");
+        }
     }
 
     //Модель предмета
@@ -290,6 +310,11 @@ namespace LectureSchedulingTool.Models
             this.type = type;
             this.id_department = id_department;
         }
+
+        public override string ToString()
+        {
+            return name + " (" + type + ")";
+        }
     }
 
     //Модель аудитории
@@ -358,6 +383,11 @@ namespace LectureSchedulingTool.Models
             this.people_capacity = people_capacity;
             this.id_department = id_department;
         }
+
+        public override string ToString()
+        {
+            return number;
+        }
     }
 
     //Модель загрузки группы
@@ -367,6 +397,8 @@ namespace LectureSchedulingTool.Models
         public int id_students_group_load { get; set; }
 
         [Required]
+        [CorrectHours]
+        [Range(1, 10000)]
         public int hours { get; set; }
 
         [Required]

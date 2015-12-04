@@ -25,10 +25,11 @@
             int pages = ViewBag.pages != null ? ViewBag.pages : 1;
 
             List<Faculty> faculties = ViewBag.faculties != null ? ViewBag.faculties : null;
-            IEnumerable<SelectListItem> Ifaculties = faculties.Select(f => new SelectListItem() { Value = f.id_faculty.ToString(), Text = f.abbreviation + " (" + f.name + ")" });
             List<Department> departments = ViewBag.departments != null ? ViewBag.departments : null;
-            IEnumerable<SelectListItem> Idepartments = departments.Select(d => new SelectListItem() { Value = d.id_department.ToString(), Text = d.abbreviation + " (" + d.name + ")" });
             List<Classroom> classrooms = ViewBag.classrooms != null ? ViewBag.classrooms : null;
+
+            IEnumerable<SelectListItem> Ifaculties;
+            IEnumerable<SelectListItem> Idepartments;
 
             for (int i = 0; i < classrooms.Count; i++)
             {
@@ -37,6 +38,9 @@
 
                 if (action == "e" && edit_row == i)
                 {
+                    Ifaculties = faculties.Select(f => new SelectListItem() { Value = f.id_faculty.ToString(), Text = f.ToString() });
+                    Idepartments = departments.Select(d => new SelectListItem() { Value = d.id_department.ToString(), Text = d.ToString() });
+
                     using (Html.BeginForm("Classroom", "Scheduling"))
                     {
                         <tr>
@@ -82,6 +86,9 @@
             }
             if (action == "a")
             {
+                Ifaculties = faculties.Select(f => new SelectListItem() { Value = f.id_faculty.ToString(), Text = f.ToString() });
+                Idepartments = departments.Select(d => new SelectListItem() { Value = d.id_department.ToString(), Text = d.ToString() });
+
                 using (Html.BeginForm("Classroom", "Scheduling"))
                 {
                     <tr>
@@ -91,7 +98,7 @@
                         <td>@(Html.DropDownListFor(m => m.id_department, Idepartments, new { @class = "form-control" }))</td>
                         <td>@(Html.TextBoxFor(m => m.number, new { @class = "form-control" })) </td>
                         <td>@(Html.TextBoxFor(m => m.people_capacity, new { @class = "form-control" })) </td>
-                        <td width="10%"><center><button type="submit" id="save" name="action" value="u" class="btn btn-primary"> Обновить</button></center></td>
+                        <td width="10%"><center><button type="submit" id="save" name="action" value="s" class="btn btn-primary"> Добавить</button></center></td>
                         <td width="9%"><center><button type="submit" id="cancel" name="action" value="0" class="btn btn-warning"> Отменить</button></center></td>
                     </tr>
                 }

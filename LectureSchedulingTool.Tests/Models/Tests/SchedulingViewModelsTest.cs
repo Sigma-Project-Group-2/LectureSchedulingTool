@@ -73,9 +73,8 @@ namespace LectureSchedulingTool.Tests.Models.Tests
             string name = "Informatic";
             string abbreviation = "I";
             int id_fac = 1;
-            int producing = 1;
             //act
-            object result = new Department(name, abbreviation,producing,id_fac);
+            object result = new Department(name, abbreviation,id_fac);
             //assert
             Assert.IsInstanceOfType(result, typeof(Department));
         }
@@ -96,7 +95,7 @@ namespace LectureSchedulingTool.Tests.Models.Tests
             string name = "aaaa";
             string abbr = "123456789100";
             //act
-            Department result = new Department(name, abbr, 1, 1) {id_department=1};
+            Department result = new Department(name, abbr, 1) {id_department=1};
             //assert
             Assert.AreNotEqual(10, result.abbreviation.Length);
         }
@@ -107,7 +106,7 @@ namespace LectureSchedulingTool.Tests.Models.Tests
             string name = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa2";
             string abbr = "aaa";
             //act
-            Department result = new Department(name, abbr, 1, 1) { id_department = 1 };
+            Department result = new Department(name, abbr, 1) { id_department = 1 };
             //assert
             Assert.AreNotEqual(100, result.name.Length);
         }
@@ -128,16 +127,6 @@ namespace LectureSchedulingTool.Tests.Models.Tests
             Department dept = new Department();
             //act
             var result = dept.id_department;
-            //assert
-            Assert.AreNotEqual(-1, result);
-        }
-        [TestMethod]
-        public void DepartmentTest_InvalidDataIdProducing_ShouldAreNotEqual()
-        {
-            //arrange
-            Department dept = new Department();
-            //act
-            var result = dept.is_producing;
             //assert
             Assert.AreNotEqual(-1, result);
         }

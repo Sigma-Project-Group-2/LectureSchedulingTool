@@ -9,7 +9,7 @@ namespace LectureSchedulingTool.Controllers
     public partial class SchedulingController : Controller
     {
         [Authorize]
-        public ActionResult Students_group(Students_group model, int page = 1, char action = '0', int row = -1, int id_students_group = -1)
+        public ActionResult Students_group_load(Students_group_load model, int page = 1, char action = '0', int row = -1, int id_students_group_load = -1)
         {
             switch (action)
             {
@@ -19,14 +19,13 @@ namespace LectureSchedulingTool.Controllers
                     ViewBag.action = action;
                     ViewBag.row = row;
 
-                    model = new Students_group();
+                    model = new Students_group_load();
                     break;
 
                 case 's':
                     if (ModelState.IsValid)
                     {
-
-                        if (DB.Students_group.Count(sg => sg.name == model.name) > 0)
+                        if (DB.Students_group_load.Count(sgl => sgl.id_students_group == model.id_students_group && sgl.id_subject == model.id_subject) > 0)
                         {
                             ViewBag.action = 'a';
                             ViewBag.row = row;
@@ -40,7 +39,7 @@ namespace LectureSchedulingTool.Controllers
 
                             try
                             {
-                                DB.Students_group.Add(model);
+                                DB.Students_group_load.Add(model);
                                 DB.SaveChanges();
                             }
                             catch (Exception ex)
@@ -64,13 +63,13 @@ namespace LectureSchedulingTool.Controllers
                     ViewBag.action = action;
                     ViewBag.row = row;
 
-                    model = DB.Students_group.Find(id_students_group);
+                    model = DB.Students_group_load.Find(id_students_group_load);
                     break;
 
                 case 'u':
                     if (ModelState.IsValid)
                     {
-                        if (DB.Students_group.Count(sg => sg.name == model.name && sg.id_students_group != model.id_students_group) > 0)
+                        if (DB.Students_group_load.Count(sgl => sgl.id_students_group == model.id_students_group && sgl.id_subject == model.id_subject && sgl.id_students_group_load != model.id_students_group_load) > 0)
                         {
                             ViewBag.action = 'e';
                             ViewBag.row = row;
@@ -84,9 +83,9 @@ namespace LectureSchedulingTool.Controllers
 
                             try
                             {
-                                DB.Students_group.Find(id_students_group).name = model.name;
-                                DB.Students_group.Find(id_students_group).people_amount = model.people_amount;
-                                DB.Students_group.Find(id_students_group).id_department = model.id_department;
+                                DB.Students_group_load.Find(id_students_group_load).hours = model.hours;
+                                DB.Students_group_load.Find(id_students_group_load).id_students_group = model.id_students_group;
+                                DB.Students_group_load.Find(id_students_group_load).id_subject = model.id_subject;
                                 DB.SaveChanges();
                             }
                             catch (Exception ex)
@@ -106,12 +105,12 @@ namespace LectureSchedulingTool.Controllers
 
                 case 'r':
                     ModelState.Clear();
-                    model = DB.Students_group.Find(id_students_group);
-                    if (DB.Students_group.Count(sg => sg.name == model.name) > 0)
+                    model = DB.Students_group_load.Find(id_students_group_load);
+                    if (DB.Students_group_load.Count(sgl => sgl.id_students_group == model.id_students_group && sgl.id_subject == model.id_subject) > 0)
                     {
                         try
                         {
-                            DB.Students_group.Remove(DB.Students_group.Find(id_students_group));
+                            DB.Students_group_load.Remove(DB.Students_group_load.Find(id_students_group_load));
                             DB.SaveChanges();
                         }
                         catch (Exception ex)
@@ -137,46 +136,45 @@ namespace LectureSchedulingTool.Controllers
 
             try
             {
-                IQueryable<Students_group> Istudents_groups;
+                IQueryable<Students_group_load> Istudents_group_loads;
 
                 int elements_on_page = Int32.Parse(ConfigurationManager.AppSettings["ElementsOnPage"]);
-                if (DB.Students_group.Count() <= elements_on_page)
+                if (DB.Students_group_load.Count() <= elements_on_page)
                 {
                     ViewBag.pages = 1;
-                    Istudents_groups = DB.Students_group.Take(DB.Students_group.Count());
+                    Istudents_group_loads = DB.Students_group_load.Take(DB.Students_group_load.Count());
                 }
                 else
                 {
-                    int pages = (DB.Students_group.Count() / elements_on_page) + 1;
+                    int pages = (DB.Students_group_load.Count() / elements_on_page) + 1;
 
                     ViewBag.elements_on_page = elements_on_page;
                     ViewBag.page = page;
                     ViewBag.pages = pages;
 
                     if (page == 1)
-                        Istudents_groups = DB.Students_group.Take(elements_on_page);
+                        Istudents_group_loads = DB.Students_group_load.Take(elements_on_page);
                     else
                     {
                         if (page == pages)
-                            Istudents_groups = DB.Students_group.OrderBy(sg => sg.id_students_group).Skip(elements_on_page * (page - 1));
+                            Istudents_group_loads = DB.Students_group_load.OrderBy(t => t.id_students_group_load).Skip(elements_on_page * (page - 1));
                         else
-                            Istudents_groups = DB.Students_group.OrderBy(sg => sg.id_students_group).Skip(elements_on_page * (page - 1)).Take(elements_on_page);
+                            Istudents_group_loads = DB.Students_group_load.OrderBy(t => t.id_students_group_load).Skip(elements_on_page * (page - 1)).Take(elements_on_page);
                     }
                 }
 
-                ViewBag.students_groups = Istudents_groups.ToList();
+                ViewBag.students_group_loads = Istudents_group_loads.ToList();
                 if (action == 'a' || action == 'e')
                 {
-                    ViewBag.departments = DB.Department.ToList();
-                    ViewBag.faculties = GetSafeFaculties().ToList();
+                    ViewBag.students_groups = DB.Students_group.ToList();
+                    ViewBag.subjects = DB.Subject.ToList();
                 }
                 else
                 {
-                    var departments = GetOnlyNeedsDepartments(Istudents_groups);
-                    ViewBag.departments = departments.ToList();
-                    ViewBag.faculties = GetOnlyNeedsFaculties(departments).ToList();
+                    var students_groups = GetOnlyNeedsStudentsGroups(Istudents_group_loads);
+                    ViewBag.students_groups = students_groups.ToList();
+                    ViewBag.subjects = GetOnlyNeedsSubjects(Istudents_group_loads).ToList();
                 }
-
             }
             catch (Exception ex)
             {

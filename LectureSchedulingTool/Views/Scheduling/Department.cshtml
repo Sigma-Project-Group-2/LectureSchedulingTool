@@ -24,8 +24,9 @@
             int pages = ViewBag.pages != null ? ViewBag.pages : 1;
 
             List<Faculty> faculties = ViewBag.faculties != null ? ViewBag.faculties : null;
-            IEnumerable<SelectListItem> Ifaculties = faculties.Select(f => new SelectListItem() { Value = f.id_faculty.ToString(), Text = f.abbreviation + " (" + f.name + ")" });
             List<Department> departments = ViewBag.departments != null ? ViewBag.departments : null;
+
+            IEnumerable<SelectListItem> Ifaculties;
 
             for (int i = 0; i < departments.Count; i++)
             {
@@ -33,6 +34,8 @@
 
                 if (action == "e" && edit_row == i)
                 {
+                    Ifaculties = faculties.Select(f => new SelectListItem() { Value = f.id_faculty.ToString(), Text = f.ToString() });
+
                     using (Html.BeginForm("Department", "Scheduling"))
                     {
                         <tr>
@@ -76,6 +79,8 @@
             }
             if (action == "a")
             {
+                Ifaculties = faculties.Select(f => new SelectListItem() { Value = f.id_faculty.ToString(), Text = f.ToString() });
+
                 using (Html.BeginForm("Department", "Scheduling"))
                 {
                     <tr>

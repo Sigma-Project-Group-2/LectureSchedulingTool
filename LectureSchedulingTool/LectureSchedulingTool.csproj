@@ -176,18 +176,20 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\SchedulingController.cs" />
     <Compile Include="Controllers\SchedulingView\StudentsGroupController.cs" />
+    <Compile Include="Controllers\SchedulingView\StudentsGroupLoadController.cs" />
     <Compile Include="Controllers\SchedulingView\SubjectController.cs" />
     <Compile Include="Controllers\SchedulingView\TeacherController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\CustomAttributes\CorrectHours.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\SchedulingAlgorithm.cs" />
-    <Compile Include="Models\SchedulingContext.cs" />
-    <Compile Include="Models\SchedulingViewModels.cs" />
-    <Compile Include="Models\SecretCodeAttribute.cs" />
+    <Compile Include="Models\Scheduling\SchedulingAlgorithm.cs" />
+    <Compile Include="Models\Scheduling\SchedulingContext.cs" />
+    <Compile Include="Models\Scheduling\SchedulingViewModels.cs" />
+    <Compile Include="Models\CustomAttributes\SecretCodeAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -254,6 +256,7 @@
     <Content Include="Views\Scheduling\Students_group_load.cshtml" />
     <Content Include="Views\Scheduling\Teacher_load.cshtml" />
     <Content Include="Views\Scheduling\GetDepartments.cshtml" />
+    <Content Include="Views\Scheduling\Students_group_load - Copy.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

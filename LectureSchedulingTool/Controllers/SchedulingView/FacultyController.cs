@@ -52,7 +52,7 @@ namespace LectureSchedulingTool.Controllers
                     }
                     else
                     {
-                        ViewBag.action = 'e';
+                        ViewBag.action = 'a';
                         ViewBag.row = row;
                     }
                     break;

@@ -52,7 +52,7 @@ namespace LectureSchedulingTool.Controllers
                     }
                     else
                     {
-                        ViewBag.action = 'e';
+                        ViewBag.action = 'a';
                         ViewBag.row = row;
                     }
                     break;
@@ -69,7 +69,7 @@ namespace LectureSchedulingTool.Controllers
                 case 'u':
                     if (ModelState.IsValid)
                     {
-                        if (DB.Teacher.Count(t => t.surname == model.surname && t.name == model.name && t.patronymic == model.patronymic && t.id_department != model.id_department) > 0)
+                        if (DB.Teacher.Count(t => t.surname == model.surname && t.name == model.name && t.patronymic == model.patronymic && t.id_teacher != model.id_teacher) > 0)
                         {
                             ViewBag.action = 'e';
                             ViewBag.row = row;

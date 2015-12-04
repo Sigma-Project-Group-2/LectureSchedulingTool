@@ -11,97 +11,6 @@ namespace LectureSchedulingTool.Controllers
         //База данных
         private SchedulingContext DB = new SchedulingContext();
         
-        //Контроллер загрузки групп
-        public ActionResult Students_group_load(char action = '0', int row = -1, int id_students_group_load = -1)
-        {
-            ViewBag.row = -1;
-            ViewBag.action = '0';
-
-            switch (action)
-            {
-                //Добавление нового элемента
-                case 'a':
-                    ViewBag.action = 'a';
-                    break;
-                //Сохранение нового элемента
-                case 's':
-                    int hours = Convert.ToInt32(Request.Form["hours"]);
-                    int id_students_group = Convert.ToInt32(Request.Form["id_students_group"]);
-                    int id_subject = Convert.ToInt32(Request.Form["id_subject"]);
-                    if (hours > 0 && id_students_group > 0 && id_subject > 0)
-                    {
-                        try
-                        {
-                            Students_group_load students_group_load = new Students_group_load(hours, id_students_group, id_subject);
-                            DB.Students_group_load.Add(students_group_load);
-                            DB.SaveChanges();
-                        }
-                        catch (Exception ex)
-                        {
-                            ViewBag.errors = ex.Message;
-                        }
-                    }
-                    else
-                        ViewBag.errors = "Некорретные данные. Проверьте правильность данных и повторите еще раз!";
-                    break;
-                //Редактирование существующего элемента
-                case 'e':
-                    ViewBag.action = 'e';
-                    ViewBag.row = row;
-                    break;
-                //Обновление существующего элемента
-                case 'u':
-                    hours = Convert.ToInt32(Request.Form["hours"]);
-                    id_students_group = Convert.ToInt32(Request.Form["id_students_group"]);
-                    id_subject = Convert.ToInt32(Request.Form["id_subject"]);
-                    if (hours > 0 && id_students_group > 0 && id_subject > 0)
-                    {
-                        try
-                        {
-                            DB.Students_group_load.Find(id_students_group_load).hours = hours;
-                            DB.Students_group_load.Find(id_students_group_load).id_students_group = id_students_group;
-                            DB.Students_group_load.Find(id_students_group_load).id_subject = id_subject;
-                            DB.SaveChanges();
-                        }
-                        catch (Exception ex)
-                        {
-                            ViewBag.errors = ex.Message;
-                        }
-                    }
-                    else
-                        ViewBag.errors = "Некорретные данные. Проверьте правильность данных и повторите еще раз!";
-                    break;
-                //Удаление существующего элемента
-                case 'r':
-                    try
-                    {
-                        DB.Students_group_load.Remove(DB.Students_group_load.Find(id_students_group_load));
-                        DB.SaveChanges();
-                    }
-                    catch (Exception ex)
-                    {
-                        ViewBag.errors = ex.Message;
-                    }
-                    break;
-            }
-
-            //Передача списков в представление
-            try
-            {
-                ViewBag.faculties = DB.Faculty.ToList();
-                ViewBag.departments = DB.Department.ToList();
-                ViewBag.students_groups = DB.Students_group.ToList();
-                ViewBag.subjects = DB.Subject.ToList();
-                ViewBag.students_group_loads = DB.Students_group_load.ToList();
-            }
-            catch (Exception ex)
-            {
-                ViewBag.errors = ex.Message;
-            }
-
-            return View();
-        }
-
         //Контроллер загрузки преподавателей
         public ActionResult Teacher_load(char action = '0', int row = -1, int id_teacher_load = -1)
         {
@@ -316,6 +225,14 @@ namespace LectureSchedulingTool.Controllers
         public IQueryable<Department> GetOnlyNeedsDepartments(IQueryable<Classroom> classrooms)
         {
             return (from d in DB.Department join c in classrooms on d.id_department equals c.id_department select d);
+        }
+        public IQueryable<Students_group> GetOnlyNeedsStudentsGroups(IQueryable<Students_group_load> students_group_load)
+        {
+            return (from sg in DB.Students_group join sgl in students_group_load on sg.id_students_group equals sgl.id_students_group select sg);
+        }
+        public IQueryable<Subject> GetOnlyNeedsSubjects(IQueryable<Students_group_load> students_group_load)
+        {
+            return (from s in DB.Subject join sgl in students_group_load on s.id_subject equals sgl.id_subject select s);
         }
 
         public IQueryable<Faculty> GetSafeFaculties()
