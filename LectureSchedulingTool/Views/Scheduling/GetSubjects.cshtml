@@ -1,0 +1,13 @@
+﻿@using LectureSchedulingTool.Models
+
+@{
+    List<SVM.Subject> subjects = ViewBag.subjects;
+
+    for (int i = 0; i < subjects.Count; i++)
+    {
+        <option value="@subjects[i].id_subject">
+            @(subjects[i].ToString())
+        </option>
+    }
+}
+

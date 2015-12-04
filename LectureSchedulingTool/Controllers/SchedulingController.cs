@@ -17,6 +17,20 @@ namespace LectureSchedulingTool.Controllers
             return PartialView();
         }
 
+        public ActionResult GetTeachers(int id_department)
+        {
+            ViewBag.teachers = DB.Teacher.Where(t => t.id_department == id_department).ToList();
+
+            return PartialView();
+        }
+
+        public ActionResult GetSubjects(int id_department)
+        {
+            ViewBag.subjects = DB.Subject.Where(s => s.id_department == id_department).ToList();
+
+            return PartialView();
+        }
+
         public IQueryable<SVM.Faculty> GetOnlyNeedsFaculties(IQueryable<SVM.Department> departments)
         {
             return (from f in DB.Faculty join d in departments on f.id_faculty equals d.id_faculty select f);
