@@ -1,7 +1,7 @@
 ﻿@using LectureSchedulingTool.Models;
 @model SVM.Faculty
 
-<h2>Факультеты</h2>
+<h2>@Html.GetContStr("Faculties_header", (string)ViewBag.CurLang)</h2>
 <hr />
 
 @(Html.ValidationSummary("", new { @class = "text-danger" }))
@@ -10,8 +10,8 @@
     <thead>
         <tr>
             <td><center>№</center></td>
-            <td>Название</td>
-            <td>Аббревиатура</td>
+            <td>@Html.GetContStr("Name", (string)ViewBag.CurLang)</td>
+            <td>@Html.GetContStr("Abr", (string)ViewBag.CurLang)</td>
         </tr>
     </thead>
     <tbody>
@@ -37,8 +37,8 @@
                             <td><center>@(i + (elements_on_page * (page - 1)) + 1)</center></td>
                             <td>@(Html.TextBoxFor(m => m.name, new { @class = "form-control" }))</td>
                             <td>@(Html.TextBoxFor(m => m.abbreviation, new { @class = "form-control" }))</td>
-                            <td width="10%"><center><button type="submit" id="update" name="action" value="u" class="btn btn-primary"> Обновить </button></center></td>
-                            <td width="9%"><center><button type="submit" id="cancel" name="action" value="0" class="btn btn-warning"> Отменить </button></center></td>
+                            <td width="10%"><center><button type="submit" id="update" name="action" value="u" class="btn btn-primary"> @Html.GetContStr("Update", (string)ViewBag.CurLang) </button></center></td>
+                            <td width="9%"><center><button type="submit" id="cancel" name="action" value="0" class="btn btn-warning"> @Html.GetContStr("Cancel", (string)ViewBag.CurLang) </button></center></td>
                         </tr>
                     }
                 }
@@ -55,13 +55,13 @@
                             <td>@(faculties[i].abbreviation)</td>
                             @if (action == "e" || action == "a")
                             {
-                                <td width="10%"><center><button type="submit" id="edit" name="action" value="e" class="btn btn-primary" width="inherit" disabled> Редактировать </button></center></td>
-                                <td width="9%"><center><button type="submit" id="remove" name="action" value="r" class="btn btn-danger" width="inherit" disabled> Удалить </button></center></td>
+                                <td width="10%"><center><button type="submit" id="edit" name="action" value="e" class="btn btn-primary" width="inherit" disabled> @Html.GetContStr("Edit", (string)ViewBag.CurLang) </button></center></td>
+                                <td width="9%"><center><button type="submit" id="remove" name="action" value="r" class="btn btn-danger" width="inherit" disabled> @Html.GetContStr("Delete", (string)ViewBag.CurLang) </button></center></td>
                             }
                             else
                             {
-                                <td width="10%"><center><button type="submit" id="edit" name="action" value="e" class="btn btn-primary" width="inherit"> Редактировать </button></center></td>
-                                <td width="9%"><center><button type="submit" id="remove" name="action" value="r" class="btn btn-danger" width="inherit"> Удалить </button></center></td>
+                                <td width="10%"><center><button type="submit" id="edit" name="action" value="e" class="btn btn-primary" width="inherit"> @Html.GetContStr("Edit", (string)ViewBag.CurLang) </button></center></td>
+                                <td width="9%"><center><button type="submit" id="remove" name="action" value="r" class="btn btn-danger" width="inherit"> @Html.GetContStr("Delete", (string)ViewBag.CurLang) </button></center></td>
                             }
                         </tr>
                     }
@@ -76,8 +76,8 @@
                         <td><center>*</center></td>
                         <td>@(Html.TextBoxFor(m => m.name, new { @class = "form-control" }))</td>
                         <td>@(Html.TextBoxFor(m => m.abbreviation, new { @class = "form-control" }))</td>
-                        <td width="10%"><center><button type="submit" id="save" name="action" value="s" class="btn btn-primary" width="inherit"> Добавить </button></center></td>
-                        <td width="9%"><center><button type="submit" id="cancel" name="action" value="0" class="btn btn-warning" width="inherit"> Отменить </button></center></td>
+                        <td width="10%"><center><button type="submit" id="save" name="action" value="s" class="btn btn-primary" width="inherit"> @Html.GetContStr("Add", (string)ViewBag.CurLang) </button></center></td>
+                        <td width="9%"><center><button type="submit" id="cancel" name="action" value="0" class="btn btn-warning" width="inherit"> @Html.GetContStr("Cancel", (string)ViewBag.CurLang) </button></center></td>
                     </tr>
                 }
             }

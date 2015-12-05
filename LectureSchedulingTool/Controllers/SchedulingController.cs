@@ -9,7 +9,22 @@ namespace LectureSchedulingTool.Controllers
     public partial class SchedulingController : Controller
     {
         private static SchedulingContext DB = new SchedulingContext();
-                
+        public string CurrentLangCode { get; protected set; }
+
+        protected override void Initialize(System.Web.Routing.RequestContext requestContext)
+        {
+            //проверяем если ли в коллекции параметр lang и если есть, получаем его.
+            if (requestContext.RouteData.Values["lang"] != null && requestContext.RouteData.Values["lang"] as string != "null")
+                CurrentLangCode = requestContext.RouteData.Values["lang"] as string;
+            //а если его нет, то используем язык по умолчанию
+            else
+                CurrentLangCode = "ru";
+
+            //сохраняем значение языка во ViewBag, для того, чтобы легко получать к нему доступ из вьюшки
+            ViewBag.CurLang = CurrentLangCode;
+            base.Initialize(requestContext);
+        }
+
         public ActionResult GetDepartments(int id_faculty)
         {
             ViewBag.departments = DB.Department.Where(d => d.id_faculty == id_faculty).ToList();

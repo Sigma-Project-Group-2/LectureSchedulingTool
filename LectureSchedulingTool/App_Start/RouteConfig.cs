@@ -14,6 +14,13 @@ namespace LectureSchedulingTool
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "Localization",
+                url: "{lang}/{controller}/{action}/{id}",
+                defaults: new { lang = "ru", controller = "Home", action = "Index", id = UrlParameter.Optional },
+                constraints: new { lang = @"[a-z]{2}" }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
