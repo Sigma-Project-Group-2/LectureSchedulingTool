@@ -1,7 +1,7 @@
 ﻿@using LectureSchedulingTool.Models;
 @model SVM.Students_group_load
 
-<h2>Нагрузка групп</h2>
+<h2>@Html.GetContStr("L_Groups", (string)ViewBag.CurLang)</h2>
 <hr />
 
 @(Html.ValidationSummary("", new { @class = "text-danger" }))
@@ -10,9 +10,9 @@
     <thead>
         <tr>
             <td><center>№</center></td>
-            <td>Группа</td>
-            <td>Предмет</td>
-            <td>Часы</td>
+            <td>@Html.GetContStr("Group", (string)ViewBag.CurLang)</td>
+            <td>@Html.GetContStr("Subject", (string)ViewBag.CurLang)</td>
+            <td>@Html.GetContStr("Hours", (string)ViewBag.CurLang)</td>
         </tr>
     </thead>
     <tbody>
@@ -45,8 +45,8 @@
                             <td>@(Html.DropDownListFor(m => m.id_students_group, Istudents_groups, new { @class = "form-control" }))</td>
                             <td>@(Html.DropDownListFor(m => m.id_subject, Isubjects, new { @class = "form-control" }))</td>
                             <td>@(Html.TextBoxFor(m => m.hours, new { @class = "form-control" })) </td>
-                            <td width="10%"><center><button type="submit" id="update" name="action" value="u" class="btn btn-primary"> Обновить</button></center></td>
-                            <td width="9%"><center><button type="submit" id="cancel" name="action" value="0" class="btn btn-warning"> Отменить</button></center></td>
+                            <td width="10%"><center><button type="submit" id="update" name="action" value="u" class="btn btn-primary"> @Html.GetContStr("Update", (string)ViewBag.CurLang)</button></center></td>
+                            <td width="9%"><center><button type="submit" id="cancel" name="action" value="0" class="btn btn-warning"> @Html.GetContStr("Cancel", (string)ViewBag.CurLang)</button></center></td>
                         </tr>
                     }
                 }
@@ -67,13 +67,13 @@
                             <td>@(students_group_loads[i].hours)</td>
                             @if (action == "e" || action == "a")
                             {
-                                <td width="10%"><center><button type="submit" id="edit" name="action" value="e" class="btn btn-primary" width="inherit" disabled> Редактировать</button></center></td>
-                                <td width="9%"><center><button type="submit" id="remove" name="action" value="r" class="btn btn-danger" width="inherit" disabled> Удалить</button></center></td>
+                                <td width="10%"><center><button type="submit" id="edit" name="action" value="e" class="btn btn-primary" width="inherit" disabled> @Html.GetContStr("Edit", (string)ViewBag.CurLang)</button></center></td>
+                                <td width="9%"><center><button type="submit" id="remove" name="action" value="r" class="btn btn-danger" width="inherit" disabled> @Html.GetContStr("Delete", (string)ViewBag.CurLang)</button></center></td>
                             }
                             else
                             {
-                                <td width="10%"><center><button type="submit" id="edit" name="action" value="e" class="btn btn-primary" width="inherit"> Редактировать</button></center></td>
-                                <td width="9%"><center><button type="submit" id="remove" name="action" value="r" class="btn btn-danger" width="inherit"> Удалить</button></center></td>
+                                <td width="10%"><center><button type="submit" id="edit" name="action" value="e" class="btn btn-primary" width="inherit"> @Html.GetContStr("Edit", (string)ViewBag.CurLang)</button></center></td>
+                                <td width="9%"><center><button type="submit" id="remove" name="action" value="r" class="btn btn-danger" width="inherit"> @Html.GetContStr("Delete", (string)ViewBag.CurLang)</button></center></td>
                             }
                         </tr>
                     }
@@ -92,8 +92,8 @@
                         <td>@(Html.DropDownListFor(m => m.id_students_group, Istudents_groups, new { @class = "form-control" }))</td>
                         <td>@(Html.DropDownListFor(m => m.id_subject, Isubjects, new { @class = "form-control" }))</td>
                         <td>@(Html.TextBoxFor(m => m.hours, new { @class = "form-control" })) </td>
-                        <td width="10%"><center><button type="submit" id="save" name="action" value="s" class="btn btn-primary"> Добавить</button></center></td>
-                        <td width="9%"><center><button type="submit" id="cancel" name="action" value="0" class="btn btn-warning"> Отменить</button></center></td>
+                        <td width="10%"><center><button type="submit" id="save" name="action" value="s" class="btn btn-primary"> @Html.GetContStr("Add", (string)ViewBag.CurLang)</button></center></td>
+                        <td width="9%"><center><button type="submit" id="cancel" name="action" value="0" class="btn btn-warning"> @Html.GetContStr("Cancel", (string)ViewBag.CurLang)</button></center></td>
                     </tr>
                 }
             }
