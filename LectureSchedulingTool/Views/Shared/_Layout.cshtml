@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using LectureSchedulingTool.Models;
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -63,6 +64,17 @@
                         <li>@Html.ActionLink("О нас", "About", "Home")</li>
                         <li>@Html.ActionLink("Контакты", "Contact", "Home")</li>
                     }
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            @Html.GetContStr("Lang", (string)ViewBag.CurLang)
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>@Html.RouteLink("EN", new { controller = Url.RequestContext.RouteData.Values["controller"], action = Url.RequestContext.RouteData.Values["action"], lang = "en" })</li>
+                            <li>@Html.RouteLink("UA", new { controller = Url.RequestContext.RouteData.Values["controller"], action = Url.RequestContext.RouteData.Values["action"], lang = "ua" })</li>
+                            <li>@Html.RouteLink("RU", new { controller = Url.RequestContext.RouteData.Values["controller"], action = Url.RequestContext.RouteData.Values["action"], lang = "ru" })</li>
+                        </ul>
+                    </li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

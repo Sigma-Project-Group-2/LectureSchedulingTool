@@ -10,12 +10,16 @@ namespace LectureSchedulingTool.Controllers
     {
         private static SchedulingContext DB = new SchedulingContext();
         public string CurrentLangCode { get; protected set; }
+        private System.Web.Routing.RequestContext request;
 
         protected override void Initialize(System.Web.Routing.RequestContext requestContext)
         {
             //проверяем если ли в коллекции параметр lang и если есть, получаем его.
             if (requestContext.RouteData.Values["lang"] != null && requestContext.RouteData.Values["lang"] as string != "null")
+            {
                 CurrentLangCode = requestContext.RouteData.Values["lang"] as string;
+                request = requestContext;
+            }
             //а если его нет, то используем язык по умолчанию
             else
                 CurrentLangCode = "ru";
