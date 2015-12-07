@@ -1,7 +1,6 @@
 ﻿using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using LectureSchedulingTool.Models;
-using LectureSchedulingTool.Controllers;
 
 namespace LectureSchedulingTool.Tests
 {
