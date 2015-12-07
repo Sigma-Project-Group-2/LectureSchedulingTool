@@ -4,7 +4,7 @@ using System.Configuration;
 
 namespace LectureSchedulingTool.Models.CustomAttributes
 {
-    class CorrectHours : ValidationAttribute
+    public class CorrectHours : ValidationAttribute
     {
         public CorrectHours()
         {
