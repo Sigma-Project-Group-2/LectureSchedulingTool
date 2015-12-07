@@ -137,6 +137,7 @@
   <ItemGroup>
     <Compile Include="Controllers\Tests\UnitTest1.cs" />
     <Compile Include="Models\Tests\SchedulingViewModelsTest.cs" />
+    <Compile Include="Models\Tests\CorrectHoursModelTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\Tests\HomeControllerTest.cs" />
     <Compile Include="Models\Tests\SecretCodeAttributeTest.cs" />
