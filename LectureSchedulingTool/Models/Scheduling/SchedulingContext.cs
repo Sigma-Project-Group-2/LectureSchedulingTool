@@ -15,6 +15,5 @@ namespace LectureSchedulingTool.Models
         public DbSet<SVM.Students_group_load> Students_group_load { get; set; }
         public DbSet<SVM.Teacher_load> Teacher_load { get; set; }
         public DbSet<SVM.Lesson> Lesson { get; set; }
-        public DbSet<SVM.Localization> Localization { get; set; }
     }
 }

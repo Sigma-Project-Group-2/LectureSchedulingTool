@@ -186,6 +186,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CustomAttributes\CorrectHours.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Localization\Localization.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Scheduling\SchedulingAlgorithm.cs" />
     <Compile Include="Models\Scheduling\SchedulingContext.cs" />

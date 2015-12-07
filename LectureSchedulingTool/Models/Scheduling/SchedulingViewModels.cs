@@ -7,35 +7,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LectureSchedulingTool.Models
 {
-    public static class GetString
-    {
-        public static string GetContStr(this HtmlHelper helper, string name, string lang)
-        {
-            using (SchedulingContext data = new SchedulingContext())
-            {
-                var translation = data.Localization.FirstOrDefault(x => x.Name == name && x.Lang == lang);
-                if (translation != null) return translation.Text;
-            }
-            //А если такой строки нет, то надо об этом сообщить.
-            return "[No " + name + " for " + lang + "]";
-        }
-    }
-
     public class SVM
     {
         private static SchedulingContext DB = new SchedulingContext();
-
-        public class Localization
-        {
-            [Key]
-            public int Id { get; set; }
-            [Required]
-            public string Name { set; get; }
-            [Required]
-            public string Lang { get; set; }
-            [Required]
-            public string Text { get; set; }
-        }
 
         //Модель факультета
         public class Faculty
