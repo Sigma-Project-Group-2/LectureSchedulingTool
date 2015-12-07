@@ -17,6 +17,7 @@ namespace LectureSchedulingTool.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private SecretCodeContext DB = new SecretCodeContext();
 
         public ManageController()
         {
@@ -71,6 +72,53 @@ namespace LectureSchedulingTool.Controllers
 
         public ActionResult ChangePassword()
         {
+            return View();
+        }
+
+        public ActionResult SecretCode(char action = '0', int id_secret_code = -1)
+        {
+            switch (action)
+            {
+                case 'a':
+                    Secret_code secret_code = new Secret_code();
+                    secret_code.GenerateCode();
+
+                    try
+                    {
+                        while (DB.Secret_code.Count(sc => sc.secret_code == secret_code.secret_code) > 0)
+                            secret_code.GenerateCode();
+
+                        DB.Secret_code.Add(secret_code);
+                        DB.SaveChanges();
+                    }
+                    catch (Exception ex)
+                    {
+                        ModelState.AddModelError("-1", "Невозможно добавить данные! Пожалуйста, попробуйте еще раз.");
+                    }
+                    break;
+
+                case 'r':
+                    try
+                    {
+                        if (DB.Secret_code.Count(sc => sc.id_secret_code == id_secret_code) > 0)
+                        {
+                            DB.Secret_code.Remove(DB.Secret_code.Find(id_secret_code));
+                            DB.SaveChanges();
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("-2", "Невозможно удалить данные! Пожалуйста, проверьте правильность ввода и попробуйте еще раз.");
+                        }                        
+                    }
+                    catch (Exception ex)
+                    {
+                        ModelState.AddModelError("-2", "Невозможно удалить данные! Пожалуйста, проверьте правильность ввода и попробуйте еще раз.");
+                    }
+                    break;
+            }
+
+            ViewBag.secret_codes = DB.Secret_code.ToList();
+
             return View();
         }
 
