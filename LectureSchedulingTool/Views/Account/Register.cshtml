@@ -1,11 +1,12 @@
 ﻿@model LectureSchedulingTool.Models.RegisterViewModel
+@using LectureSchedulingTool.Models
 
-<h2>Регистрация</h2>
+<h2>@Html.Localizate("CheckIn", (string)ViewBag.CurLang)</h2>
 
 @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
-    <h4>Регистрация доступна только для авторизованного персонала. Пожалуйста, не пытайтесь зарегистрироваться если Вам не предоставили доступ к данному ресурсу.</h4>
+    <h4>@Html.Localizate("Advert_Register", (string)ViewBag.CurLang)</h4>
     <hr />
     @Html.ValidationSummary("", new { @class = "text-danger" })
     <div class="form-group">
@@ -15,26 +16,26 @@
         </div>
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.SecretCode, new { @class = "col-md-2 control-label" })
+        @Html.Label(@Html.Localizate("Secret_Code", (string)ViewBag.CurLang), new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
             @Html.TextBoxFor(m => m.SecretCode, new { @class = "form-control" })
         </div>
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+        @Html.Label(@Html.Localizate("Pass", (string)ViewBag.CurLang), new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
             @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
         </div>
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
+        @Html.Label(@Html.Localizate("Pass_Confirmation", (string)ViewBag.CurLang), new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
             @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
         </div>
     </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Зарегистрироваться" />
+            <input type="submit" class="btn btn-default" value="@Html.Localizate("Register", (string)ViewBag.CurLang)" />
         </div>
     </div>
 }

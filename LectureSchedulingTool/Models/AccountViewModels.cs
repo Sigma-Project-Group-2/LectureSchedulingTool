@@ -12,7 +12,7 @@ namespace LectureSchedulingTool.Models
 
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Пароль")]
+        //[Display(Name = "Пароль")]
         public string Password { get; set; }
 
         [Display(Name = "Запомнить меня?")]
@@ -34,7 +34,7 @@ namespace LectureSchedulingTool.Models
         [Required]
         [StringLength(100, ErrorMessage = "{0} должен быть как минимум {2} символов в длинну.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Пароль")]
+        //[Display(Name = "Пароль")]
         public string Password { get; set; }
 
         [Required]
