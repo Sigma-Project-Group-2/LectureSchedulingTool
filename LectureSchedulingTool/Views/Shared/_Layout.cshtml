@@ -19,7 +19,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Расписание", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink(@Html.Localizate("Scheduling", (string)ViewBag.CurLang), "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -27,42 +27,42 @@
                     {
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                Факультеты
+                                @Html.Localizate("Faculties_header", (string)ViewBag.CurLang)
                                 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu" role="menu">
-                                <li>@Html.ActionLink("Факультеты", "Faculty", "Scheduling")</li>
-                                <li>@Html.ActionLink("Кафедры", "Department", "Scheduling")</li>
+                                <li>@Html.ActionLink(@Html.Localizate("Faculties_header", (string)ViewBag.CurLang), "Faculty", "Scheduling")</li>
+                                <li>@Html.ActionLink(@Html.Localizate("Departments_header", (string)ViewBag.CurLang), "Department", "Scheduling")</li>
                             </ul>
                         </li>
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                Группы
+                                @Html.Localizate("Groups", (string)ViewBag.CurLang)
                                 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu" role="menu">
-                                <li>@Html.ActionLink("Группы", "Students_group", "Scheduling")</li>
-                                <li>@Html.ActionLink("Нагрузка групп", "Students_group_load", "Scheduling")</li>
+                                <li>@Html.ActionLink(@Html.Localizate("Groups", (string)ViewBag.CurLang), "Students_group", "Scheduling")</li>
+                                <li>@Html.ActionLink(@Html.Localizate("L_Groups", (string)ViewBag.CurLang), "Students_group_load", "Scheduling")</li>
                             </ul>
                         </li>
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                Преподаватели
+                                @Html.Localizate("Teachers", (string)ViewBag.CurLang)
                                 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu" role="menu">
-                                <li>@Html.ActionLink("Преподаватели", "Teacher", "Scheduling")</li>
-                                <li>@Html.ActionLink("Нагрузка преподавателей", "Teacher_load", "Scheduling")</li>
+                                <li>@Html.ActionLink(@Html.Localizate("Teachers", (string)ViewBag.CurLang), "Teacher", "Scheduling")</li>
+                                <li>@Html.ActionLink(@Html.Localizate("L_Teachers", (string)ViewBag.CurLang), "Teacher_load", "Scheduling")</li>
                             </ul>
                         </li>
-                        <li>@Html.ActionLink("Предметы", "Subject", "Scheduling")</li>
-                        <li>@Html.ActionLink("Аудитории", "Classroom", "Scheduling")</li>
-                        <li>@Html.ActionLink("Занятия", "Lesson", "Scheduling")</li>
+                        <li>@Html.ActionLink(@Html.Localizate("Subjects", (string)ViewBag.CurLang), "Subject", "Scheduling")</li>
+                        <li>@Html.ActionLink(@Html.Localizate("Classrooms", (string)ViewBag.CurLang), "Classroom", "Scheduling")</li>
+                        <li>@Html.ActionLink(@Html.Localizate("Lessons", (string)ViewBag.CurLang), "Lesson", "Scheduling")</li>
                     }
                     else
                     {
-                        <li>@Html.ActionLink("О нас", "About", "Home")</li>
-                        <li>@Html.ActionLink("Контакты", "Contact", "Home")</li>
+                        <li>@Html.ActionLink(@Html.Localizate("About", (string)ViewBag.CurLang), "About", "Home")</li>
+                        <li>@Html.ActionLink(@Html.Localizate("Contacts", (string)ViewBag.CurLang), "Contact", "Home")</li>
                     }
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -86,7 +86,7 @@
         <footer>
             <p>&copy; @DateTime.Now.Year - SGP2</p>
             <p>
-                Запущено при поддержке
+                @Html.Localizate("footer", (string)ViewBag.CurLang)
                 <a href="http://www.asp.net/mvc">ASP.NET MVC</a>,
                 <a href="https://azure.microsoft.com">Microsoft Azure</a> и
                 <a href="https://somee.com">Somee hosting</a>
