@@ -42,7 +42,7 @@ namespace LectureSchedulingTool.Controllers
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -54,9 +54,9 @@ namespace LectureSchedulingTool.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -128,15 +128,35 @@ namespace LectureSchedulingTool.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
+                using (var DB = new SecretCodeContext())
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
-                    return RedirectToAction("Index", "Home");
+                    if (DB.Secret_code.Count() != 0)
+                    {
+                        if (DB.Secret_code.Count(sc => sc.secret_code == model.SecretCode.ToUpper()) == 0)
+                        {
+                            ModelState.AddModelError("-1", "Неверный секретный код! Пожалуйста, проверьте правильность ввода и попробуйте еще раз.");
+                            return View(model);
+                        }
+                    }
+
+                    var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                    var result = await UserManager.CreateAsync(user, model.Password);
+                    if (result.Succeeded)
+                    {
+                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+                        if (DB.Secret_code.Count() != 0)
+                        {
+                            var sc_to_remove = DB.Secret_code.FirstOrDefault(sc => sc.secret_code == model.SecretCode.ToUpper());
+                            DB.Secret_code.Remove(sc_to_remove);
+                            DB.SaveChanges();
+                        }
+
+                        return RedirectToAction("Index", "Home");
+                    }
+
+                    AddErrors(result);
                 }
-                AddErrors(result);
             }
 
             // If we got this far, something failed, redisplay form

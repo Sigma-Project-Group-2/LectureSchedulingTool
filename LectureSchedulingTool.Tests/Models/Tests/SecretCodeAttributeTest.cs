@@ -1,6 +1,7 @@
 ﻿using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using LectureSchedulingTool.Models;
+using System;
 
 namespace LectureSchedulingTool.Tests
 {
@@ -127,5 +128,19 @@ namespace LectureSchedulingTool.Tests
         }
 
         #endregion
+    }
+    [TestClass]
+    public class GenerateSecretCodeTest
+    {
+        [TestMethod]
+        public void GenerateSecretCodeTest_IsGenerating_ShouldIsNotNull()
+        {
+            //arrange
+            Secret_code scr = new Secret_code();
+            //act
+            scr.GenerateCode();
+            //assert
+            Assert.IsNotNull(scr.secret_code);
+        }
     }
 }
