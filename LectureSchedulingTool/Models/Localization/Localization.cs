@@ -28,11 +28,13 @@ namespace LectureSchedulingTool.Models
         {
             using (LocalizationContext data = new LocalizationContext())
             {
-                var translation = data.Localization.FirstOrDefault(x => x.name == name && x.language == language);
-                if (translation != null) return translation.text;
+                var translation = data.Localization.FirstOrDefault(t => t.name == name && t.language == language);
+
+                if (translation != null)
+                    return translation.text;
+                else
+                    return "[Localization not found]";
             }
-            //А если такой строки нет, то надо об этом сообщить.
-            return "[No " + name + " for " + language + "]";
         }
     }
 }

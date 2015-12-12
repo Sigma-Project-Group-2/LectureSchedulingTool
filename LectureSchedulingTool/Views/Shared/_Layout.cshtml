@@ -1,14 +1,16 @@
 ﻿@using LectureSchedulingTool.Models;
 <!DOCTYPE html>
+
+@(Styles.Render("~/Content/css"))
+@(Scripts.Render("~/bundles/modernizr"))
+@(Scripts.Render("~/bundles/jquery"))
+@(Scripts.Render("~/bundles/bootstrap"))
+
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lecture scheduling tool</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+    <title>@(Html.Localizate("Lecture_scheduling_tool", (string)ViewBag.CurLang))</title>        
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -19,7 +21,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink(@Html.Localizate("Scheduling", (string)ViewBag.CurLang), "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @(Html.ActionLink(@Html.Localizate("Scheduling", (string)ViewBag.CurLang), "Index", "Home", new { area = "" }, new { @class = "navbar-brand" }))
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -27,68 +29,68 @@
                     {
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                @Html.Localizate("Faculties_header", (string)ViewBag.CurLang)
+                                @(Html.Localizate("Faculties", (string)ViewBag.CurLang))
                                 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu" role="menu">
-                                <li>@Html.ActionLink(@Html.Localizate("Faculties_header", (string)ViewBag.CurLang), "Faculty", "Scheduling")</li>
-                                <li>@Html.ActionLink(@Html.Localizate("Departments_header", (string)ViewBag.CurLang), "Department", "Scheduling")</li>
+                                <li>@(Html.ActionLink(@Html.Localizate("Faculties_header", (string)ViewBag.CurLang), "Faculty", "Scheduling"))</li>
+                                <li>@(Html.ActionLink(@Html.Localizate("Departments_header", (string)ViewBag.CurLang), "Department", "Scheduling"))</li>
                             </ul>
                         </li>
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                @Html.Localizate("Groups", (string)ViewBag.CurLang)
+                                @(Html.Localizate("Groups", (string)ViewBag.CurLang))
                                 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu" role="menu">
-                                <li>@Html.ActionLink(@Html.Localizate("Groups", (string)ViewBag.CurLang), "Students_group", "Scheduling")</li>
-                                <li>@Html.ActionLink(@Html.Localizate("L_Groups", (string)ViewBag.CurLang), "Students_group_load", "Scheduling")</li>
+                                <li>@(Html.ActionLink(@Html.Localizate("Groups", (string)ViewBag.CurLang), "Students_group", "Scheduling"))</li>
+                                <li>@(Html.ActionLink(@Html.Localizate("Groups_loads", (string)ViewBag.CurLang), "Students_group_load", "Scheduling"))</li>
                             </ul>
                         </li>
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                @Html.Localizate("Teachers", (string)ViewBag.CurLang)
+                                @(Html.Localizate("Teachers", (string)ViewBag.CurLang))
                                 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu" role="menu">
                                 <li>@Html.ActionLink(@Html.Localizate("Teachers", (string)ViewBag.CurLang), "Teacher", "Scheduling")</li>
-                                <li>@Html.ActionLink(@Html.Localizate("L_Teachers", (string)ViewBag.CurLang), "Teacher_load", "Scheduling")</li>
+                                <li>@Html.ActionLink(@Html.Localizate("Teachers_loads", (string)ViewBag.CurLang), "Teacher_load", "Scheduling")</li>
                             </ul>
                         </li>
-                        <li>@Html.ActionLink(@Html.Localizate("Subjects", (string)ViewBag.CurLang), "Subject", "Scheduling")</li>
-                        <li>@Html.ActionLink(@Html.Localizate("Classrooms", (string)ViewBag.CurLang), "Classroom", "Scheduling")</li>
-                        <li>@Html.ActionLink(@Html.Localizate("Lessons", (string)ViewBag.CurLang), "Lesson", "Scheduling")</li>
+                        <li>@(Html.ActionLink(@Html.Localizate("Subjects", (string)ViewBag.CurLang), "Subject", "Scheduling"))</li>
+                        <li>@(Html.ActionLink(@Html.Localizate("Classrooms", (string)ViewBag.CurLang), "Classroom", "Scheduling"))</li>
+                        <li>@(Html.ActionLink(@Html.Localizate("Lessons", (string)ViewBag.CurLang), "Lesson", "Scheduling"))</li>
                     }
                     else
                     {
-                        <li>@Html.ActionLink(@Html.Localizate("About", (string)ViewBag.CurLang), "About", "Home")</li>
-                        <li>@Html.ActionLink(@Html.Localizate("Contacts", (string)ViewBag.CurLang), "Contact", "Home")</li>
+                        <li>@(Html.ActionLink(@Html.Localizate("About", (string)ViewBag.CurLang), "About", "Home"))</li>
+                        <li>@(Html.ActionLink(@Html.Localizate("Contacts", (string)ViewBag.CurLang), "Contact", "Home"))</li>
                     }
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            @Html.Localizate("Lang", (string)ViewBag.CurLang)
+                            @(Html.Localizate("Language", (string)ViewBag.CurLang))
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
-                            <li>@Html.RouteLink("EN", new { controller = Url.RequestContext.RouteData.Values["controller"], action = Url.RequestContext.RouteData.Values["action"], lang = "en" })</li>
-                            <li>@Html.RouteLink("UA", new { controller = Url.RequestContext.RouteData.Values["controller"], action = Url.RequestContext.RouteData.Values["action"], lang = "ua" })</li>
-                            <li>@Html.RouteLink("RU", new { controller = Url.RequestContext.RouteData.Values["controller"], action = Url.RequestContext.RouteData.Values["action"], lang = "ru" })</li>
+                            <li>@(Html.RouteLink("EN", new { controller = Url.RequestContext.RouteData.Values["controller"], action = Url.RequestContext.RouteData.Values["action"], lang = "en" }))</li>
+                            <li>@(Html.RouteLink("UA", new { controller = Url.RequestContext.RouteData.Values["controller"], action = Url.RequestContext.RouteData.Values["action"], lang = "ua" }))</li>
+                            <li>@(Html.RouteLink("RU", new { controller = Url.RequestContext.RouteData.Values["controller"], action = Url.RequestContext.RouteData.Values["action"], lang = "ru" }))</li>
                         </ul>
                     </li>
                 </ul>
-                @Html.Partial("_LoginPartial")
+                @(Html.Partial("_LoginPartial"))
             </div>
         </div>
     </div>
     <div class="container body-content">
-        @RenderBody()
+        @(RenderBody())
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - SGP2</p>
+            <p>&copy; @(DateTime.Now.Year) - SGP2</p>
             <p>
-                @Html.Localizate("footer", (string)ViewBag.CurLang)
+                @(Html.Localizate("Powered_by", (string)ViewBag.CurLang))
                 <a href="http://www.asp.net/mvc">ASP.NET MVC</a>,
-                <a href="https://azure.microsoft.com">Microsoft Azure</a> и
+                <a href="https://azure.microsoft.com">Microsoft Azure</a>,
                 <a href="https://somee.com">Somee hosting</a>
             </p>
         </footer>

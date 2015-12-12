@@ -10,13 +10,13 @@
         <li>
             @Html.ActionLink(@Html.Localizate("Settings", (string)ViewBag.CurLang), "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
         </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">@Html.Localizate("Out", (string)ViewBag.CurLang)</a></li>
+        <li><a href="javascript:document.getElementById('logoutForm').submit()">@Html.Localizate("Log_out", (string)ViewBag.CurLang)</a></li>
     </ul>
     }
 }
 else
 {
     <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink(@Html.Localizate("In", (string)ViewBag.CurLang), "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        <li>@Html.ActionLink(@Html.Localizate("Log_in", (string)ViewBag.CurLang), "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
     </ul>
 }

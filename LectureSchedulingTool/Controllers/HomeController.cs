@@ -11,7 +11,6 @@ namespace LectureSchedulingTool.Controllers
     public class HomeController : Controller
     {
         public string CurrentLangCode { get; protected set; }
-
         protected override void Initialize(System.Web.Routing.RequestContext requestContext)
         {
             //проверяем если ли в коллекции параметр lang и если есть, получаем его.

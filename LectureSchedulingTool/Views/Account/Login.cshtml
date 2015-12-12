@@ -1,46 +1,44 @@
 ﻿@using LectureSchedulingTool.Models
 @model LoginViewModel
 
-<h2>Авторизация</h2>
+<h2>@Html.Localizate("Authorization", (string)ViewBag.CurLang)</h2>
 <div class="row">
     <div class="col-md-8">
         <section id="loginForm">
             @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
                 @Html.AntiForgeryToken()
-                <h4>Используйте ваш аккаунт для авторизации</h4>
+                <h4>@Html.Localizate("Authorization_advert", (string)ViewBag.CurLang)</h4>
                 <hr />
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="form-group">
-                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                        @Html.Label(Html.Localizate("Email", (string)ViewBag.CurLang), new { @class = "col-md-2 control-label" })
                     <div class="col-md-10">
                         @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                     </div>
                 </div>
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <div class="checkbox">
-                            @Html.CheckBoxFor(m => m.RememberMe)
-                            @Html.LabelFor(m => m.RememberMe)
+                    <div class="form-group">
+                        @Html.Label(Html.Localizate("Password", (string)ViewBag.CurLang), new { @class = "col-md-2 control-label" })
+                        <div class="col-md-10">
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
                         </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Авторизоваться" class="btn btn-default" />
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <div class="checkbox">
+                                @Html.CheckBoxFor(m => m.RememberMe)
+                                @Html.Localizate("Remember_me", (string)ViewBag.CurLang)
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <p>
-                    @Html.ActionLink("Зарегистироваться как новый пользователь", "Register")
-                </p>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="@Html.Localizate("Log_in", (string)ViewBag.CurLang)" class="btn btn-default" />
+                        </div>
+                    </div>
+                    <p>
+                        @Html.ActionLink((@Html.Localizate("Register_as_new", (string)ViewBag.CurLang)), "Register")
+                    </p>
             }
         </section>
     </div>
