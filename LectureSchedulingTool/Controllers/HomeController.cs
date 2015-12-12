@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LectureSchedulingTool.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,7 +11,6 @@ namespace LectureSchedulingTool.Controllers
     public class HomeController : Controller
     {
         public string CurrentLangCode { get; protected set; }
-
         protected override void Initialize(System.Web.Routing.RequestContext requestContext)
         {
             //проверяем если ли в коллекции параметр lang и если есть, получаем его.
@@ -39,6 +39,9 @@ namespace LectureSchedulingTool.Controllers
 
         public ActionResult Contact()
         {
+            SchedulingAlgorithm sa = new SchedulingAlgorithm();
+            sa.Generate();
+
             return View();
         }
     }

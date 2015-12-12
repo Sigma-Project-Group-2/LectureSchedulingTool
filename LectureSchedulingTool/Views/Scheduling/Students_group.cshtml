@@ -13,7 +13,7 @@
             <td>@Html.Localizate("Faculty", (string)ViewBag.CurLang)</td>
             <td>@Html.Localizate("Department", (string)ViewBag.CurLang)</td>
             <td>@Html.Localizate("Name", (string)ViewBag.CurLang)</td>
-            <td>@Html.Localizate("N_Students", (string)ViewBag.CurLang)</td>
+            <td>@Html.Localizate("People_amount", (string)ViewBag.CurLang)</td>
         </tr>
     </thead>
     <tbody>
@@ -71,12 +71,12 @@
                             @if (action == "e" || action == "a")
                             {
                                 <td width="10%"><center><button type="submit" id="edit" name="action" value="e" class="btn btn-primary" width="inherit" disabled> @Html.Localizate("Edit", (string)ViewBag.CurLang)</button></center></td>
-                                <td width="9%"><center><button type="submit" id="remove" name="action" value="r" class="btn btn-danger" width="inherit" disabled> @Html.Localizate("Delete", (string)ViewBag.CurLang)</button></center></td>
+                                <td width="9%"><center><button type="submit" id="remove" name="action" value="r" class="btn btn-danger" width="inherit" disabled> @Html.Localizate("Remove", (string)ViewBag.CurLang)</button></center></td>
                             }
                             else
                             {
                                 <td width="10%"><center><button type="submit" id="edit" name="action" value="e" class="btn btn-primary" width="inherit"> @Html.Localizate("Edit", (string)ViewBag.CurLang)</button></center></td>
-                                <td width="9%"><center><button type="submit" id="remove" name="action" value="r" class="btn btn-danger" width="inherit"> @Html.Localizate("Delete", (string)ViewBag.CurLang)</button></center></td>
+                                <td width="9%"><center><button type="submit" id="remove" name="action" value="r" class="btn btn-danger" width="inherit"> @Html.Localizate("Remove", (string)ViewBag.CurLang)</button></center></td>
                             }
                         </tr>
                     }

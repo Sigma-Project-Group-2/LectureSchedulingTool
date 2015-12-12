@@ -1,7 +1,7 @@
 ﻿@using LectureSchedulingTool.Models;
 @model IndexViewModel
 
-<h2>Настройки</h2>
+<h2>@(Html.Localizate("Settings", (string)ViewBag.CurLang))</h2>
 <hr />
 
 @(Html.ValidationSummary("", new { @class = "text-danger" }))
@@ -10,13 +10,13 @@
     @using (Html.BeginForm("Index", "Manage"))
     {
         <dl class="dl-horizontal">
-            <dt>Пароль:</dt>
+            <dt>@(Html.Localizate("Password", (string)ViewBag.CurLang)):</dt>
             <dd>
-                [@(Html.ActionLink("изменить Ваш пароль", "ChangePassword"))]
+                [@(Html.ActionLink(Html.Localizate("Change_password", (string)ViewBag.CurLang), "ChangePassword"))]
             </dd>
         </dl>
         <dl class="dl-horizontal">
-            <dt>Кол-во недель:</dt>
+            <dt>@(Html.Localizate("Weeks_count", (string)ViewBag.CurLang)):</dt>
             <dd>
                 @if (Model.HaveDataInTables == true)
                 {
@@ -29,7 +29,7 @@
             </dd>
         </dl>
         <dl class="dl-horizontal">
-            <dt>Кол-во учебных недель:</dt>
+            <dt>@(Html.Localizate("Weeks_amount", (string)ViewBag.CurLang)):</dt>
             <dd>
                 @if (Model.HaveDataInTables == true)
                 {
@@ -42,7 +42,7 @@
             </dd>
         </dl>
         <dl class="dl-horizontal">
-            <dt>Кол-во занятий в день:</dt>
+            <dt>@(Html.Localizate("Lessons_count", (string)ViewBag.CurLang)):</dt>
             <dd>
                 @if (Model.HaveDataInTables == true)
                 {
@@ -55,7 +55,7 @@
             </dd>
         </dl>
         <dl class="dl-horizontal">
-            <dt>Кол-во часов в одном занятии:</dt>
+            <dt>@(Html.Localizate("Lessons_amount", (string)ViewBag.CurLang)):</dt>
             <dd>
                 @if (Model.HaveDataInTables == true)
                 {
@@ -68,32 +68,29 @@
             </dd>
         </dl>
         <dl class="dl-horizontal">
-            <dt>Кол-во элементов на странице:</dt>
+            <dt>@(Html.Localizate("Elements_on_page", (string)ViewBag.CurLang)):</dt>
             <dd>
                 @(Html.TextBoxFor(m => m.ElementsOnPage, new { @class = "form-control" }))
             </dd>
         </dl>
         <dl class="dl-horizontal">
-            <dt>Данные:</dt>
+            <dt>@(Html.Localizate("Scheduling", (string)ViewBag.CurLang)):</dt>
             <dd>
-                [@(Html.ActionLink("загрузить тестовые данные", "ChangePassword"))]
+                [@(Html.ActionLink(Html.Localizate("Load_test_data", (string)ViewBag.CurLang), "Index"))]
             </dd>
             <dd>
-                [@(Html.ActionLink("удалить все данные", "ChangePassword"))]
+                [@(Html.ActionLink(Html.Localizate("Remove_all_data", (string)ViewBag.CurLang), "Index"))]
             </dd>
-        </dl>
-        <dl class="dl-horizontal">
-            <dt>Расписание:</dt>
             <dd>
-                [@(Html.ActionLink("сгенерировать расписание", "ChangePassword"))]
+                [@(Html.ActionLink(Html.Localizate("Generate_scheduling", (string)ViewBag.CurLang), "Index"))]
             </dd>
         </dl>
         <dl class="dl-horizontal">
-            <dt>Секретные коды:</dt>
+            <dt>@(Html.Localizate("Secret_code", (string)ViewBag.CurLang)):</dt>
             <dd>
-                [@(Html.ActionLink("управление секретными кодами", "SecretCode"))]
+                [@(Html.ActionLink(Html.Localizate("Manage_secret_code", (string)ViewBag.CurLang), "SecretCode"))]
             </dd>
         </dl>
-        <button class="btn btn-primary" type="submit">Сохранить</button>
+        <button class="btn btn-primary" type="submit">@(Html.Localizate("Save", (string)ViewBag.CurLang))</button>
     }
 </div>

@@ -7,30 +7,36 @@ namespace LectureSchedulingTool.Models
 {
     public class SchedulingAlgorithm
     {
-        private static SchedulingContext DB = new SchedulingContext();
-
         public void Generate()
         {
-            List<Students_Group_Day> sg_day = new List<Students_Group_Day>();
-            foreach (var sg in DB.Students_group)
-                sg_day.Add(new Students_Group_Day(sg.id_students_group));
-
-            List<Teacher_Day> t_day = new List<Teacher_Day>();
-            foreach (var t in DB.Teacher)
-                t_day.Add(new Teacher_Day(t.id_teacher));
-
-            List<Classroom_Day> c_day = new List<Classroom_Day>();
-            foreach (var c in DB.Classroom)
-                c_day.Add(new Classroom_Day(c.id_classroom));
-
-            for (int i = 0; i < DB.Faculty.Count(); i++)
+            using (var DB = new SchedulingContext())
             {
+                List<Students_Group_Day> sg_day = new List<Students_Group_Day>();
+                foreach (var sg in DB.Students_group)
+                    sg_day.Add(new Students_Group_Day(sg.id_students_group));
 
-            }
+                List<Teacher_Day> t_day = new List<Teacher_Day>();
+                foreach (var t in DB.Teacher)
+                    t_day.Add(new Teacher_Day(t.id_teacher));
 
-            for (int i = 0; i < DB.Faculty.Count(); i++)
-            {
+                List<Classroom_Day> c_day = new List<Classroom_Day>();
+                foreach (var c in DB.Classroom)
+                    c_day.Add(new Classroom_Day(c.id_classroom));
 
+                foreach (var d in DB.Department)
+                {
+
+                }
+
+                foreach (var d in DB.Department)
+                {
+                    List<SVM.Lesson> empty_lessons = GetEmptyLessons(d.id_department, true);
+
+                    while (empty_lessons.Count > 0)
+                    {
+
+                    }
+                }
             }
         }
 
@@ -44,16 +50,16 @@ namespace LectureSchedulingTool.Models
             {
                 this.id_students_group = id_students_group;
 
-                day = new List<List<bool>>();
+                day = new List<List<bool>>(5);
 
                 int lessons = Int32.Parse(ConfigurationManager.AppSettings["LessonsCount"]);
 
                 for (int i = 0; i < 5; i++)
                 {
-                    day[i] = new List<bool>(lessons);
+                    day.Add(new List<bool>(lessons));
 
                     for (int j = 0; j < lessons; j++)
-                        day[i][j] = false;
+                        day[i].Add(false);
                 }
             }
         }
@@ -73,10 +79,10 @@ namespace LectureSchedulingTool.Models
 
                 for (int i = 0; i < 5; i++)
                 {
-                    day[i] = new List<bool>(lessons);
+                    day.Add(new List<bool>(lessons));
 
                     for (int j = 0; j < lessons; j++)
-                        day[i][j] = false;
+                        day[i].Add(false);
                 }
             }
         }
@@ -96,36 +102,43 @@ namespace LectureSchedulingTool.Models
 
                 for (int i = 0; i < 5; i++)
                 {
-                    day[i] = new List<bool>(lessons);
+                    day.Add(new List<bool>(lessons));
 
                     for (int j = 0; j < lessons; j++)
-                        day[i][j] = false;
+                        day[i].Add(false);
                 }
             }
         }
 
-        private List<SVM.Lesson> GetEmptyLessons(int id_faculty, bool for_internal_groups)
+        private List<SVM.Lesson> GetEmptyLessons(int id_department, bool for_internal_groups)
         {
-            List<SVM.Students_group_load> sgl = DB.Students_group_load.ToList();
+            List<SVM.Students_group_load> student_group_loads;
             List<SVM.Lesson> lessons = new List<SVM.Lesson>();
+
+            using (var DB = new SchedulingContext())
+            {
+                student_group_loads = new List<SVM.Students_group_load>(DB.Students_group_load.Count());
+
+                student_group_loads = DB.Students_group_load.Take(16).ToList();
+            }
 
             int weeks_amount = Int32.Parse(ConfigurationManager.AppSettings["WeeksAmount"]);
             int weeks_count = Int32.Parse(ConfigurationManager.AppSettings["WeeksCount"]);
             int lesson_amount = Int32.Parse(ConfigurationManager.AppSettings["LessonsAmount"]);
 
-            int min_hours = weeks_amount * 2 / weeks_count;
+            int min_hours = weeks_amount * lesson_amount / weeks_count;
 
-            for (int i = 0; sgl.Count != 0; i++)
+            for (int i = 0; student_group_loads.Count != 0; i++)
             {
-                if (sgl[i].hours / min_hours == 1)
+                if (student_group_loads[i].hours / min_hours == 1)
                 {
-                    lessons.Add(new SVM.Lesson { id_students_group_load = sgl[i].id_students_group_load });
-                    sgl.Remove(sgl[i]);
+                    lessons.Add(new SVM.Lesson { id_students_group_load = student_group_loads[i].id_students_group_load });
+                    student_group_loads.Remove(student_group_loads[i]);
                 }
                 else
                 {
-                    lessons.Add(new SVM.Lesson { id_students_group_load = sgl[i].id_students_group_load });
-                    sgl[i].hours -= min_hours;
+                    lessons.Add(new SVM.Lesson { id_students_group_load = student_group_loads[i].id_students_group_load });
+                    student_group_loads[i].hours -= min_hours;
                 }
             }
 
