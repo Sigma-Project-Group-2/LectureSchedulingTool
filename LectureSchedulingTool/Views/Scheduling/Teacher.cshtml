@@ -1,7 +1,7 @@
 ﻿@using LectureSchedulingTool.Models;
 @model SVM.Teacher
 
-<h2>Преподаватели</h2>
+<h2>@Html.Localizate("Teachers", (string)ViewBag.CurLang)</h2>
 <hr />
 
 @(Html.ValidationSummary("", new { @class = "text-danger" }))
@@ -10,13 +10,13 @@
     <thead>
         <tr>
             <td><center>№</center></td>
-            <td>Факультет</td>
-            <td>Кафедра</td>
-            <td>Фамилия</td>
-            <td>Имя</td>
-            <td>Отчество</td>
-            <td>Должность</td>
-            <td>Регалии</td>
+            <td>@Html.Localizate("Faculty", (string)ViewBag.CurLang)</td>
+            <td>@Html.Localizate("Department", (string)ViewBag.CurLang)</td>
+            <td>@Html.Localizate("L_Name", (string)ViewBag.CurLang)</td>
+            <td>@Html.Localizate("F_Name", (string)ViewBag.CurLang)</td>
+            <td>@Html.Localizate("P_name", (string)ViewBag.CurLang)</td>
+            <td>@Html.Localizate("Pos", (string)ViewBag.CurLang)</td>
+            <td>@Html.Localizate("Reg", (string)ViewBag.CurLang)</td>
         </tr>
     </thead>
     <tbody>
@@ -55,8 +55,8 @@
                             <td>@(Html.TextBoxFor(m => m.patronymic, new { @class = "form-control" })) </td>
                             <td>@(Html.TextBoxFor(m => m.working_position, new { @class = "form-control" })) </td>
                             <td>@(Html.TextBoxFor(m => m.regalia, new { @class = "form-control" })) </td>
-                            <td width="10%"><center><button type="submit" id="update" name="action" value="u" class="btn btn-primary"> Обновить</button></center></td>
-                            <td width="9%"><center><button type="submit" id="cancel" name="action" value="0" class="btn btn-warning"> Отменить</button></center></td>
+                            <td width="10%"><center><button type="submit" id="update" name="action" value="u" class="btn btn-primary">@Html.Localizate("Update", (string)ViewBag.CurLang)</button></center></td>
+                            <td width="9%"><center><button type="submit" id="cancel" name="action" value="0" class="btn btn-warning">@Html.Localizate("Cancel", (string)ViewBag.CurLang)</button></center></td>
                         </tr>
                     }
                 }
@@ -81,13 +81,13 @@
                             <td>@(teachers[i].regalia)</td>
                             @if (action == "e" || action == "a")
                             {
-                                <td width="10%"><center><button type="submit" id="edit" name="action" value="e" class="btn btn-primary" width="inherit" disabled> Редактировать</button></center></td>
-                                <td width="9%"><center><button type="submit" id="remove" name="action" value="r" class="btn btn-danger" width="inherit" disabled> Удалить</button></center></td>
+                                <td width="10%"><center><button type="submit" id="edit" name="action" value="e" class="btn btn-primary" width="inherit" disabled>@Html.Localizate("Edit", (string)ViewBag.CurLang)</button></center></td>
+                                <td width="9%"><center><button type="submit" id="remove" name="action" value="r" class="btn btn-danger" width="inherit" disabled>@Html.Localizate("Delete", (string)ViewBag.CurLang)</button></center></td>
                             }
                             else
                             {
-                                <td width="10%"><center><button type="submit" id="edit" name="action" value="e" class="btn btn-primary" width="inherit"> Редактировать</button></center></td>
-                                <td width="9%"><center><button type="submit" id="remove" name="action" value="r" class="btn btn-danger" width="inherit"> Удалить</button></center></td>
+                                <td width="10%"><center><button type="submit" id="edit" name="action" value="e" class="btn btn-primary" width="inherit">@Html.Localizate("Edit", (string)ViewBag.CurLang)</button></center></td>
+                                <td width="9%"><center><button type="submit" id="remove" name="action" value="r" class="btn btn-danger" width="inherit">@Html.Localizate("Delete", (string)ViewBag.CurLang)</button></center></td>
                             }
                         </tr>
                     }
@@ -110,8 +110,8 @@
                         <td>@(Html.TextBoxFor(m => m.patronymic, new { @class = "form-control" })) </td>
                         <td>@(Html.TextBoxFor(m => m.working_position, new { @class = "form-control" })) </td>
                         <td>@(Html.TextBoxFor(m => m.regalia, new { @class = "form-control" })) </td>
-                        <td width="10%"><center><button type="submit" id="save" name="action" value="s" class="btn btn-primary"> Добавить</button></center></td>
-                        <td width="9%"><center><button type="submit" id="cancel" name="action" value="0" class="btn btn-warning"> Отменить</button></center></td>
+                        <td width="10%"><center><button type="submit" id="save" name="action" value="s" class="btn btn-primary">@Html.Localizate("Add", (string)ViewBag.CurLang)</button></center></td>
+                        <td width="9%"><center><button type="submit" id="cancel" name="action" value="0" class="btn btn-warning">@Html.Localizate("Cancel", (string)ViewBag.CurLang)</button></center></td>
                     </tr>
                 }
             }

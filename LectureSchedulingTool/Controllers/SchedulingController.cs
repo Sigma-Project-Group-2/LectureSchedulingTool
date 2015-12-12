@@ -14,7 +14,9 @@ namespace LectureSchedulingTool.Controllers
         {
             //проверяем если ли в коллекции параметр lang и если есть, получаем его.
             if (requestContext.RouteData.Values["lang"] != null && requestContext.RouteData.Values["lang"] as string != "null")
+            {
                 CurrentLangCode = requestContext.RouteData.Values["lang"] as string;
+            }
             //а если его нет, то используем язык по умолчанию
             else
                 CurrentLangCode = "ru";
