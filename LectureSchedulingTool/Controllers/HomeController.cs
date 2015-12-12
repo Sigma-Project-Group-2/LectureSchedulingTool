@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LectureSchedulingTool.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -20,6 +21,9 @@ namespace LectureSchedulingTool.Controllers
 
         public ActionResult Contact()
         {
+            SchedulingAlgorithm sa = new SchedulingAlgorithm();
+            sa.Generate();
+
             return View();
         }
     }
