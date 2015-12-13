@@ -5,12 +5,15 @@ namespace LectureSchedulingTool.Models
 {
     public class LoginViewModel
     {
-        [Required]
-        [Display(Name = "Email")]
-        [EmailAddress]
+        [Required(ErrorMessageResourceType = typeof(Resources.ValidationMessages),
+            ErrorMessageResourceName = "EmailRequired")]
+        //[Display(Name = "Email")]
+        [EmailAddress(ErrorMessageResourceType = typeof(Resources.ValidationMessages),
+            ErrorMessageResourceName = "EmailInCorrect")]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceType = typeof(Resources.ValidationMessages),
+            ErrorMessageResourceName = "PasswordRequired")]
         [DataType(DataType.Password)]
         //[Display(Name = "Пароль")]
         public string Password { get; set; }
@@ -21,26 +24,34 @@ namespace LectureSchedulingTool.Models
 
     public class RegisterViewModel
     {
-        [Required]
-        [EmailAddress]
-        [Display(Name = "Email")]
+        [Required(ErrorMessageResourceType = typeof(Resources.ValidationMessages), 
+            ErrorMessageResourceName = "EmailRequired")]
+        [EmailAddress(ErrorMessageResourceType = typeof(Resources.ValidationMessages),
+            ErrorMessageResourceName = "EmailInCorrect")]
+        //[Display(Name = "Email")]
         public string Email { get; set; }
 
-        [Required]
-        [SecretCode]
-        [Display(Name = "Секретный код")]
+        [Required(ErrorMessageResourceType = typeof(Resources.ValidationMessages),
+            ErrorMessageResourceName = "SecretCodeRequired")]
+        [SecretCode(ErrorMessageResourceType = typeof(Resources.ValidationMessages),
+            ErrorMessageResourceName = "InCorrectSecretCode1")]
+        //[Display(Name = "Секретный код")]
         public string SecretCode { get; set; }
 
-        [Required]
-        [StringLength(100, ErrorMessage = "{0} должен быть как минимум {2} символов в длинну.", MinimumLength = 6)]
+        [Required(ErrorMessageResourceType = typeof(Resources.ValidationMessages),
+            ErrorMessageResourceName = "PasswordRequired")]
+        [StringLength(100, MinimumLength = 6, ErrorMessageResourceType = typeof(Resources.ValidationMessages),
+            ErrorMessageResourceName = "PasswordCodeLength")]
         [DataType(DataType.Password)]
         //[Display(Name = "Пароль")]
         public string Password { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceType = typeof(Resources.ValidationMessages),
+            ErrorMessageResourceName = "PasswordConfirmationRequired")]
         [DataType(DataType.Password)]
-        [Display(Name = "Подтверждение пароля")]
-        [Compare("Password", ErrorMessage = "Пароль и подтверждение пароля не совпадают.")]
+        //[Display(Name = "Подтверждение пароля")]
+        [Compare("Password", ErrorMessageResourceType = typeof(Resources.ValidationMessages),
+            ErrorMessageResourceName = "PasswordConfirmationEquality")]
         public string ConfirmPassword { get; set; }        
     }
 }

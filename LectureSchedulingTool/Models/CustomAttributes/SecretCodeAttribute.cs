@@ -17,13 +17,13 @@ namespace LectureSchedulingTool.Models
 
             if (secretCode == null)
             {
-                ErrorMessage = "Некорректный секретный код. Пример: AAAAA-AAAAA-AAAAA-AAAAA";
+                ErrorMessageResourceName = "InCorrectSecretCode1";
                 return false;
             }
 
             if (secretCode.Length != 23)
             {
-                ErrorMessage = "Некорректный секретный код. Не совпадает кол-во символов. Пример: AAAAA-AAAAA-AAAAA-AAAAA";
+                ErrorMessageResourceName = "InCorrectSecretCode2";
                 return false;
             }
 
@@ -31,12 +31,12 @@ namespace LectureSchedulingTool.Models
             {
                 if (secretCode[i] != '-' && (i == 5 || i == 11 || i == 17))
                 {
-                    ErrorMessage = "Некорректный секретный код. Некорректно расставлены дефисы. Пример: AAAAA-AAAAA-AAAAA-AAAAA";
+                    ErrorMessageResourceName = "InCorrectSecretCode3";
                     return false;
                 }
                 if ((secretCode[1] == '-') || (secretCode[1] == ' '))
                 {
-                    ErrorMessage = "Некорректный секретный код. Неверный ввод. Пример: AAAAA-AAAAA-AAAAA-AAAAA";
+                    ErrorMessageResourceName = "InCorrectSecretCode4";
                     return false;
                 }
 
@@ -46,7 +46,7 @@ namespace LectureSchedulingTool.Models
             {
                 if ((secretCode[i] == secretCode[i + 1]) && (secretCode[i + 1] == secretCode[i + 2]))
                 {
-                    ErrorMessage = "Некорректный секретный код. Неверный ввод. Пример: AAAAA-AAAAA-AAAAA-AAAAA";
+                    ErrorMessageResourceName = "InCorrectSecretCode4";
                     return false;
 
                 }

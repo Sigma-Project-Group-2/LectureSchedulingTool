@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using LectureSchedulingTool.Models;
+using LectureSchedulingTool.Filter;
 
 namespace LectureSchedulingTool.Controllers
 {
@@ -21,6 +22,7 @@ namespace LectureSchedulingTool.Controllers
         private ApplicationUserManager _userManager;
 
         public string CurrentLangCode { get; protected set; }
+        [Culture]
         protected override void Initialize(System.Web.Routing.RequestContext requestContext)
         {
             //проверяем если ли в коллекции параметр lang и если есть, получаем его.
@@ -40,13 +42,13 @@ namespace LectureSchedulingTool.Controllers
         public AccountController()
         {
         }
-
+        
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
         }
-
+        
         public ApplicationSignInManager SignInManager
         {
             get
@@ -58,7 +60,7 @@ namespace LectureSchedulingTool.Controllers
                 _signInManager = value;
             }
         }
-
+        
         public ApplicationUserManager UserManager
         {
             get
@@ -73,6 +75,7 @@ namespace LectureSchedulingTool.Controllers
 
         //
         // GET: /Account/Login
+        [Culture]
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
@@ -82,6 +85,7 @@ namespace LectureSchedulingTool.Controllers
 
         //
         // POST: /Account/Login
+        [Culture]
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -106,12 +110,14 @@ namespace LectureSchedulingTool.Controllers
                 case SignInStatus.Failure:
                 default:
                     ModelState.AddModelError("", "Invalid login attempt.");
+                   
                     return View(model);
             }
         }
 
         //
         // GET: /Account/Register
+        [Culture]
         [AllowAnonymous]
         public ActionResult Register()
         {
@@ -120,6 +126,7 @@ namespace LectureSchedulingTool.Controllers
 
         //
         // POST: /Account/Register
+        [Culture]
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
