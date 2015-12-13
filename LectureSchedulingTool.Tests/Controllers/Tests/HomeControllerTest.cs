@@ -1,7 +1,8 @@
 ﻿using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using LectureSchedulingTool.Controllers;
-
+using LectureSchedulingTool.Models;
+using Moq;
 namespace LectureSchedulingTool.Tests.Controllers
 {
     [TestClass]
@@ -37,11 +38,12 @@ namespace LectureSchedulingTool.Tests.Controllers
         public void Contact()
         {
             // Arrange
-            HomeController controller = new HomeController();
-
+            
+            var mock = new Mock<SchedulingAlgorithm>();
+            mock.Setup(x => x.Generate());
+            HomeController controller = new HomeController(mock.Object);
             // Act
             ViewResult result = controller.Contact() as ViewResult;
-
             // Assert
             Assert.IsNotNull(result);
         }
