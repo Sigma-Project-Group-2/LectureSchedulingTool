@@ -73,7 +73,8 @@ namespace LectureSchedulingTool.Controllers
         public ActionResult Index(IndexViewModel model)
         {
             if (model.HaveDataInTables == true)
-                ModelState.AddModelError("-1", "Часть полей ввода заблокированна, так как есть данные в таблицах. Удалите все данные, в случае, если вам нужно редактировать одно из заблокированных полей.");
+                Localizator.Localizate("Password", (string)ViewBag.CurLang);
+                ModelState.AddModelError("-1", Localizator.Localizate("Manage_Error1", CurrentLangCode));
 
             if (ModelState.IsValid)
             {
@@ -110,7 +111,7 @@ namespace LectureSchedulingTool.Controllers
                     }
                     catch (Exception ex)
                     {
-                        ModelState.AddModelError("-1", "Невозможно добавить данные! Пожалуйста, попробуйте еще раз.");
+                        ModelState.AddModelError("-1", Localizator.Localizate("Manage_Error2", CurrentLangCode));
                     }
                     break;
 
@@ -124,12 +125,12 @@ namespace LectureSchedulingTool.Controllers
                         }
                         else
                         {
-                            ModelState.AddModelError("-2", "Невозможно удалить данные! Пожалуйста, проверьте правильность ввода и попробуйте еще раз.");
+                            ModelState.AddModelError("-2", Localizator.Localizate("Manage_Error3", CurrentLangCode));
                         }                        
                     }
                     catch (Exception ex)
                     {
-                        ModelState.AddModelError("-2", "Невозможно удалить данные! Пожалуйста, проверьте правильность ввода и попробуйте еще раз.");
+                        ModelState.AddModelError("-2", Localizator.Localizate("Manage_Error3", CurrentLangCode));
                     }
                     break;
             }

@@ -38,5 +38,18 @@ namespace LectureSchedulingTool.Models
                     return "[Localization not found]";
             }
         }
+
+        public static string Localizate(string name, string language)
+        {
+            using (LocalizationContext data = new LocalizationContext())
+            {
+                var translation = data.Localization.FirstOrDefault(t => t.name == name && t.language == language);
+
+                if (translation != null)
+                    return translation.text;
+                else
+                    return "[Localization not found]";
+            }
+        }
     }
 }

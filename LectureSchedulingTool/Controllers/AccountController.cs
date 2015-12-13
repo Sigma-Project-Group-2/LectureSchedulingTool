@@ -109,7 +109,7 @@ namespace LectureSchedulingTool.Controllers
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 case SignInStatus.Failure:
                 default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
+                    ModelState.AddModelError("", Localizator.Localizate("Account_Email_Password_Error", CurrentLangCode));
                    
                     return View(model);
             }
@@ -140,7 +140,7 @@ namespace LectureSchedulingTool.Controllers
                     {
                         if (DB.Secret_code.Count(sc => sc.secret_code == model.SecretCode.ToUpper()) == 0)
                         {
-                            ModelState.AddModelError("-1", "Неверный секретный код! Пожалуйста, проверьте правильность ввода и попробуйте еще раз.");
+                            ModelState.AddModelError("-1", Localizator.Localizate("Secret_code_error", CurrentLangCode));
                             return View(model);
                         }
                     }

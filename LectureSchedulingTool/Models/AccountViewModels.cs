@@ -33,8 +33,7 @@ namespace LectureSchedulingTool.Models
 
         [Required(ErrorMessageResourceType = typeof(Resources.ValidationMessages),
             ErrorMessageResourceName = "SecretCodeRequired")]
-        [SecretCode(ErrorMessageResourceType = typeof(Resources.ValidationMessages),
-            ErrorMessageResourceName = "InCorrectSecretCode1")]
+        [SecretCode(ErrorMessageResourceType = typeof(Resources.ValidationMessages))]
         //[Display(Name = "Секретный код")]
         public string SecretCode { get; set; }
 

@@ -30,7 +30,7 @@ namespace LectureSchedulingTool.Controllers
                             ViewBag.action = 'a';
                             ViewBag.row = row;
 
-                            ModelState.AddModelError("-2", "Введеные данные не уникальны! Пожалуйста, проверьте правильность ввода и попробуйте еще раз.");
+                            ModelState.AddModelError("-2", Localizator.Localizate("Scheduling_Error1", CurrentLangCode));
                         }
                         else
                         {
@@ -44,7 +44,7 @@ namespace LectureSchedulingTool.Controllers
                             }
                             catch (Exception ex)
                             {
-                                ModelState.AddModelError("-3", "Невозможно добавить данные! Пожалуйста, проверьте правильность ввода и попробуйте еще раз.");
+                                ModelState.AddModelError("-3", Localizator.Localizate("Scheduling_Error2", CurrentLangCode));
                                 if (HttpContext.IsDebuggingEnabled)
                                     ModelState.AddModelError("-3", ex.GetBaseException().Message);
                             }
@@ -74,7 +74,7 @@ namespace LectureSchedulingTool.Controllers
                             ViewBag.action = 'e';
                             ViewBag.row = row;
 
-                            ModelState.AddModelError("-2", "Введеные данные не уникальны! Пожалуйста, проверьте правильность ввода и попробуйте еще раз.");
+                            ModelState.AddModelError("-2", Localizator.Localizate("Scheduling_Error3", CurrentLangCode));
                         }
                         else
                         {
@@ -89,7 +89,7 @@ namespace LectureSchedulingTool.Controllers
                             }
                             catch (Exception ex)
                             {
-                                ModelState.AddModelError("-3", "Невозможно обновить данные! Пожалуйста, проверьте правильность ввода и попробуйте еще раз.");
+                                ModelState.AddModelError("-3", Localizator.Localizate("Scheduling_Error4", CurrentLangCode));
                                 if (HttpContext.IsDebuggingEnabled)
                                     ModelState.AddModelError("-3", ex.GetBaseException().Message);
                             }
@@ -114,14 +114,14 @@ namespace LectureSchedulingTool.Controllers
                         }
                         catch (Exception ex)
                         {
-                            ModelState.AddModelError("-4", "Невозможно удалить данные! Возможно, есть зависимые данные. Пожалуйста, проверьте правильность ввода и попробуйте еще раз.");
+                            ModelState.AddModelError("-4", Localizator.Localizate("Scheduling_Error5", CurrentLangCode));
                             if (HttpContext.IsDebuggingEnabled)
                                 ModelState.AddModelError("-4", ex.GetBaseException().Message);
                         }
                     }
                     else
                     {
-                        ModelState.AddModelError("-5", "Невозможно удалить данные! Пожалуйста, проверьте правильность ввода и попробуйте еще раз.");
+                        ModelState.AddModelError("-5", Localizator.Localizate("Scheduling_Error6", CurrentLangCode));
                     }
                     break;
 
@@ -166,7 +166,7 @@ namespace LectureSchedulingTool.Controllers
             }
             catch (Exception ex)
             {
-                ModelState.AddModelError("-1", "Невозможно загрузить данные! Пожалуйста, попробуйте еще раз или обратитесь к администратору системы.");
+                ModelState.AddModelError("-1", Localizator.Localizate("Scheduling_Error7", CurrentLangCode));
                 if (HttpContext.IsDebuggingEnabled)
                     ModelState.AddModelError("-1", ex.GetBaseException().Message);
             }
