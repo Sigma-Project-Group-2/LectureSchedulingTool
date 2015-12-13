@@ -86,14 +86,17 @@ namespace LectureSchedulingTool.Controllers
 
         public IQueryable<SVM.Faculty> GetSafeFaculties()
         {
+            return DB.Faculty;
             return (from f in DB.Faculty join d in DB.Department on f.id_faculty equals d.id_faculty select f);
         }
         public IQueryable<SVM.Department> GetSafeDepartmentsForSGLoads()
         {
+            return DB.Department;
             return (from d in DB.Department join sg in DB.Students_group on d.id_department equals sg.id_department select d);
         }
         public IQueryable<SVM.Department> GetSafeDepartmentsForTLoads()
         {
+            return DB.Department;
             return (from d in DB.Department join t in DB.Teacher on d.id_department equals t.id_department select d);
         }
     }
