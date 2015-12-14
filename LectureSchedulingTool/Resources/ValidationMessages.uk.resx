@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CorrectHours1" xml:space="preserve">
+    <value>Некоректне значення навантаження.</value>
+  </data>
+  <data name="CorrectHours2" xml:space="preserve">
+    <value>Некоректне значення навантаження. Значення повинно целочисленном ділитися на</value>
+  </data>
   <data name="EmailInCorrect" xml:space="preserve">
     <value>Поле "Електронна пошта" не містить допустимий адрес електронної пошти.</value>
   </data>
@@ -147,7 +153,16 @@
   <data name="PasswordRequired" xml:space="preserve">
     <value>Необхідне поле "Пароль"</value>
   </data>
+  <data name="RangeHours" xml:space="preserve">
+    <value>{0} має бути в діапазоні від {1} до {2}</value>
+  </data>
+  <data name="Required" xml:space="preserve">
+    <value>Необхідне поле "{0}"</value>
+  </data>
   <data name="SecretCodeRequired" xml:space="preserve">
     <value>Необхідне поле "Секретний код"</value>
+  </data>
+  <data name="StringLength" xml:space="preserve">
+    <value>{0} повинно бути менше чим {1} символів</value>
   </data>
 </root>

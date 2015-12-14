@@ -9,7 +9,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using LectureSchedulingTool.Models;
-using LectureSchedulingTool.Filter;
+using System.Collections.Generic;
+using System.Threading;
 
 namespace LectureSchedulingTool.Controllers
 {
@@ -22,7 +23,7 @@ namespace LectureSchedulingTool.Controllers
         private ApplicationUserManager _userManager;
 
         public string CurrentLangCode { get; protected set; }
-        [Culture]
+
         protected override void Initialize(System.Web.Routing.RequestContext requestContext)
         {
             //проверяем если ли в коллекции параметр lang и если есть, получаем его.
@@ -36,6 +37,10 @@ namespace LectureSchedulingTool.Controllers
 
             //сохраняем значение языка во ViewBag, для того, чтобы легко получать к нему доступ из вьюшки
             ViewBag.CurLang = CurrentLangCode;
+
+            string cultureName = (string)requestContext.RouteData.Values["lang"];
+            Localizator.Initialize(cultureName);
+
             base.Initialize(requestContext);
         }
 
@@ -75,7 +80,7 @@ namespace LectureSchedulingTool.Controllers
 
         //
         // GET: /Account/Login
-        [Culture]
+
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
@@ -85,7 +90,7 @@ namespace LectureSchedulingTool.Controllers
 
         //
         // POST: /Account/Login
-        [Culture]
+        //[Culture]
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -117,7 +122,7 @@ namespace LectureSchedulingTool.Controllers
 
         //
         // GET: /Account/Register
-        [Culture]
+        //[Culture]
         [AllowAnonymous]
         public ActionResult Register()
         {
@@ -126,7 +131,7 @@ namespace LectureSchedulingTool.Controllers
 
         //
         // POST: /Account/Register
-        [Culture]
+
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]

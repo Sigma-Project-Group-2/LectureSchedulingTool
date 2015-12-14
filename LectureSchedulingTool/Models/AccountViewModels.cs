@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using LectureSchedulingTool.Models.CustomAttributes;
 
 namespace LectureSchedulingTool.Models
 {
@@ -7,7 +8,6 @@ namespace LectureSchedulingTool.Models
     {
         [Required(ErrorMessageResourceType = typeof(Resources.ValidationMessages),
             ErrorMessageResourceName = "EmailRequired")]
-        //[Display(Name = "Email")]
         [EmailAddress(ErrorMessageResourceType = typeof(Resources.ValidationMessages),
             ErrorMessageResourceName = "EmailInCorrect")]
         public string Email { get; set; }
@@ -15,7 +15,6 @@ namespace LectureSchedulingTool.Models
         [Required(ErrorMessageResourceType = typeof(Resources.ValidationMessages),
             ErrorMessageResourceName = "PasswordRequired")]
         [DataType(DataType.Password)]
-        //[Display(Name = "Пароль")]
         public string Password { get; set; }
 
         [Display(Name = "Запомнить меня?")]
@@ -24,17 +23,16 @@ namespace LectureSchedulingTool.Models
 
     public class RegisterViewModel
     {
-        [Required(ErrorMessageResourceType = typeof(Resources.ValidationMessages), 
+        [Required(ErrorMessageResourceType = typeof(Resources.ValidationMessages),
             ErrorMessageResourceName = "EmailRequired")]
         [EmailAddress(ErrorMessageResourceType = typeof(Resources.ValidationMessages),
             ErrorMessageResourceName = "EmailInCorrect")]
-        //[Display(Name = "Email")]
+        [Display(Name = "Email")]
         public string Email { get; set; }
 
         [Required(ErrorMessageResourceType = typeof(Resources.ValidationMessages),
             ErrorMessageResourceName = "SecretCodeRequired")]
         [SecretCode(ErrorMessageResourceType = typeof(Resources.ValidationMessages))]
-        //[Display(Name = "Секретный код")]
         public string SecretCode { get; set; }
 
         [Required(ErrorMessageResourceType = typeof(Resources.ValidationMessages),
@@ -42,13 +40,11 @@ namespace LectureSchedulingTool.Models
         [StringLength(100, MinimumLength = 6, ErrorMessageResourceType = typeof(Resources.ValidationMessages),
             ErrorMessageResourceName = "PasswordCodeLength")]
         [DataType(DataType.Password)]
-        //[Display(Name = "Пароль")]
         public string Password { get; set; }
 
         [Required(ErrorMessageResourceType = typeof(Resources.ValidationMessages),
             ErrorMessageResourceName = "PasswordConfirmationRequired")]
         [DataType(DataType.Password)]
-        //[Display(Name = "Подтверждение пароля")]
         [Compare("Password", ErrorMessageResourceType = typeof(Resources.ValidationMessages),
             ErrorMessageResourceName = "PasswordConfirmationEquality")]
         public string ConfirmPassword { get; set; }        

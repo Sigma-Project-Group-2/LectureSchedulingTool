@@ -117,52 +117,67 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CorrectHours1" xml:space="preserve">
-    <value>Некорректное значение нагрузки.</value>
+  <data name="Abbreviation" xml:space="preserve">
+    <value>Abbreviation</value>
   </data>
-  <data name="CorrectHours2" xml:space="preserve">
-    <value>Некорректное значение нагрузки. Значение должно целочисленно делиться на</value>
+  <data name="Capacity" xml:space="preserve">
+    <value>Capacity</value>
   </data>
-  <data name="EmailInCorrect" xml:space="preserve">
-    <value>Поле "Электронная почта" не содержит допустимый адрес электронной почты.</value>
+  <data name="ComparePassword" xml:space="preserve">
+    <value>The new password and confirmation of the new password do not match.</value>
   </data>
-  <data name="EmailRequired" xml:space="preserve">
-    <value>Требуется поле "Электронная почта"</value>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>New Password Confirmation</value>
   </data>
-  <data name="InCorrectSecretCode1" xml:space="preserve">
-    <value>Некорректный секретный код. Пример: AAAAA-AAAAA-AAAAA-AAAAA</value>
+  <data name="ElementsOnPage" xml:space="preserve">
+    <value>Number of items per page</value>
   </data>
-  <data name="InCorrectSecretCode2" xml:space="preserve">
-    <value>Некорректный секретный код. Не совпадает кол-во символов. Пример: AAAAA-AAAAA-AAAAA-AAAAA" </value>
+  <data name="FirstName" xml:space="preserve">
+    <value>First Name</value>
   </data>
-  <data name="InCorrectSecretCode3" xml:space="preserve">
-    <value>Некорректный секретный код. Некорректно расставлены дефисы. Пример: AAAAA-AAAAA-AAAAA-AAAAA</value>
+  <data name="Hours" xml:space="preserve">
+    <value>Hours</value>
   </data>
-  <data name="InCorrectSecretCode4" xml:space="preserve">
-    <value>Некорректный секретный код. Неверный ввод. Пример: AAAAA-AAAAA-AAAAA-AAAAA</value>
+  <data name="LessonsAmount" xml:space="preserve">
+    <value>Number of hours in one session</value>
   </data>
-  <data name="PasswordCodeLength" xml:space="preserve">
-    <value>{0} должен быть как минимум {2} символов в длинну.</value>
+  <data name="LessonsCount" xml:space="preserve">
+    <value>The number of lessons per day</value>
   </data>
-  <data name="PasswordConfirmationEquality" xml:space="preserve">
-    <value>Пароль и подтверждение пароля не совпадают.</value>
+  <data name="NewPassword" xml:space="preserve">
+    <value>New Password</value>
   </data>
-  <data name="PasswordConfirmationRequired" xml:space="preserve">
-    <value>Требуется поле "Подтверждение пароля"</value>
+  <data name="Number" xml:space="preserve">
+    <value>Number</value>
   </data>
-  <data name="PasswordRequired" xml:space="preserve">
-    <value>Требуется поле "Пароль"</value>
+  <data name="NumberOfStudents" xml:space="preserve">
+    <value>Number of students</value>
   </data>
-  <data name="RangeHours" xml:space="preserve">
-    <value>{0} должно быть в диапазоне от {1} до {2}</value>
+  <data name="OldPassword" xml:space="preserve">
+    <value>Current Password</value>
   </data>
-  <data name="Required" xml:space="preserve">
-    <value>Требуется поле "{0}"</value>
+  <data name="Patronymic" xml:space="preserve">
+    <value>Patronymic</value>
   </data>
-  <data name="SecretCodeRequired" xml:space="preserve">
-    <value>Требуется поле "Секретный код"</value>
+  <data name="Position" xml:space="preserve">
+    <value>Position</value>
   </data>
-  <data name="StringLength" xml:space="preserve">
-    <value>{0} должно быть меньше чем {1} символов</value>
+  <data name="Regalia" xml:space="preserve">
+    <value>Regalia</value>
+  </data>
+  <data name="Surname" xml:space="preserve">
+    <value>Surname</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="WeeksAmount" xml:space="preserve">
+    <value>Number of study weeks</value>
+  </data>
+  <data name="WeeksCount" xml:space="preserve">
+    <value>Number of weeks</value>
   </data>
 </root>

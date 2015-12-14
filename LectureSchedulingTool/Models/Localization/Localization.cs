@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
+using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading;
 using System.Web.Mvc;
 
 namespace LectureSchedulingTool.Models
@@ -50,6 +53,19 @@ namespace LectureSchedulingTool.Models
                 else
                     return "[Localization not found]";
             }
+        }
+
+        public static void Initialize(string cultureName)
+        {
+            if (cultureName == "ua")
+                cultureName = "uk";
+            List<string> cultures = new List<string>() { "ru", "en", "uk" };
+            if (!cultures.Contains(cultureName))
+            {
+                cultureName = "ru";
+            }
+            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture(cultureName);
+            Thread.CurrentThread.CurrentUICulture = CultureInfo.CreateSpecificCulture(cultureName);
         }
     }
 }

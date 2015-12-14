@@ -61,6 +61,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Некорректное значение нагрузки..
+        /// </summary>
+        public static string CorrectHours1 {
+            get {
+                return ResourceManager.GetString("CorrectHours1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Некорректное значение нагрузки. Значение должно целочисленно делиться на.
+        /// </summary>
+        public static string CorrectHours2 {
+            get {
+                return ResourceManager.GetString("CorrectHours2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Поле &quot;Электронная почта&quot; не содержит допустимый адрес электронной почты..
         /// </summary>
         public static string EmailInCorrect {
@@ -151,11 +169,38 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на {0} должно быть в диапазоне от {1} до {2}.
+        /// </summary>
+        public static string RangeHours {
+            get {
+                return ResourceManager.GetString("RangeHours", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Требуется поле &quot;{0}&quot;.
+        /// </summary>
+        public static string Required {
+            get {
+                return ResourceManager.GetString("Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Требуется поле &quot;Секретный код&quot;.
         /// </summary>
         public static string SecretCodeRequired {
             get {
                 return ResourceManager.GetString("SecretCodeRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на {0} должно быть меньше чем {1} символов.
+        /// </summary>
+        public static string StringLength {
+            get {
+                return ResourceManager.GetString("StringLength", resourceCulture);
             }
         }
     }

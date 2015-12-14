@@ -1,9 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
+using System.Globalization;
+using System.Threading;
+using System.Web.Mvc;
 
 namespace LectureSchedulingTool.Models
 {
+
     public class SecretCodeAttribute : ValidationAttribute
     {
         public SecretCodeAttribute()

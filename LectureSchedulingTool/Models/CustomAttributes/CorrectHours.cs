@@ -15,7 +15,7 @@ namespace LectureSchedulingTool.Models.CustomAttributes
         {
             if (value == null)
             {
-                ErrorMessage = "Некорректное значение нагрузки.";
+                ErrorMessageResourceName = "CorrectHours1";
                 return false;
             }
 
@@ -28,7 +28,8 @@ namespace LectureSchedulingTool.Models.CustomAttributes
 
             if (hours % min_hours != 0)
             {
-                ErrorMessage = "Некорректное значение нагрузки. Значение должно целочисленно делиться на " + min_hours + ".";
+                ErrorMessageResourceName = "CorrectHours2";
+                ErrorMessage = ErrorMessageResourceName + " " + min_hours + ".";
                 return false;
             }
 

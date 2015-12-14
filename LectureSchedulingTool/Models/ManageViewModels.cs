@@ -10,24 +10,39 @@ namespace LectureSchedulingTool.Models
     {
         public bool BrowserRemembered { get; set; }
 
-        [Required]
-        [Range((int)1, (int)3)]
+        [Required(ErrorMessageResourceType = typeof(Resources.ValidationMessages),
+            ErrorMessageResourceName = "Required")]
+        [Range(1, 3, ErrorMessageResourceType = typeof(Resources.ValidationMessages),
+                ErrorMessageResourceName = "RangeHours")]
+        [Display(ResourceType = typeof(Resources.Names), Name = "WeeksCount")]
         public int WeeksCount { get; set; }
 
-        [Required]
-        [Range((int)1, (int)52)]
+        [Required(ErrorMessageResourceType = typeof(Resources.ValidationMessages),
+            ErrorMessageResourceName = "Required")]
+        [Range(1, 52, ErrorMessageResourceType = typeof(Resources.ValidationMessages),
+                ErrorMessageResourceName = "RangeHours")]
+        [Display(ResourceType = typeof(Resources.Names), Name = "WeeksAmount")]
         public int WeeksAmount { get; set; }
 
-        [Required]
-        [Range((int)1, (int)10)]
+        [Required(ErrorMessageResourceType = typeof(Resources.ValidationMessages),
+             ErrorMessageResourceName = "Required")]
+        [Range(1, 10, ErrorMessageResourceType = typeof(Resources.ValidationMessages),
+                ErrorMessageResourceName = "RangeHours")]
+        [Display(ResourceType = typeof(Resources.Names), Name = "LessonsCount")]
         public int LessonsCount { get; set; }
 
-        [Required]
-        [Range((int)1, (int)10)]
+        [Required(ErrorMessageResourceType = typeof(Resources.ValidationMessages),
+             ErrorMessageResourceName = "Required")]
+        [Range(1, 10, ErrorMessageResourceType = typeof(Resources.ValidationMessages),
+                ErrorMessageResourceName = "RangeHours")]
+        [Display(ResourceType = typeof(Resources.Names), Name = "LessonsAmount")]
         public int LessonsAmount { get; set; }
 
-        [Required]
-        [Range((int)5, (int)100)]
+        [Required(ErrorMessageResourceType = typeof(Resources.ValidationMessages),
+            ErrorMessageResourceName = "Required")]
+        [Range(5, 100, ErrorMessageResourceType = typeof(Resources.ValidationMessages),
+                ErrorMessageResourceName = "RangeHours")]
+        [Display(ResourceType = typeof(Resources.Names), Name = "ElementsOnPage")]
         public int ElementsOnPage { get; set; }
 
         [NotMapped]
@@ -63,20 +78,26 @@ namespace LectureSchedulingTool.Models
 
     public class ChangePasswordViewModel
     {
-        [Required]
+        [Required(ErrorMessageResourceType = typeof(Resources.ValidationMessages),
+            ErrorMessageResourceName = "Required")]
         [DataType(DataType.Password)]
-        [Display(Name = "Текущий пароль")]
+        [Display(ResourceType = typeof(Resources.Names), Name = "OldPassword")]
         public string OldPassword { get; set; }
 
-        [Required]
-        [StringLength(100, ErrorMessage = "{0} должен быть как минимум {2} символов в длинну.", MinimumLength = 6)]
+        [Required(ErrorMessageResourceType = typeof(Resources.ValidationMessages),
+            ErrorMessageResourceName = "Required")]
+        [StringLength(100, ErrorMessageResourceType = typeof(Resources.ValidationMessages),
+            ErrorMessageResourceName = "StringLength", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Новый пароль")]
+        [Display(ResourceType = typeof(Resources.Names), Name = "NewPassword")]
         public string NewPassword { get; set; }
 
+        [Required(ErrorMessageResourceType = typeof(Resources.ValidationMessages),
+            ErrorMessageResourceName = "Required")]
         [DataType(DataType.Password)]
-        [Display(Name = "Подтверждение нового пароля")]
-        [Compare("NewPassword", ErrorMessage = "Новый пароль и подтверждение нового пароля не совпадают.")]
+        [Display(ResourceType = typeof(Resources.Names), Name = "ConfirmPassword")]
+        [Compare("NewPassword", ErrorMessageResourceType = typeof(Resources.Names),
+            ErrorMessageResourceName = "ComparePassword")]
         public string ConfirmPassword { get; set; }
     }
 

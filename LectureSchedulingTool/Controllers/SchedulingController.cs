@@ -23,6 +23,10 @@ namespace LectureSchedulingTool.Controllers
 
             //сохраняем значение языка во ViewBag, для того, чтобы легко получать к нему доступ из вьюшки
             ViewBag.CurLang = CurrentLangCode;
+
+            string cultureName = (string)requestContext.RouteData.Values["lang"];
+            Localizator.Initialize(cultureName);
+
             base.Initialize(requestContext);
         }
 

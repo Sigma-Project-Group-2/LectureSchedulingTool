@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CorrectHours1" xml:space="preserve">
+    <value>Incorrect load value.</value>
+  </data>
+  <data name="CorrectHours2" xml:space="preserve">
+    <value>Incorrect load value. The value must be divisible by integer</value>
+  </data>
   <data name="EmailInCorrect" xml:space="preserve">
     <value>The "E-mail" does not contain a valid email address.</value>
   </data>
@@ -147,7 +153,16 @@
   <data name="PasswordRequired" xml:space="preserve">
     <value>The field "Password" must be filled</value>
   </data>
+  <data name="RangeHours" xml:space="preserve">
+    <value>{0} should be in the range of {1} to {2}</value>
+  </data>
+  <data name="Required" xml:space="preserve">
+    <value>The field "{0}" must be filled</value>
+  </data>
   <data name="SecretCodeRequired" xml:space="preserve">
     <value>The field "Secret code" must be filled</value>
+  </data>
+  <data name="StringLength" xml:space="preserve">
+    <value>{0} must be less than {1} characters</value>
   </data>
 </root>
