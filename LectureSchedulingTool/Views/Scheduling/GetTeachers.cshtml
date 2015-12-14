@@ -2,11 +2,18 @@
 
 @{
     List<SVM.Teacher> teachers = ViewBag.teachers;
-
-    for (int i = 0; i < teachers.Count; i++)
+    if (teachers.Count != 0) { 
+        for (int i = 0; i < teachers.Count; i++)
+        {
+            <option value="@teachers[i].id_teacher">
+                @(teachers[i].ToString())
+            </option>
+        }
+    }
+    else
     {
-        <option value="@teachers[i].id_teacher">
-            @(teachers[i].ToString())
+        <option value="-1">
+           ------
         </option>
     }
 }

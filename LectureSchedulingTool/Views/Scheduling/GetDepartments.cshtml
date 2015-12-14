@@ -3,10 +3,19 @@
 @{
     List<SVM.Department> departments = ViewBag.departments;
 
-    for (int i = 0; i < departments.Count; i++)
+    if (departments.Count != 0)
     {
-        <option value="@departments[i].id_department">
-            @(departments[i].ToString())
+        for (int i = 0; i < departments.Count; i++)
+        {
+            <option value="@departments[i].id_department" >
+                @(departments[i].ToString())
+            </option>
+        }
+    }
+    else
+    {
+        <option value="-1">
+           ------
         </option>
     }
 }
