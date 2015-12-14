@@ -121,7 +121,7 @@
     <value>Некоректне значення навантаження.</value>
   </data>
   <data name="CorrectHours2" xml:space="preserve">
-    <value>Некоректне значення навантаження. Значення повинно целочисленном ділитися на</value>
+    <value>Некоректне значення навантаження. </value>
   </data>
   <data name="EmailInCorrect" xml:space="preserve">
     <value>Поле "Електронна пошта" не містить допустимий адрес електронної пошти.</value>

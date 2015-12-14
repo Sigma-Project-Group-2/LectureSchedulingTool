@@ -443,6 +443,7 @@ namespace LectureSchedulingTool.Models
             [Required(ErrorMessageResourceType = typeof(Resources.ValidationMessages),
             ErrorMessageResourceName = "Required")]
             [CorrectHours(ErrorMessageResourceType = typeof(Resources.ValidationMessages))]
+
             [Range(1, 10000, ErrorMessageResourceType = typeof(Resources.ValidationMessages),
                 ErrorMessageResourceName = "RangeHours")]
             [Display(ResourceType = typeof(Resources.Names), Name = "Hours")]

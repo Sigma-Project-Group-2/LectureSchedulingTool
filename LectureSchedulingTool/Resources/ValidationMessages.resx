@@ -118,10 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="CorrectHours1" xml:space="preserve">
-    <value>Некорректное значение нагрузки.</value>
+    <value>Некорректное значение нагрузки.{0}</value>
   </data>
   <data name="CorrectHours2" xml:space="preserve">
-    <value>Некорректное значение нагрузки. Значение должно целочисленно делиться на</value>
+    <value>Некорректное значение нагрузки.</value>
   </data>
   <data name="EmailInCorrect" xml:space="preserve">
     <value>Поле "Электронная почта" не содержит допустимый адрес электронной почты.</value>
@@ -133,7 +133,7 @@
     <value>Некорректный секретный код. Пример: AAAAA-AAAAA-AAAAA-AAAAA</value>
   </data>
   <data name="InCorrectSecretCode2" xml:space="preserve">
-    <value>Некорректный секретный код. Не совпадает кол-во символов. Пример: AAAAA-AAAAA-AAAAA-AAAAA" </value>
+    <value>Некорректный секретный код. Не совпадает к{0}ол-во символов. Пример: AAAAA-AAAAA-AAAAA-AAAAA"</value>
   </data>
   <data name="InCorrectSecretCode3" xml:space="preserve">
     <value>Некорректный секретный код. Некорректно расставлены дефисы. Пример: AAAAA-AAAAA-AAAAA-AAAAA</value>

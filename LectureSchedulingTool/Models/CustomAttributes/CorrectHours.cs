@@ -28,8 +28,8 @@ namespace LectureSchedulingTool.Models.CustomAttributes
 
             if (hours % min_hours != 0)
             {
+                
                 ErrorMessageResourceName = "CorrectHours2";
-                ErrorMessage = ErrorMessageResourceName + " " + min_hours + ".";
                 return false;
             }
 
