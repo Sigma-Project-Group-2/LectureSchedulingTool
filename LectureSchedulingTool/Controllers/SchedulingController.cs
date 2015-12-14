@@ -32,23 +32,32 @@ namespace LectureSchedulingTool.Controllers
 
         public ActionResult GetDepartments(int id_faculty)
         {
-            ViewBag.departments = DB.Department.Where(d => d.id_faculty == id_faculty).ToList();
+            using (var DB = new SchedulingContext())
+            {
+                ViewBag.departments = DB.Department.Where(d => d.id_faculty == id_faculty).ToList();
 
-            return PartialView();
+                return PartialView();
+            }
         }
 
         public ActionResult GetTeachers(int id_department)
         {
-            ViewBag.teachers = DB.Teacher.Where(t => t.id_department == id_department).ToList();
+            using (var DB = new SchedulingContext())
+            {
+                ViewBag.teachers = DB.Teacher.Where(t => t.id_department == id_department).ToList();
 
-            return PartialView();
+                return PartialView();
+            }
         }
 
         public ActionResult GetSubjects(int id_department)
         {
-            ViewBag.subjects = DB.Subject.Where(s => s.id_department == id_department).ToList();
+            using (var DB = new SchedulingContext())
+            {
+                ViewBag.subjects = DB.Subject.Where(s => s.id_department == id_department).ToList();
 
-            return PartialView();
+                return PartialView();
+            }
         }
 
         public IQueryable<SVM.Faculty> GetOnlyNeedsFaculties(IQueryable<SVM.Department> departments)
@@ -90,14 +99,17 @@ namespace LectureSchedulingTool.Controllers
 
         public IQueryable<SVM.Faculty> GetSafeFaculties()
         {
+            return DB.Faculty;
             return (from f in DB.Faculty join d in DB.Department on f.id_faculty equals d.id_faculty select f);
         }
         public IQueryable<SVM.Department> GetSafeDepartmentsForSGLoads()
         {
+            return DB.Department;
             return (from d in DB.Department join sg in DB.Students_group on d.id_department equals sg.id_department select d);
         }
         public IQueryable<SVM.Department> GetSafeDepartmentsForTLoads()
         {
+            return DB.Department;
             return (from d in DB.Department join t in DB.Teacher on d.id_department equals t.id_department select d);
         }
     }
