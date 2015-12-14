@@ -28,23 +28,32 @@ namespace LectureSchedulingTool.Controllers
 
         public ActionResult GetDepartments(int id_faculty)
         {
-            ViewBag.departments = DB.Department.Where(d => d.id_faculty == id_faculty).ToList();
+            using (var DB = new SchedulingContext())
+            {
+                ViewBag.departments = DB.Department.Where(d => d.id_faculty == id_faculty).ToList();
 
-            return PartialView();
+                return PartialView();
+            }
         }
 
         public ActionResult GetTeachers(int id_department)
         {
-            ViewBag.teachers = DB.Teacher.Where(t => t.id_department == id_department).ToList();
+            using (var DB = new SchedulingContext())
+            {
+                ViewBag.teachers = DB.Teacher.Where(t => t.id_department == id_department).ToList();
 
-            return PartialView();
+                return PartialView();
+            }
         }
 
         public ActionResult GetSubjects(int id_department)
         {
-            ViewBag.subjects = DB.Subject.Where(s => s.id_department == id_department).ToList();
+            using (var DB = new SchedulingContext())
+            {
+                ViewBag.subjects = DB.Subject.Where(s => s.id_department == id_department).ToList();
 
-            return PartialView();
+                return PartialView();
+            }
         }
 
         public IQueryable<SVM.Faculty> GetOnlyNeedsFaculties(IQueryable<SVM.Department> departments)
