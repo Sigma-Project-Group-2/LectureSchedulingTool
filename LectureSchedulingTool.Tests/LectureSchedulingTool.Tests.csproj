@@ -136,8 +136,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\Tests\UnitTest1.cs" />
+    <Compile Include="Controllers\Tests\ManageControllerTest.cs" />
     <Compile Include="Models\Tests\SchedulingViewModelsTest.cs" />
     <Compile Include="Models\Tests\CorrectHoursModelTest.cs" />
+    <Compile Include="Models\Tests\IdentityModelTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\Tests\HomeControllerTest.cs" />
     <Compile Include="Models\Tests\SecretCodeAttributeTest.cs" />
@@ -154,10 +156,7 @@
       <Name>LectureSchedulingTool</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controllers\Stubs\" />
-    <Folder Include="Models\Stubs\" />
-  </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
