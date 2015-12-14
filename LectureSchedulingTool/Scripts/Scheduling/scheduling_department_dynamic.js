@@ -17,7 +17,7 @@
     $('[class $= btn-primary]').filter('[value = u]').prop('disabled', 'true');
     $('[class $= btn-primary]').filter('[value = s]').prop('disabled', 'true');
     $('[name = ' + depSel + ']').prop('disabled', 'true'); 
-
+     
 
     $.ajax({
         type: 'GET',
