@@ -31,5 +31,29 @@ namespace LectureSchedulingTool.Tests.Controllers.Tests
             //assert
             Assert.IsNotNull(result);
         }
+        [TestMethod]
+        public void SecretCodeTest_ActionR_ShouldIsNotNull()
+        {
+            //arrange
+            var mock = new Mock<ManageController>();
+            mock.SetupSet(x => x.SecretCode('r'));
+            ManageController controller = new ManageController(mock.Object);
+            //act
+            ViewResult result = controller.SecretCode() as ViewResult;
+            //assert
+            Assert.IsNotNull(result);
+        }
+        [TestMethod]
+        public void IndexTest_ShouldIsNotNull()
+        {
+            //arrange
+            var mock = new Mock<IndexViewModel>();
+          //  mock.Setup(x => x.HaveDataInTables);
+            ManageController controller = new ManageController(mock.Object);
+            //act
+            ViewResult result = controller.Index(mock.Object) as ViewResult;
+            //assert
+            Assert.IsNotNull(result);
+        }
     }
 }

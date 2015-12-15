@@ -135,7 +135,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\Tests\UnitTest1.cs" />
+    <Compile Include="Controllers\Tests\AccountControllerTest.cs" />
     <Compile Include="Controllers\Tests\ManageControllerTest.cs" />
     <Compile Include="Models\Tests\SchedulingViewModelsTest.cs" />
     <Compile Include="Models\Tests\CorrectHoursModelTest.cs" />
