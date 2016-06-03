@@ -59,7 +59,7 @@ namespace LectureSchedulingTool.Models
                     else
                         return false;
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     return true;
                 }

@@ -128,7 +128,7 @@ namespace LectureSchedulingTool.Models
                     {
                         return GetFaculty().id_faculty;
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         return -1;
                     }
@@ -228,7 +228,7 @@ namespace LectureSchedulingTool.Models
                     {
                         return GetFaculty().id_faculty;
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         return -1;
                     }
@@ -310,7 +310,7 @@ namespace LectureSchedulingTool.Models
                     {
                         return GetFaculty().id_faculty;
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         return -1;
                     }
@@ -387,7 +387,7 @@ namespace LectureSchedulingTool.Models
                     {
                         return GetFaculty().id_faculty;
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         return -1;
                     }
@@ -465,7 +465,7 @@ namespace LectureSchedulingTool.Models
                     {
                         return GetFaculty().id_faculty;
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         return -1;
                     }
@@ -480,7 +480,7 @@ namespace LectureSchedulingTool.Models
                     {
                         return GetStudentsGroup().id_department;
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         return -1;
                     }
@@ -565,7 +565,7 @@ namespace LectureSchedulingTool.Models
                     {
                         return GetFaculty().id_faculty;
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         return -1;
                     }
@@ -580,7 +580,7 @@ namespace LectureSchedulingTool.Models
                     {
                         return GetTeacher().id_department;
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         return -1;
                     }
@@ -675,7 +675,7 @@ namespace LectureSchedulingTool.Models
                     {
                         return GetFaculty().id_faculty;
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         return -1;
                     }
@@ -690,7 +690,7 @@ namespace LectureSchedulingTool.Models
                     {
                         return GetStudentsGroup().id_department;
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         return -1;
                     }
@@ -706,7 +706,7 @@ namespace LectureSchedulingTool.Models
                     {
                         return GetStudentsGroupLoad().id_students_group;
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         return -1;
                     }
@@ -721,7 +721,7 @@ namespace LectureSchedulingTool.Models
                     {
                         return GetTeacherLoad().id_teacher;
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         return -1;
                     }
@@ -736,7 +736,7 @@ namespace LectureSchedulingTool.Models
                     {
                         return GetStudentsGroupLoad().id_subject;
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         return -1;
                     }

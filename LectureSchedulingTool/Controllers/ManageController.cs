@@ -112,7 +112,7 @@ namespace LectureSchedulingTool.Controllers
                         DB.Secret_code.Add(secret_code);
                         DB.SaveChanges();
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         ModelState.AddModelError("-1", Localizator.Localizate("Manage_Error2", CurrentLangCode));
                     }
@@ -131,7 +131,7 @@ namespace LectureSchedulingTool.Controllers
                             ModelState.AddModelError("-2", Localizator.Localizate("Manage_Error3", CurrentLangCode));
                         }                        
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         ModelState.AddModelError("-2", Localizator.Localizate("Manage_Error3", CurrentLangCode));
                     }
