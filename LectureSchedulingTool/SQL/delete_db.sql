@@ -15,3 +15,7 @@ DROP TABLE Students_group
 DROP TABLE Departments
 
 DROP TABLE Faculties
+
+DROP TABLE Secret_code
+
+DROP TABLE Localizations

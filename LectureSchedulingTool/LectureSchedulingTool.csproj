@@ -255,7 +255,6 @@
     <Content Include="Scripts\Scheduling\scheduling_remove_alert.js" />
     <Content Include="Scripts\your_dog.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="SQL\create_db_navicat.sql" />
     <Content Include="SQL\insert_test_data.sql" />
     <Content Include="SQL\delete_db.sql" />
     <Content Include="SQL\create_db.sql" />

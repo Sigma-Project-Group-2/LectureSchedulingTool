@@ -1,4 +1,18 @@
-﻿CREATE TABLE Faculties
+﻿CREATE TABLE Secret_code
+(
+	id_secret_code      int IDENTITY ( 1,1 ) ,
+	secret_code         varchar(23) COLLATE Cyrillic_General_CI_AS  NOT NULL ,
+)
+
+CREATE TABLE Localizations
+(
+	id_localization     int IDENTITY ( 1,1 ) ,
+	name                varchar(50) COLLATE Cyrillic_General_CI_AS  NOT NULL ,
+	language            varchar(10) COLLATE Cyrillic_General_CI_AS  NOT NULL ,
+	text                nvarchar(MAX) COLLATE Cyrillic_General_CI_AS  NOT NULL
+)
+
+CREATE TABLE Faculties
 ( 
 	id_faculty           int IDENTITY ( 1,1 ) ,
 	name                 nvarchar(100) COLLATE Cyrillic_General_CI_AS  NOT NULL ,
