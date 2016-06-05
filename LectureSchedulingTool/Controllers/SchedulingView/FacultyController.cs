@@ -30,7 +30,7 @@ namespace LectureSchedulingTool.Controllers
                             ViewBag.action = 'a';
                             ViewBag.row = row;
 
-                            ModelState.AddModelError("-2", Localizator.Localizate("Scheduling_Error1", CurrentLangCode));
+                            ModelState.AddModelError("-2", Localizator.Localizate("Faculty_duplicate_name_or_abbreviation_error", CurrentLangCode));
                         }
                         else
                         {
@@ -44,7 +44,7 @@ namespace LectureSchedulingTool.Controllers
                             }
                             catch (Exception ex)
                             {
-                                ModelState.AddModelError("-3", Localizator.Localizate("Scheduling_Error2", CurrentLangCode));
+                                ModelState.AddModelError("-3", Localizator.Localizate("Faculty_add_error", CurrentLangCode));
                                 if (HttpContext.IsDebuggingEnabled)
                                     ModelState.AddModelError("-3", ex.GetBaseException().Message);
                             }
@@ -74,7 +74,7 @@ namespace LectureSchedulingTool.Controllers
                             ViewBag.action = 'e';
                             ViewBag.row = row;
 
-                            ModelState.AddModelError("-2", Localizator.Localizate("Scheduling_Error3", CurrentLangCode));
+                            ModelState.AddModelError("-2", Localizator.Localizate("Faculty_duplicate_name_or_abbreviation_error", CurrentLangCode));
                         }
                         else
                         {
@@ -89,7 +89,7 @@ namespace LectureSchedulingTool.Controllers
                             }
                             catch (Exception ex)
                             {
-                                ModelState.AddModelError("-3", Localizator.Localizate("Scheduling_Error4", CurrentLangCode));
+                                ModelState.AddModelError("-3", Localizator.Localizate("Faculty_edit_error", CurrentLangCode));
                                 if (HttpContext.IsDebuggingEnabled)
                                     ModelState.AddModelError("-3", ex.GetBaseException().Message);
                             }
@@ -114,14 +114,14 @@ namespace LectureSchedulingTool.Controllers
                         }
                         catch (Exception ex)
                         {
-                            ModelState.AddModelError("-4", Localizator.Localizate("Scheduling_Error5", CurrentLangCode));
+                            ModelState.AddModelError("-4", Localizator.Localizate("Faculty_delete_error", CurrentLangCode));
                             if (HttpContext.IsDebuggingEnabled)
                                 ModelState.AddModelError("-4", ex.GetBaseException().Message);
                         }
                     }
                     else
                     {
-                        ModelState.AddModelError("-5", Localizator.Localizate("Scheduling_Error6", CurrentLangCode));
+                        ModelState.AddModelError("-5", Localizator.Localizate("Faculty_existance_error", CurrentLangCode));
                     }
                     break;
 
@@ -166,7 +166,7 @@ namespace LectureSchedulingTool.Controllers
             }
             catch (Exception ex)
             {
-                ModelState.AddModelError("-1", Localizator.Localizate("Scheduling_Error7", CurrentLangCode));
+                ModelState.AddModelError("-1", Localizator.Localizate("Faculty_view_error", CurrentLangCode));
                 if (HttpContext.IsDebuggingEnabled)
                     ModelState.AddModelError("-1", ex.GetBaseException().Message);
             }

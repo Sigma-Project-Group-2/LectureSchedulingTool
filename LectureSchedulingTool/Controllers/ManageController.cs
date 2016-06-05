@@ -75,9 +75,7 @@ namespace LectureSchedulingTool.Controllers
 
         public ActionResult Index(IndexViewModel model)
         {
-            if (model.HaveDataInTables == true)
-                Localizator.Localizate("Password", (string)ViewBag.CurLang);
-                ModelState.AddModelError("-1", Localizator.Localizate("Manage_Error1", CurrentLangCode));
+            
 
             if (ModelState.IsValid)
             {
@@ -114,7 +112,7 @@ namespace LectureSchedulingTool.Controllers
                     }
                     catch (Exception)
                     {
-                        ModelState.AddModelError("-1", Localizator.Localizate("Manage_Error2", CurrentLangCode));
+                        ModelState.AddModelError("-1", Localizator.Localizate("Error_creating_secret_code", CurrentLangCode)); //Ошибка при добавлении секретного кода
                     }
                     break;
 
@@ -128,12 +126,12 @@ namespace LectureSchedulingTool.Controllers
                         }
                         else
                         {
-                            ModelState.AddModelError("-2", Localizator.Localizate("Manage_Error3", CurrentLangCode));
+                            ModelState.AddModelError("-2", Localizator.Localizate("Error_remove_secret_code", CurrentLangCode));
                         }                        
                     }
                     catch (Exception)
                     {
-                        ModelState.AddModelError("-2", Localizator.Localizate("Manage_Error3", CurrentLangCode));
+                        ModelState.AddModelError("-2", Localizator.Localizate("Error_remove_secret_code", CurrentLangCode));
                     }
                     break;
             }

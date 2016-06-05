@@ -53,7 +53,6 @@ namespace LectureSchedulingTool.Models
                 {
                     ErrorMessageResourceName = "InCorrectSecretCode4";
                     return false;
-
                 }
                 break;
             }
