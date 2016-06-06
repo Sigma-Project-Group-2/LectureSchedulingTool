@@ -20,40 +20,50 @@ namespace LectureSchedulingTool.Tests.Controllers.Tests
             Assert.IsNotNull(result);
         }
         [TestMethod]
-        public void SecretCodeTest_ActionA_ShouldIsNotNull()//is not correct. Needs for edit
+        public void SecretCodeTest_IsNotValidNull_ShouldIsFalse()//is not correct. Needs for edit
         {
             //arrange
-            var mock = new Mock<ManageController>();
-            mock.SetupSet(x => x.SecretCode('a'));
-            ManageController controller = new ManageController(mock.Object);
+            object var = null;
+            SecretCodeAttribute attr = new SecretCodeAttribute();
             //act
-            ViewResult result = controller.SecretCode() as ViewResult;
+            bool result = attr.IsValid(var);
             //assert
-            Assert.IsNotNull(result);
+            Assert.IsFalse(result);
         }
         [TestMethod]
-        public void SecretCodeTest_ActionR_ShouldIsNotNull()
+        public void SecretCodeTest_IsNotValidIncorrectSymb_ShouldIsFalse()
         {
             //arrange
-            var mock = new Mock<ManageController>();
-            mock.SetupSet(x => x.SecretCode('r'));
-            ManageController controller = new ManageController(mock.Object);
+            object var = "jafaratatatatatatatatata";
+            SecretCodeAttribute attr = new SecretCodeAttribute();
             //act
-            ViewResult result = controller.SecretCode() as ViewResult;
+            bool result = attr.IsValid(var);
             //assert
-            Assert.IsNotNull(result);
+            Assert.IsFalse(result);
         }
+
         [TestMethod]
-        public void IndexTest_ShouldIsNotNull()
+        public void SecretCodeTest_IsNotValidIncorrectData_ShouldIsFalse()
         {
             //arrange
-            var mock = new Mock<IndexViewModel>();
-          //  mock.Setup(x => x.HaveDataInTables);
-            ManageController controller = new ManageController(mock.Object);
+            object var = "---";
+            SecretCodeAttribute attr = new SecretCodeAttribute();
             //act
-            ViewResult result = controller.Index(mock.Object) as ViewResult;
+            bool result = attr.IsValid(var);
             //assert
-            Assert.IsNotNull(result);
+            Assert.IsFalse(result);
+        }
+
+        [TestMethod]
+        public void SecretCodeTest_IsValidCorrectData_ShouldIsTrue()
+        {
+            //arrange
+            object var = "afrts-bahab-abtga-asery";
+            SecretCodeAttribute attr = new SecretCodeAttribute();
+            //act
+            bool result = attr.IsValid(var);
+            //assert
+            Assert.IsTrue(result);
         }
     }
 }

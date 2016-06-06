@@ -38,14 +38,14 @@ namespace LectureSchedulingTool.Tests.Controllers
         public void Contact()
         {
             // Arrange
-            
-            var mock = new Mock<SchedulingAlgorithm>();
-            mock.Setup(x => x.Generate());
+            var mock = new Mock<HomeController>();
             HomeController controller = new HomeController(mock.Object);
+
             // Act
-            ViewResult result = controller.Contact() as ViewResult;
+            ViewResult result = controller.Index() as ViewResult;
+
             // Assert
-            Assert.IsNotNull(result);
+            Assert.IsNull(result.Model);
         }
     }
 }
