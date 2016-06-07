@@ -41,8 +41,7 @@ CREATE TABLE Teachers
 	surname              nvarchar(20) COLLATE Cyrillic_General_CI_AS  NOT NULL ,
 	name                 nvarchar(20) COLLATE Cyrillic_General_CI_AS  NOT NULL ,
 	patronymic           nvarchar(20) COLLATE Cyrillic_General_CI_AS  NOT NULL ,
-	max_hours            int  NOT NULL ,
-	working_position     nvarchar(20) COLLATE Cyrillic_General_CI_AS  NOT NULL ,
+	working_position     nvarchar(30) COLLATE Cyrillic_General_CI_AS  NOT NULL ,
 	regalia              nvarchar(20) COLLATE Cyrillic_General_CI_AS  NULL ,
 	id_department        int  NOT NULL 
 )

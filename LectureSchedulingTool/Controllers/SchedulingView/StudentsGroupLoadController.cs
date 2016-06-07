@@ -164,11 +164,8 @@ namespace LectureSchedulingTool.Controllers
                 }
 
                 ViewBag.students_group_loads = Istudents_group_loads.ToList();
-                if (action == 'a' || action == 'e')
-                {
-                    ViewBag.students_groups = DB.Students_group.ToList();
-                    ViewBag.subjects = DB.Subject.ToList();
-                }
+                ViewBag.students_groups = DB.Students_group.ToList();
+                ViewBag.subjects = DB.Subject.ToList();
             }
             catch (Exception ex)
             {

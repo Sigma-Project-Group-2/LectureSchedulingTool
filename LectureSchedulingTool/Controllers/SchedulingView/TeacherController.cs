@@ -167,11 +167,8 @@ namespace LectureSchedulingTool.Controllers
                 }
 
                 ViewBag.teachers = Iteachers.ToList();
-                if (action == 'a' || action == 'e')
-                {
-                    ViewBag.departments = DB.Department.ToList();
-                    ViewBag.faculties = GetSafeFaculties().ToList();
-                }
+                ViewBag.departments = DB.Department.ToList();
+                ViewBag.faculties = DB.Faculty.ToList();
             }
             catch (Exception ex)
             {

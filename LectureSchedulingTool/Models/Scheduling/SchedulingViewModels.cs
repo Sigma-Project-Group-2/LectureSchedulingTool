@@ -17,22 +17,18 @@ namespace LectureSchedulingTool.Models
             [Key]
             public int id_faculty { get; set; }
 
-            [Required(ErrorMessageResourceType = typeof(Resources.ValidationMessages),
-            ErrorMessageResourceName = "Required")]
-            [StringLength(100, ErrorMessageResourceType = typeof(Resources.ValidationMessages),
-            ErrorMessageResourceName = "StringLength")]
-            [Display(ResourceType = typeof(Resources.Names), Name = "Title")]
+            [Required]
+            [StringLength(100)]
             public string name { get; set; }
 
-            [Required(ErrorMessageResourceType = typeof(Resources.ValidationMessages),
-            ErrorMessageResourceName = "Required")]
-            [StringLength(10, ErrorMessageResourceType = typeof(Resources.ValidationMessages),
-            ErrorMessageResourceName = "StringLength")]
-            [Display(ResourceType = typeof(Resources.Names), Name = "Abbreviation")]
+            [Required]
+            [StringLength(10)]
             public string abbreviation { get; set; }
 
             public Faculty()
             {
+                name = "";
+                abbreviation = "";
             }
             public Faculty(string name, string abbreviation)
             {
@@ -52,23 +48,17 @@ namespace LectureSchedulingTool.Models
             [Key]
             public int id_department { get; set; }
 
-            [Required(ErrorMessageResourceType = typeof(Resources.ValidationMessages),
-            ErrorMessageResourceName = "Required")]
-            [StringLength(100, ErrorMessageResourceType = typeof(Resources.ValidationMessages),
-            ErrorMessageResourceName = "StringLength")]
-            [Display(ResourceType = typeof(Resources.Names), Name = "Title")]
+            [Required]
+            [StringLength(100)]
             public string name { get; set; }
 
-            [Required(ErrorMessageResourceType = typeof(Resources.ValidationMessages),
-            ErrorMessageResourceName = "Required")]
-            [StringLength(10, ErrorMessageResourceType = typeof(Resources.ValidationMessages),
-            ErrorMessageResourceName = "StringLength")]
-            [Display(ResourceType = typeof(Resources.Names), Name = "Abbreviation")]
+            [Required]
+            [StringLength(10)]
             public string abbreviation { get; set; }
 
             [Required]
             public int id_faculty { get; set; }
-            
+
             public Faculty GetFaculty()
             {
                 try
@@ -83,7 +73,8 @@ namespace LectureSchedulingTool.Models
 
             public Department()
             {
-
+                name = "";
+                abbreviation = "";
             }
             public Department(string name, string abbreviation, int id_faculty)
             {
@@ -104,16 +95,12 @@ namespace LectureSchedulingTool.Models
             [Key]
             public int id_students_group { get; set; }
 
-            [Required(ErrorMessageResourceType = typeof(Resources.ValidationMessages),
-            ErrorMessageResourceName = "Required")]
-            [StringLength(20, ErrorMessageResourceType = typeof(Resources.ValidationMessages),
-            ErrorMessageResourceName = "StringLength")]
-            [Display(ResourceType = typeof(Resources.Names), Name = "Title")]
+            [Required]
+            [StringLength(20)]
             public string name { get; set; }
 
-            [Required(ErrorMessageResourceType = typeof(Resources.ValidationMessages),
-            ErrorMessageResourceName = "Required")]
-            [Display(ResourceType = typeof(Resources.Names), Name = "NumberOfStudents")]
+            [Required]
+            [Range(1, 10000)]
             public int people_amount { get; set; }
 
             [Required]
@@ -134,7 +121,7 @@ namespace LectureSchedulingTool.Models
                     }
                 }
             }
-            
+
             public Faculty GetFaculty()
             {
                 try
@@ -160,7 +147,7 @@ namespace LectureSchedulingTool.Models
 
             public Students_group()
             {
-
+                name = "";
             }
             public Students_group(string name, int people_amount, int id_department)
             {
@@ -181,39 +168,23 @@ namespace LectureSchedulingTool.Models
             [Key]
             public int id_teacher { get; set; }
 
-            [Required(ErrorMessageResourceType = typeof(Resources.ValidationMessages),
-            ErrorMessageResourceName = "Required")]
-            [StringLength(20, ErrorMessageResourceType = typeof(Resources.ValidationMessages),
-            ErrorMessageResourceName = "StringLength")]
-            [Display(ResourceType = typeof(Resources.Names), Name = "Surname")]
+            [Required]
+            [StringLength(20)]
             public string surname { get; set; }
 
-            [Required(ErrorMessageResourceType = typeof(Resources.ValidationMessages),
-            ErrorMessageResourceName = "Required")]
-            [StringLength(20, ErrorMessageResourceType = typeof(Resources.ValidationMessages),
-            ErrorMessageResourceName = "StringLength")]
-            [Display(ResourceType = typeof(Resources.Names), Name = "FirstName")]
+            [Required]
+            [StringLength(20)]
             public string name { get; set; }
 
-            [Required(ErrorMessageResourceType = typeof(Resources.ValidationMessages),
-            ErrorMessageResourceName = "Required")]
-            [StringLength(20, ErrorMessageResourceType = typeof(Resources.ValidationMessages),
-            ErrorMessageResourceName = "StringLength")]
-            [Display(ResourceType = typeof(Resources.Names), Name = "Patronymic")]
+            [Required]
+            [StringLength(20)]
             public string patronymic { get; set; }
 
-            [Required(ErrorMessageResourceType = typeof(Resources.ValidationMessages),
-            ErrorMessageResourceName = "Required")]
-            [StringLength(20, ErrorMessageResourceType = typeof(Resources.ValidationMessages),
-            ErrorMessageResourceName = "StringLength")]
-            [Display(ResourceType = typeof(Resources.Names), Name = "Position")]
+            [Required]
+            [StringLength(30)]
             public string working_position { get; set; }
 
-            [Required(ErrorMessageResourceType = typeof(Resources.ValidationMessages),
-            ErrorMessageResourceName = "Required")]
-            [StringLength(20, ErrorMessageResourceType = typeof(Resources.ValidationMessages),
-            ErrorMessageResourceName = "StringLength")]
-            [Display(ResourceType = typeof(Resources.Names), Name = "Regalia")]
+            [StringLength(20)]
             public string regalia { get; set; }
 
             [Required]
@@ -234,7 +205,7 @@ namespace LectureSchedulingTool.Models
                     }
                 }
             }
-            
+
             public Faculty GetFaculty()
             {
                 try
@@ -260,7 +231,11 @@ namespace LectureSchedulingTool.Models
 
             public Teacher()
             {
-
+                surname = "";
+                name = "";
+                patronymic = "";
+                working_position = "";
+                regalia = "";
             }
             public Teacher(string surname, string name, string patronymic, string working_position, string regalia, int id_department)
             {
@@ -284,18 +259,12 @@ namespace LectureSchedulingTool.Models
             [Key]
             public int id_subject { get; set; }
 
-            [Required(ErrorMessageResourceType = typeof(Resources.ValidationMessages),
-            ErrorMessageResourceName = "Required")]
-            [StringLength(50, ErrorMessageResourceType = typeof(Resources.ValidationMessages),
-            ErrorMessageResourceName = "StringLength")]
-            [Display(ResourceType = typeof(Resources.Names), Name = "Title")]
+            [Required]
+            [StringLength(50)]
             public string name { get; set; }
 
-            [Required(ErrorMessageResourceType = typeof(Resources.ValidationMessages),
-            ErrorMessageResourceName = "Required")]
-            [StringLength(20, ErrorMessageResourceType = typeof(Resources.ValidationMessages),
-            ErrorMessageResourceName = "StringLength")]
-            [Display(ResourceType = typeof(Resources.Names), Name = "Type")]
+            [Required]
+            [StringLength(20)]
             public string type { get; set; }
 
             [Required]
@@ -316,7 +285,7 @@ namespace LectureSchedulingTool.Models
                     }
                 }
             }
-            
+
             public Faculty GetFaculty()
             {
                 try
@@ -342,7 +311,8 @@ namespace LectureSchedulingTool.Models
 
             public Subject()
             {
-
+                name = "";
+                type = "";
             }
             public Subject(string name, string type, int id_department)
             {
@@ -363,16 +333,12 @@ namespace LectureSchedulingTool.Models
             [Key]
             public int id_classroom { get; set; }
 
-            [Required(ErrorMessageResourceType = typeof(Resources.ValidationMessages),
-            ErrorMessageResourceName = "Required")]
-            [StringLength(20, ErrorMessageResourceType = typeof(Resources.ValidationMessages),
-            ErrorMessageResourceName = "StringLength")]
-            [Display(ResourceType = typeof(Resources.Names), Name = "Number")]
+            [Required]
+            [StringLength(20)]
             public string number { get; set; }
 
-            [Required(ErrorMessageResourceType = typeof(Resources.ValidationMessages),
-            ErrorMessageResourceName = "Required")]
-            [Display(ResourceType = typeof(Resources.Names), Name = "Capacity")]
+            [Required]
+            [Range(1, 10000)]
             public int people_capacity { get; set; }
 
             [Required]
@@ -393,7 +359,7 @@ namespace LectureSchedulingTool.Models
                     }
                 }
             }
-            
+
             public Faculty GetFaculty()
             {
                 try
@@ -419,7 +385,7 @@ namespace LectureSchedulingTool.Models
 
             public Classroom()
             {
-
+                number = "";
             }
             public Classroom(string number, int people_capacity, int id_department)
             {
@@ -440,17 +406,12 @@ namespace LectureSchedulingTool.Models
             [Key]
             public int id_students_group_load { get; set; }
 
-            [Required(ErrorMessageResourceType = typeof(Resources.ValidationMessages),
-            ErrorMessageResourceName = "Required")]
-            [CorrectHours(ErrorMessageResourceType = typeof(Resources.ValidationMessages))]
-
-            [Range(1, 10000, ErrorMessageResourceType = typeof(Resources.ValidationMessages),
-                ErrorMessageResourceName = "RangeHours")]
-            [Display(ResourceType = typeof(Resources.Names), Name = "Hours")]
+            [Required]
+            //[CorrectHours]
+            [Range(1, 10000)]
             public int hours { get; set; }
 
-            [Required(ErrorMessageResourceType = typeof(Resources.ValidationMessages),
-            ErrorMessageResourceName = "Required")]
+            [Required]
             public int id_students_group { get; set; }
 
             [Required]
@@ -486,7 +447,7 @@ namespace LectureSchedulingTool.Models
                     }
                 }
             }
-            
+
             public Faculty GetFaculty()
             {
                 try
@@ -586,7 +547,7 @@ namespace LectureSchedulingTool.Models
                     }
                 }
             }
-            
+
             public Faculty GetFaculty()
             {
                 try
@@ -742,7 +703,7 @@ namespace LectureSchedulingTool.Models
                     }
                 }
             }
-            
+
             public Faculty GetFaculty()
             {
                 try
